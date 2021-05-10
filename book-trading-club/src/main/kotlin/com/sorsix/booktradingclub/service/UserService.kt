@@ -37,13 +37,11 @@ class UserService(
     fun findAllBooks(request: HttpServletRequest): List<Book> {
         try{
             val user: User = request.session.getAttribute("user") as User
-            return this.bookRepository.findAllByOwner(user.username)
+            val result =  this.bookRepository.findAllByOwner(user.username)
+            return result
         }catch (e: Exception){
             println("null e")
             return ArrayList<Book>();
         }
-
-
-
     }
 }
