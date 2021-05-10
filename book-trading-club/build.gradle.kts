@@ -6,6 +6,7 @@ plugins {
     kotlin("jvm") version "1.4.32"
     kotlin("plugin.spring") version "1.4.32"
     kotlin("plugin.jpa") version "1.4.32"
+    id("org.jetbrains.kotlin.plugin.noarg") version "1.4.32"
 }
 
 group = "com.sorsix"
@@ -21,6 +22,8 @@ configurations {
 repositories {
     mavenCentral()
 }
+
+apply(plugin = "kotlin-jpa")
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
