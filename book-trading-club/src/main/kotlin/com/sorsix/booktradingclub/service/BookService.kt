@@ -11,7 +11,7 @@ import kotlin.collections.ArrayList
 
 @Service
 class BookService(
-        val bookRepository: BookRepository,
+        val bookRepository: BookRepository
 ) {
 
     fun getAllBooks() : List<Book> = bookRepository.findAll()

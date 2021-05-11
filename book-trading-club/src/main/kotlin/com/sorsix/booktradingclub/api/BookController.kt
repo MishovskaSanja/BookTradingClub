@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest
 
 @RestController
 @RequestMapping("/api/books")
+@CrossOrigin( "http://localhost:4200")
 class BookController(
         val bookService: BookService
 ) {
@@ -19,8 +20,8 @@ class BookController(
     }
 
     @PostMapping
-    fun addBook(@RequestBody bookDto: BookDto,reqest: HttpServletRequest): ResponseEntity<Book>{
-        val book = bookService.createBook(bookDto.name, bookDto.desc, reqest) ;
+    fun addBook(@RequestBody bookDto: BookDto,request: HttpServletRequest): ResponseEntity<Book>{
+        val book = bookService.createBook(bookDto.name, bookDto.desc, request) ;
         if (book != null){
             return ResponseEntity.ok(book)
         }else{

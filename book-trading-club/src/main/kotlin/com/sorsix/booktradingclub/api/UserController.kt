@@ -7,14 +7,12 @@ import com.sorsix.booktradingclub.domain.User
 import com.sorsix.booktradingclub.service.UserService
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Controller
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.*
 import javax.servlet.http.HttpServletRequest
 
 @Controller
 @RequestMapping("/api/user")
+@CrossOrigin( "http://localhost:4200")
 class UserController(
         val userService: UserService
 ){
