@@ -33,6 +33,16 @@ class UserController(
         }
     }
 
+    @GetMapping
+    fun getAllUsers() : ResponseEntity<List<User>>{
+        return ResponseEntity.ok(userService.findAllUsers());
+    }
+
+    @GetMapping
+    fun logout(httpServletRequest: HttpServletRequest) {
+        httpServletRequest.session.invalidate();
+    }
+
     @PostMapping("/edit")
     fun editInfo(@RequestBody userDto: UserDto, request: HttpServletRequest) : ResponseEntity<User>{
         return ResponseEntity.ok(this.userService.editInfo(userDto.fullName, userDto.address, userDto.city, userDto.state, request));
@@ -40,6 +50,6 @@ class UserController(
 
     @GetMapping("/userBooks")
     fun getUserBooks(httpServletRequest: HttpServletRequest): ResponseEntity<List<Book>>{
-        return ResponseEntity.ok(this.userService.findAllBooks(httpServletRequest));
+        return ResponseEntity.ok(this.userService.findAllUserBooks(httpServletRequest));
     }
 }
