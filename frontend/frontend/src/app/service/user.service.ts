@@ -1,30 +1,35 @@
 import { Injectable } from '@angular/core';
 import {  HttpHeaders } from '@angular/common/http';
 import {HttpClient} from '@angular/common/http'
-import { User } from '../model/user';
-import { RequestOptions } from '@angular/http';
-
+import { UserLogin } from '../model/userLogin';
+import { UserRegister } from '../model/userRegister'
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  private url: string
+  private baseUrl: string
 
   constructor(private http: HttpClient){
-    this.url = '/api/user'
+    this.baseUrl = '/api/user'
   }
 
-  // login(data:any){
-  //   let url = `/api/login`;
-  //   let body = JSON.stringify(data);
-  //   let headers = new Headers({'Content-Type':'application/json'});
-  //   let reqOptions = new RequestOptions({headers:headers});
 
-  //   return this.http.post(url,body,reqOptions) ????
-  //                   .map(res=>res);
-  // }
+
+  login(user:UserLogin){
+    const headers = { 'content-type': 'application/json'}
+    const body = JSON.stringify(user)
+    console.log(user)
+    this.http.post<UserLogin>(this.baseUrl + '/login', body, {'headers':headers})
+  }
+
+  register(user:UserRegister){
+    const headers = { 'content-type': 'application/json'}
+    const body = JSON.stringify(user)
+    console.log(user)
+    this.http.post<UserLogin>(this.baseUrl + '/register', body, {'headers':headers})
+  }
 
 
 }

@@ -1,4 +1,4 @@
-export class Book {
+export interface Book {
   id: number
   name: String
   description: String

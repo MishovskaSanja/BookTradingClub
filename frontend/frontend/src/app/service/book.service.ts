@@ -9,6 +9,13 @@ import { Observable } from 'rxjs';
 })
 export class BookService {
 
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json',
+      Authorization: 'my-auth-token'
+    })
+  };
+
   url: string;
 
   constructor(private http: HttpClient){
