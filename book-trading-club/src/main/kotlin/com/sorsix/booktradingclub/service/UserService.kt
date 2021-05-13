@@ -15,37 +15,32 @@ class UserService(
         val bookRepository: BookRepository
 ){
 
-    fun register(username: String, password: String, repeatPassword: String,
-                    fullName: String, city: String, state: String, address: String) : Optional<User>{
+    fun findAllUsers() : List<User>{
+        return this.userRepository.findAll();
+    }
 
-        return Optional.of(this.userRepository.save(User(username, password, fullName, city, state, address )));
+    fun register(username: String, password: String,
+                    fullName: String, city: String, state: String, address: String) : Optional<User>{
+        return if (userRepository.findByUsername(username).isEmpty) {
+            Optional.of(this.userRepository.save(User(username, password, fullName, city, state, address)));
+        }else{
+            Optional.empty()
+        }
     }
 
     fun login(username: String, password: String) : Optional<User>{
         return this.userRepository.findByUsernameAndPassword(username, password);
     }
 
-    fun editInfo(fullName: String, city: String, state: String, address: String, request: HttpServletRequest) : User{
+    fun editInfo(fullName: String, city: String, address: String, state: String, request: HttpServletRequest) : Optional<User>{
         val user: User = request.session.getAttribute("user") as User
-        user.fullName = fullName;
-        user.city = state
-        user.address = address
-        user.state = state
-        return this.userRepository.save(user);
+        if (userRepository.updateUser(user.username, fullName, city, address, state) > 0)
+            return userRepository.findByUsername(user.username)
+        return Optional.empty()
     }
 
     fun findAllUserBooks(request: HttpServletRequest): List<Book> {
-        try{
-            val user: User = request.session.getAttribute("user") as User
-            val result =  this.bookRepository.findAllByOwner(user)
-            return result
-        }catch (e: Exception){
-            println("null e")
-            return ArrayList<Book>();
-        }
-    }
-
-    fun findAllUsers() : List<User>{
-        return this.userRepository.findAll();
+        val user: User = request.session.getAttribute("user") as User
+        return this.bookRepository.findAllByOwner(user)
     }
 }

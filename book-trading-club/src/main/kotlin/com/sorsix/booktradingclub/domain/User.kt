@@ -17,9 +17,6 @@ data class User (
         var fullName: String,
         var city: String,
         var state: String,
-        var address: String
-
-){
-
-}
+        var address: String,
+)
 

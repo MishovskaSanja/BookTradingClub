@@ -1,12 +1,13 @@
 package com.sorsix.booktradingclub.domain
 
+import com.sorsix.booktradingclub.domain.enumeration.RequestState
 import javax.persistence.*
 
 @Entity
 class Request (
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        val requestedId: Long,
+        val requestId: Long,
 
         @ManyToOne
         val userRequesting: User,
@@ -23,8 +24,5 @@ class Request (
         @Enumerated(EnumType.STRING)
         val state: RequestState
 
-){
-
-
-}
+)
 

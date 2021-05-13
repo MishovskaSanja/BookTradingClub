@@ -15,29 +15,17 @@ class BookController(
         val bookService: BookService
 ) {
     @GetMapping
-    fun getBooks(): List<Book>{
-        return bookService.getAllBooks();
-    }
+    fun getBooks(): List<Book> = bookService.getAllBooks()
 
     @PostMapping
-    fun addBook(@RequestBody bookDto: BookDto,request: HttpServletRequest): ResponseEntity<Book>{
-        val book = bookService.createBook(bookDto.name, bookDto.description, request) ;
-        if (book != null){
-            return ResponseEntity.ok(book)
-        }else{
-            return ResponseEntity.badRequest().build()
-        }
+    fun addBook(@RequestBody bookDto: BookDto, request: HttpServletRequest): ResponseEntity<Book>{
+        val book = bookService.createBook(bookDto.name, bookDto.description, request)
+        return ResponseEntity.ok(book)
     }
 
     @PutMapping("/edit/{id}")
-    fun updateBook(
-            @PathVariable id: Long,
-            @RequestBody name: String,
-            @RequestBody description: String
-    ): ResponseEntity<Int> {
-        println(name)
-        println(description)
-        return this.bookService.editBook(id, name, description).let {
+    fun updateBook(@PathVariable id: Long, @RequestBody bookDto: BookDto): ResponseEntity<Int> {
+        return this.bookService.editBook(id, bookDto.name, bookDto.description).let {
             ResponseEntity.ok(it)
         }
     }

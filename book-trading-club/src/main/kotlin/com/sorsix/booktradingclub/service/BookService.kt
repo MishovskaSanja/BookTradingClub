@@ -17,14 +17,12 @@ class BookService(
 
     fun getAllBooks() : List<Book> = bookRepository.findAll()
 
-    fun createBook(name: String, description: String, request: HttpServletRequest) : Book? {
+    fun createBook(name: String, description: String, request: HttpServletRequest) : Book {
         val user = request.session.getAttribute("user") as User
         val book = Book(id=0, name = name, description = description, owner = user)
         return this.bookRepository.save(book);
     }
 
-
-    @Transactional
     fun editBook(id:Long, name: String, description: String): Int {
         return this.bookRepository.editBook(id,name,description)
     }
@@ -32,6 +30,4 @@ class BookService(
     fun deleteBook(id: Long) {
         return this.bookRepository.deleteById(id)
     }
-
-
 }
