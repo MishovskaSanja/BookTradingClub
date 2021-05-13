@@ -38,7 +38,7 @@ class UserController(
         return ResponseEntity.ok(userService.findAllUsers());
     }
 
-    @GetMapping
+    @GetMapping("/logout")
     fun logout(httpServletRequest: HttpServletRequest) {
         httpServletRequest.session.invalidate();
     }

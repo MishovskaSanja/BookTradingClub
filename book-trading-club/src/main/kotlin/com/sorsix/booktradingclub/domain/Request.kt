@@ -1,13 +1,30 @@
 package com.sorsix.booktradingclub.domain
 
+import javax.persistence.*
+
+@Entity
 class Request (
-        val user1: User,
-        val book1: Book,
-        val book2: Book
-// ili samo id od ovie???
-//smeni ako nesho
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        val requestedId: Long,
+
+        @ManyToOne
+        val userRequesting: User,
+
+        @ManyToOne
+        val userReceiving: User,
+
+        @ManyToMany
+        val wantedBooks: List<Book>,
+
+        @ManyToMany
+        val booksToGive: List<Book>,
+
+        @Enumerated(EnumType.STRING)
+        val state: RequestState
 
 ){
+
 
 }
 

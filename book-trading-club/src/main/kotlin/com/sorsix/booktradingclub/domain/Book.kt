@@ -11,5 +11,7 @@ data class Book(
         val name:String,
         val description:String,
 
-        val owner: String
+        @ManyToOne(fetch = FetchType.EAGER)
+        @JoinColumn(name = "owner_id")
+        val owner: User
 )

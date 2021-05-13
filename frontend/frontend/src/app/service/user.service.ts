@@ -24,6 +24,7 @@ export class UserService {
     this.http.post<UserLogin>(this.baseUrl + '/login', body, {'headers':headers})
   }
 
+
   register(user:UserRegister){
     const headers = { 'content-type': 'application/json'}
     const body = JSON.stringify(user)
