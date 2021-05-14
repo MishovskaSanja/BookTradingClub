@@ -25,18 +25,26 @@ class RequestService (
 
     fun getAllAcceptedRequests(): List<Request> = requestRepository.getAllByState(RequestState.ACCEPTED)
 
-    fun createRequest(booksToGiveIds:List<Long>, booksWantedIds: List<Long>, httpServletRequest: HttpServletRequest){
+    fun createRequest(booksToGiveIds:List<Long>, booksWantedIds: List<Long>, httpServletRequest: HttpServletRequest) : List<Request>{
         val userRequesting = httpServletRequest.session.getAttribute("user") as User
 
         val booksWanted = bookRepository.findAllById(booksWantedIds)
-        val books = bookRepository.findAllById(booksToGiveIds)
+        val booksToGive = bookRepository.findAllById(booksToGiveIds)
 
         val collections  = booksWanted.stream()
                 .collect(Collectors.groupingBy { it.owner })
 
+        val result : MutableList<Request> = ArrayList()
         collections.keys.stream().forEach {
-            this.requestRepository.save(Request(requestId = 0, userRequesting = userRequesting, userReceiving = it, booksToGive = books, wantedBooks = bookRepository.findAllByOwner(it), state = RequestState.PENDING))
+            collections[it]?.let {
+                it1 -> Request(requestId = 0, userRequesting = userRequesting, userReceiving = it, booksToGive = booksToGive, wantedBooks = it1, state = RequestState.PENDING)
+            }?.let {
+                it2 -> this.requestRepository.save(it2)
+            }?.let {
+                it3 -> result.add(it3)
+            }
         }
+        return result
     }
 
     fun deleteRequest(id: Long){

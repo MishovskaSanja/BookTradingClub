@@ -1,5 +1,6 @@
 package com.sorsix.booktradingclub.repository
 
+import com.sorsix.booktradingclub.domain.Book
 import com.sorsix.booktradingclub.domain.User
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Modifying
@@ -15,6 +16,7 @@ public interface UserRepository : JpaRepository<User, Long>{
     fun findByUsernameAndPassword(username: String, password: String) : Optional<User>
 
     fun findByUsername(username: String) : Optional<User>
+
 
     @Modifying
     @Transactional

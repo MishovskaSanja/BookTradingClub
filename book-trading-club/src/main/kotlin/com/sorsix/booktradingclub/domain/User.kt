@@ -1,10 +1,7 @@
 package com.sorsix.booktradingclub.domain
 
 import lombok.Data
-import javax.persistence.Entity
-import javax.persistence.Id
-import javax.persistence.OneToMany
-import javax.persistence.Table
+import javax.persistence.*
 
 @Entity
 @Table(name = "users")
@@ -17,6 +14,6 @@ data class User (
         var fullName: String,
         var city: String,
         var state: String,
-        var address: String,
+        var address: String
 )
 

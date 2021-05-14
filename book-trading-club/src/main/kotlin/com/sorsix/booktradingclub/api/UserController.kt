@@ -2,6 +2,7 @@ package com.sorsix.booktradingclub.api
 
 import com.sorsix.booktradingclub.api.dto.UserEditDto
 import com.sorsix.booktradingclub.api.dto.UserLoginDto
+import com.sorsix.booktradingclub.api.dto.UserRegisterDto
 import com.sorsix.booktradingclub.domain.Book
 import com.sorsix.booktradingclub.domain.User
 import com.sorsix.booktradingclub.domain.exception.InvalidCredentialsException
@@ -20,7 +21,7 @@ class UserController(
 ){
 
     @PostMapping("/register")
-    fun register(@RequestBody user: User) : ResponseEntity<User>{
+    fun register(@RequestBody user: UserRegisterDto) : ResponseEntity<User>{
         return userService.register(user.username, user.password, user.fullName, user.city, user.state, user.address)
                 .map { ResponseEntity.ok().body(it) }.orElseThrow{
                     UsernameAlreadyExistsException()
@@ -52,7 +53,7 @@ class UserController(
         return ResponseEntity.ok(userService.findAllUsers());
     }
 
-    @GetMapping("/logout")
+    @PostMapping("/logout")
     fun logout(request: HttpServletRequest) : Unit {
         request.session.invalidate()
     }
