@@ -25,15 +25,24 @@ internal class RequestController(
         return requestService.getAllAcceptedRequests()
     }
 
-    //shtikliram books, od niv mozhe da zemem id i toa sa owner receiver
-    @PostMapping("/makeRequest")
-    fun makeRequest(@RequestBody requestDto: RequestDto, request: HttpServletRequest) : ResponseEntity<List<Request>>{
+    @PostMapping("/post")
+    fun postRequest(@RequestBody requestDto: RequestDto, request: HttpServletRequest) : ResponseEntity<Request>{
        return ResponseEntity.ok(requestService.createRequest(requestDto.booksToGive, requestDto.wantedBooks, request))
     }
     
     @DeleteMapping("/{id}")
     fun deleteRequest(@PathVariable id: Long){
-        return requestService.deleteRequest(id)
+        return requestService.cancelRequest(id)
+    }
+
+    @PostMapping("/accept/{id}")
+    fun acceptRequest(@PathVariable id: Long){
+        return requestService.acceptRequest(id)
+    }
+
+    @GetMapping("/my")
+    fun getAllIncomingRequests(request: HttpServletRequest){
+
     }
 
 }

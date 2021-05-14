@@ -4,6 +4,7 @@ import com.sorsix.booktradingclub.api.dto.UserEditDto
 import com.sorsix.booktradingclub.api.dto.UserLoginDto
 import com.sorsix.booktradingclub.api.dto.UserRegisterDto
 import com.sorsix.booktradingclub.domain.Book
+import com.sorsix.booktradingclub.domain.Request
 import com.sorsix.booktradingclub.domain.User
 import com.sorsix.booktradingclub.domain.exception.InvalidCredentialsException
 import com.sorsix.booktradingclub.domain.exception.UsernameAlreadyExistsException
@@ -54,8 +55,9 @@ class UserController(
     }
 
     @PostMapping("/logout")
-    fun logout(request: HttpServletRequest) : Unit {
+    fun logout(request: HttpServletRequest) : ResponseEntity<String> {
         request.session.invalidate()
+        return ResponseEntity.ok("success!")
     }
 
     @PutMapping("/edit")
@@ -70,6 +72,11 @@ class UserController(
 
     @GetMapping("/userBooks")
     fun getUserBooks(httpServletRequest: HttpServletRequest): ResponseEntity<List<Book>>{
-        return ResponseEntity.ok(this.userService.findAllUserBooks(httpServletRequest));
+        return ResponseEntity.ok(this.userService.findAllUserBooks(httpServletRequest))
+    }
+
+    @GetMapping("/incomingRequests")
+    fun getIncomingRequests(request: HttpServletRequest) : ResponseEntity<List<Request>>{
+        return ResponseEntity.ok(userService.getIncomingRequests(request))
     }
 }

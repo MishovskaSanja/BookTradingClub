@@ -15,14 +15,13 @@ class Request (
         @ManyToOne
         val userReceiving: User,
 
-        @ManyToMany
-        val wantedBooks: List<Book>,
+        @ManyToOne
+        val wantedBook: Book,
 
-        @ManyToMany
-        val booksToGive: List<Book>,
+        @ManyToOne
+        val bookToGive: Book,
 
         @Enumerated(EnumType.STRING)
         val state: RequestState
-
 )
 

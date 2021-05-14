@@ -1,6 +1,7 @@
 package com.sorsix.booktradingclub.repository
 
 import com.sorsix.booktradingclub.domain.Request
+import com.sorsix.booktradingclub.domain.User
 import com.sorsix.booktradingclub.domain.enumeration.RequestState
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Modifying
@@ -15,4 +16,8 @@ interface RequestRepository: JpaRepository<Request, Long> {
     fun updateRequest(id: Long, state: RequestState): Int
 
     fun getAllByState(state: RequestState): List<Request>
+
+    fun getAllByUserRequesting(user: User): List<Request>
+
+    fun getAllByUserReceiving(user: User): List<Request>
 }

@@ -1,8 +1,10 @@
 package com.sorsix.booktradingclub.service
 
 import com.sorsix.booktradingclub.domain.Book
+import com.sorsix.booktradingclub.domain.Request
 import com.sorsix.booktradingclub.domain.User
 import com.sorsix.booktradingclub.repository.BookRepository
+import com.sorsix.booktradingclub.repository.RequestRepository
 import com.sorsix.booktradingclub.repository.UserRepository
 import org.springframework.stereotype.Service
 import java.util.*
@@ -12,7 +14,8 @@ import kotlin.collections.ArrayList
 @Service
 class UserService(
         val userRepository: UserRepository,
-        val bookRepository: BookRepository
+        val bookRepository: BookRepository,
+        val requestRepository: RequestRepository
 ){
 
     fun findAllUsers() : List<User>{
@@ -29,7 +32,7 @@ class UserService(
     }
 
     fun login(username: String, password: String) : Optional<User>{
-        return this.userRepository.findByUsernameAndPassword(username, password);
+        return this.userRepository.findByUsernameAndPassword(username, password)
     }
 
     fun editInfo(fullName: String, city: String, address: String, state: String, request: HttpServletRequest) : Optional<User>{
@@ -42,5 +45,10 @@ class UserService(
     fun findAllUserBooks(request: HttpServletRequest): List<Book> {
         val user: User = request.session.getAttribute("user") as User
         return this.bookRepository.findAllByOwner(user)
+    }
+
+    fun getIncomingRequests(request: HttpServletRequest): List<Request>{
+        val user: User = request.session.getAttribute("user") as User
+        return this.requestRepository.getAllByUserReceiving(user)
     }
 }

@@ -25,50 +25,32 @@ class RequestService (
 
     fun getAllAcceptedRequests(): List<Request> = requestRepository.getAllByState(RequestState.ACCEPTED)
 
-    fun createRequest(booksToGiveIds:List<Long>, booksWantedIds: List<Long>, httpServletRequest: HttpServletRequest) : List<Request>{
+    fun createRequest(bookToGiveId:Long, bookWantedId: Long, httpServletRequest: HttpServletRequest) : Request{
         val userRequesting = httpServletRequest.session.getAttribute("user") as User
 
-        val booksWanted = bookRepository.findAllById(booksWantedIds)
-        val booksToGive = bookRepository.findAllById(booksToGiveIds)
+        val bookWanted : Book = bookRepository.findById(bookWantedId).get()
+        val bookToGive : Book = bookRepository.findById(bookToGiveId).get()
 
-        val collections  = booksWanted.stream()
-                .collect(Collectors.groupingBy { it.owner })
+        val userReceiving = bookWanted.owner
 
-        val result : MutableList<Request> = ArrayList()
-        collections.keys.stream().forEach {
-            collections[it]?.let {
-                it1 -> Request(requestId = 0, userRequesting = userRequesting, userReceiving = it, booksToGive = booksToGive, wantedBooks = it1, state = RequestState.PENDING)
-            }?.let {
-                it2 -> this.requestRepository.save(it2)
-            }?.let {
-                it3 -> result.add(it3)
-            }
-        }
-        return result
+        val request = Request(requestId = 0, userRequesting = userRequesting, userReceiving = userReceiving, bookToGive = bookToGive, wantedBook = bookWanted, state = RequestState.PENDING)
+        return this.requestRepository.save(request)
     }
 
-    fun deleteRequest(id: Long){
+    fun cancelRequest(id: Long){
         return this.requestRepository.deleteById(id)
     }
 
-    //TODO: accepted request becomes a trade, only changing the state to ACCEPTED
     fun acceptRequest(requestId: Long){
-        requestRepository.findById(requestId).map {
+        requestRepository.findById(requestId).map { it ->
             if (it.state == RequestState.PENDING){
-                this.requestRepository.updateRequest(requestId, RequestState.ACCEPTED)
+                this.bookRepository.deleteById(it.bookToGive.id)
+                this.bookRepository.deleteById(it.wantedBook.id)
+                this.requestRepository.findById(requestId).map {it2 ->
+                    this.requestRepository.save(Request(requestId = it2.requestId, userRequesting = it2.userRequesting, userReceiving =  it2.userReceiving, wantedBook =  it2.wantedBook, bookToGive = it2.bookToGive, RequestState.ACCEPTED))
+                }
             }
             //TODO: if the request is accepted, all the books from both sides should be deleted
-        }
-    }
-
-    //TODO: cancel request
-    fun cancelRequest(requestId: Long){
-        requestRepository.findById(requestId).map {
-            if (it.state == RequestState.CANCELED) {
-                logger.warn("Already canceled")
-            } else {
-                this.requestRepository.updateRequest(requestId, RequestState.CANCELED)
-            }
         }
     }
 }
