@@ -18,9 +18,4 @@ public interface UserRepository : JpaRepository<User, Long>{
     fun findByUsername(username: String) : Optional<User>
 
 
-    @Modifying
-    @Transactional
-    @Query("update User u set u.fullName = :fullName, u.city = :city, u.address = :address, u.state = :state  where u.username = :username")
-    fun updateUser(username: String, fullName: String, city: String, address: String, state: String) : Int
-
 }

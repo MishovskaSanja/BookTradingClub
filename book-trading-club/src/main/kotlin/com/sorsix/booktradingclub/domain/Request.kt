@@ -1,6 +1,6 @@
 package com.sorsix.booktradingclub.domain
 
-import com.sorsix.booktradingclub.domain.enumeration.RequestState
+import com.sorsix.booktradingclub.domain.enumeration.RequestStatus
 import javax.persistence.*
 
 @Entity
@@ -22,6 +22,6 @@ class Request (
         val bookToGive: Book,
 
         @Enumerated(EnumType.STRING)
-        val state: RequestState
+        val status: RequestStatus
 )
 

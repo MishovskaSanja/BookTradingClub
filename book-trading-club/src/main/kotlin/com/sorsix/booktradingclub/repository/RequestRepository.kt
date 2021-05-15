@@ -2,22 +2,19 @@ package com.sorsix.booktradingclub.repository
 
 import com.sorsix.booktradingclub.domain.Request
 import com.sorsix.booktradingclub.domain.User
-import com.sorsix.booktradingclub.domain.enumeration.RequestState
+import com.sorsix.booktradingclub.domain.enumeration.RequestStatus
 import org.springframework.data.jpa.repository.JpaRepository
-import org.springframework.data.jpa.repository.Modifying
-import org.springframework.data.jpa.repository.Query
 import org.springframework.stereotype.Repository
+import java.util.*
 
 @Repository
 interface RequestRepository: JpaRepository<Request, Long> {
 
-    @Modifying
-    @Query("update Request r set r.state = :state  where r.id = :id")
-    fun updateRequest(id: Long, state: RequestState): Int
-
-    fun getAllByState(state: RequestState): List<Request>
+    fun getAllByState(status: RequestStatus): List<Request>
 
     fun getAllByUserRequesting(user: User): List<Request>
 
-    fun getAllByUserReceiving(user: User): List<Request>
+    fun getAllByUserReceiving(user: User): Optional<List<Request>>
+
+
 }

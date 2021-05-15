@@ -1,5 +1,6 @@
 package com.sorsix.booktradingclub.domain
 
+import com.sorsix.booktradingclub.domain.enumeration.BookStatus
 import javax.persistence.*
 
 @Entity
@@ -8,9 +9,11 @@ data class Book(
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         val id: Long,
 
-        val name:String,
-        val description:String,
+        var name:String,
+        var description:String,
 
         @ManyToOne
-        val owner: User
+        val owner: User,
+
+        var status: BookStatus
 )

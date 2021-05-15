@@ -2,6 +2,7 @@ package com.sorsix.booktradingclub.repository
 
 import com.sorsix.booktradingclub.domain.Book
 import com.sorsix.booktradingclub.domain.User
+import com.sorsix.booktradingclub.domain.enumeration.BookStatus
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Modifying
 import org.springframework.data.jpa.repository.Query
@@ -13,10 +14,6 @@ import javax.transaction.Transactional
 interface BookRepository : JpaRepository<Book, Long>{
 
     fun findAllByOwner(owner: User) : List<Book>
-
-    @Modifying
-    @Transactional
-    @Query("update Book b set  b.name = :name, b.description = :description where b.id = :id")
-    fun editBook(id: Long, name: String, description: String): Int
+    fun findAllByStatus(status: BookStatus) : List<Book>
 
 }

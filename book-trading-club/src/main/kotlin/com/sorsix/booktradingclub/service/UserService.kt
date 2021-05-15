@@ -9,6 +9,7 @@ import com.sorsix.booktradingclub.repository.UserRepository
 import org.springframework.stereotype.Service
 import java.util.*
 import javax.servlet.http.HttpServletRequest
+import javax.transaction.Transactional
 import kotlin.collections.ArrayList
 
 @Service
@@ -35,11 +36,14 @@ class UserService(
         return this.userRepository.findByUsernameAndPassword(username, password)
     }
 
-    fun editInfo(fullName: String, city: String, address: String, state: String, request: HttpServletRequest) : Optional<User>{
+    @Transactional
+    fun editInfo(fullName: String, city: String, address: String, state: String, request: HttpServletRequest) {
         val user: User = request.session.getAttribute("user") as User
-        if (userRepository.updateUser(user.username, fullName, city, address, state) > 0)
-            return userRepository.findByUsername(user.username)
-        return Optional.empty()
+        user.fullName = fullName
+        user.address= address
+        user.state = state
+        user.city = city
+        this.userRepository.save(user)
     }
 
     fun findAllUserBooks(request: HttpServletRequest): List<Book> {
@@ -47,7 +51,7 @@ class UserService(
         return this.bookRepository.findAllByOwner(user)
     }
 
-    fun getIncomingRequests(request: HttpServletRequest): List<Request>{
+    fun getIncomingRequests(request: HttpServletRequest): Optional<List<Request>>{
         val user: User = request.session.getAttribute("user") as User
         return this.requestRepository.getAllByUserReceiving(user)
     }

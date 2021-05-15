@@ -3,6 +3,7 @@ package com.sorsix.booktradingclub.api
 import com.sorsix.booktradingclub.api.dto.RequestDto
 import com.sorsix.booktradingclub.domain.Request
 import com.sorsix.booktradingclub.service.RequestService
+import com.sorsix.booktradingclub.service.UserService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import java.util.*
@@ -12,7 +13,8 @@ import javax.servlet.http.HttpServletRequest
 @RequestMapping("/api/requests")
 @CrossOrigin("http://localhost:4200")
 internal class RequestController(
-        val requestService: RequestService
+        val requestService: RequestService,
+        val userService: UserService
 ) {
 
     @GetMapping
@@ -27,8 +29,9 @@ internal class RequestController(
 
     @PostMapping("/post")
     fun postRequest(@RequestBody requestDto: RequestDto, request: HttpServletRequest) : ResponseEntity<Request>{
-       return ResponseEntity.ok(requestService.createRequest(requestDto.booksToGive, requestDto.wantedBooks, request))
-    }
+       return ResponseEntity.of(requestService.createRequest(requestDto.booksToGive, requestDto.wantedBooks, request))
+       }
+
     
     @DeleteMapping("/{id}")
     fun deleteRequest(@PathVariable id: Long){
@@ -40,9 +43,9 @@ internal class RequestController(
         return requestService.acceptRequest(id)
     }
 
-    @GetMapping("/my")
-    fun getAllIncomingRequests(request: HttpServletRequest){
-
+    @GetMapping("/myRequests")
+    fun getAllIncomingRequests(request: HttpServletRequest): ResponseEntity<List<Request>>{
+        return ResponseEntity.of(userService.getIncomingRequests(request))
     }
 
 }
