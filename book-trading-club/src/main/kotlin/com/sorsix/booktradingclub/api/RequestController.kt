@@ -29,7 +29,7 @@ internal class RequestController(
 
     @PostMapping("/post")
     fun postRequest(@RequestBody requestDto: RequestDto, request: HttpServletRequest) : ResponseEntity<Request>{
-       return ResponseEntity.of(requestService.createRequest(requestDto.booksToGive, requestDto.wantedBooks, request))
+       return ResponseEntity.of(requestService.createRequest(requestDto.bookToGive, requestDto.wantedBook, request))
        }
 
     

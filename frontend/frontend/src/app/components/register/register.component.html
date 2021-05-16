@@ -1,1 +1,21 @@
-<p>register works!</p>
+<form #useregister = "ngForm" (ngSubmit) = "onSubmit(useregister.value)">
+  <label for="username">Username</label>
+  <input type="text" id="username" name="username" placeholder="Username" ngModel>
+  <br/>
+  <label for="password">Password</label>
+  <input type="password" id="password" name="password" placeholder="Password" ngModel>
+  <br/>
+  <label for="fullName">Full name</label>
+  <input type="text" id="fullName" name="fullName" placeholder="Full name" ngModel>
+  <br/>
+  <label for="city">City</label>
+  <input type="text" id="city" name="city" placeholder="Address" ngModel>
+  <br/>
+  <label for="state">State</label>
+  <input type="text" id="state" name="state" placeholder="State" ngModel>
+  <br/>
+  <label for="address">Address</label>
+  <input type="text" id="address" name="address" placeholder="Address" ngModel>
+<br>
+  <button type="submit" value="submit">Submit</button>
+</form>

@@ -10,7 +10,7 @@ import java.util.*
 @Repository
 interface RequestRepository: JpaRepository<Request, Long> {
 
-    fun getAllByState(status: RequestStatus): List<Request>
+    fun getAllByStatus(status: RequestStatus): List<Request>
 
     fun getAllByUserRequesting(user: User): List<Request>
 

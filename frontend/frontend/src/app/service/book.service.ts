@@ -19,15 +19,14 @@ export class BookService {
   url: string;
 
   constructor(private http: HttpClient){
-    this.url = 'http://localhost:8083/api/books'
+    this.url = 'http://localhost:8080/api/books'
   }
 
   public getAllBooks(): Observable<Book[]>{
     return this.http.get<Book[]>(this.url)
   }
 
-  //TODO: addBook not working
-  public addBook(){
-    return ;
+  public addBook(data) : Observable<Book>{
+    return this.http.post<Book>(this.url, data)
   }
 }

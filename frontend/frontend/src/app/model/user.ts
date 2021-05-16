@@ -1,8 +1,8 @@
-export interface UserRegister {
+export interface User {
   username: string,
+  password: string,
   fullName: string,
-  password: string
   city: string,
   state: string,
-  adddress: string
+  address: string
 }

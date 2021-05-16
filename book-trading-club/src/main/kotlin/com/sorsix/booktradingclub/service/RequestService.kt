@@ -22,9 +22,9 @@ class RequestService(
 
     val logger = LoggerFactory.getLogger(Logger::class.java)
 
-    fun getAllRequests(): List<Request> = requestRepository.getAllByState(RequestStatus.PENDING)
+    fun getAllRequests(): List<Request> = requestRepository.getAllByStatus(RequestStatus.PENDING)
 
-    fun getAllAcceptedRequests(): List<Request> = requestRepository.getAllByState(RequestStatus.ACCEPTED)
+    fun getAllAcceptedRequests(): List<Request> = requestRepository.getAllByStatus(RequestStatus.ACCEPTED)
 
 
     fun createRequest(bookToGiveId: Long, bookWantedId: Long, httpServletRequest: HttpServletRequest): Optional<Request> {

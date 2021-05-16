@@ -1,3 +1,4 @@
+<app-header></app-header>
 <div class="card my-5">
   <div class="card-body">
     <table class="table table-bordered table-striped">
@@ -18,3 +19,6 @@
     </table>
   </div>
 </div>
+<div *ngIf="user">{{user.username}}
+</div>
+<button routerLink="/addbook">Add book</button>

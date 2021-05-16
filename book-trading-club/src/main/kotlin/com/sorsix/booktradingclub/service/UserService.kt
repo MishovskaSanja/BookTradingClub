@@ -37,13 +37,13 @@ class UserService(
     }
 
     @Transactional
-    fun editInfo(fullName: String, city: String, address: String, state: String, request: HttpServletRequest) {
+    fun editInfo(fullName: String, city: String, address: String, state: String, request: HttpServletRequest) : User{
         val user: User = request.session.getAttribute("user") as User
         user.fullName = fullName
         user.address= address
         user.state = state
         user.city = city
-        this.userRepository.save(user)
+        return this.userRepository.save(user)
     }
 
     fun findAllUserBooks(request: HttpServletRequest): List<Book> {

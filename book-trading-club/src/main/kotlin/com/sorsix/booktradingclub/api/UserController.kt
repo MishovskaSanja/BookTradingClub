@@ -35,10 +35,10 @@ class UserController(
     }
 
     @PostMapping("/login")
-    fun login(@RequestBody userLoginDto : UserLoginDto, request: HttpServletRequest) : ResponseEntity<String>{
+    fun login(@RequestBody userLoginDto : UserLoginDto, request: HttpServletRequest) : ResponseEntity<User>{
         return userService.login(userLoginDto.username, userLoginDto.password).map {
             request.session.setAttribute("user", it);
-            ResponseEntity.ok("Success!");
+            ResponseEntity.ok(it);
         }.orElseThrow{
            InvalidCredentialsException()
         }
@@ -62,12 +62,7 @@ class UserController(
 
     @PutMapping("/edit")
     fun editInfo(@RequestBody userDto: UserEditDto, request: HttpServletRequest) : ResponseEntity<User>{
-        return this.userService.editInfo(userDto.fullName, userDto.city, userDto.address, userDto.state, request)
-                .map {
-                    ResponseEntity.ok(it)
-                }.orElseGet{
-                    ResponseEntity.badRequest().build()
-                }
+        return ResponseEntity.ok(this.userService.editInfo(userDto.fullName, userDto.city, userDto.address, userDto.state, request))
     }
 
     @GetMapping("/userBooks")
@@ -75,8 +70,19 @@ class UserController(
         return ResponseEntity.ok(this.userService.findAllUserBooks(httpServletRequest))
     }
 
+    @GetMapping("/current")
+    fun getCurrentUser(request: HttpServletRequest): ResponseEntity<User>{
+        var user = request.session.getAttribute("user") as User
+        return ResponseEntity.ok(user)
+
+    }
+
     @GetMapping("/incomingRequests")
     fun getIncomingRequests(request: HttpServletRequest) : ResponseEntity<List<Request>>{
-        return ResponseEntity.ok(userService.getIncomingRequests(request))
+        return userService.getIncomingRequests(request).map {
+            ResponseEntity.ok(it)
+        }.orElseGet{
+            ResponseEntity.badRequest().build()
+        }
     }
 }

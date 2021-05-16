@@ -1,8 +1,5 @@
-import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { from } from 'rxjs';
-import { UserLogin } from 'src/app/model/userLogin';
+import { Router } from '@angular/router';
 import { UserService } from '../../service/user.service'
 @Component({
   selector: 'app-login',
@@ -11,26 +8,20 @@ import { UserService } from '../../service/user.service'
 })
 export class LoginComponent implements OnInit {
 
-  user: UserLogin
-  loginForm = this.formBuilder.group({
-    username: ' ',
-    password: ' '
-  })
 
-  constructor(private userService: UserService,
-    private formBuilder: FormBuilder
-  ) { }
+  constructor(private userService: UserService,private  router: Router) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
 
+  onSubmit(data){
+    this.userService.login(data).subscribe(result => {
+      console.log(result)
+      sessionStorage.setItem("user", JSON.stringify(result))
+    })
+
+    const navigationDetails: string[] = ['/books'];
+    this.router.navigate(navigationDetails);
   }
 
-  login() {
-
-    this.user = new UserLogin(this.loginForm.value['username'], this.loginForm.value['password']);
-
-    console.log(this.user)
-    this.userService.login(this.user)
-  }
 
 }

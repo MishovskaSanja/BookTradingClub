@@ -25,12 +25,11 @@ class BookService(
     }
 
     @Transactional
-    fun editBook(id:Long, name: String, description: String, status: BookStatus) {
-        val book= this.bookRepository.findById(id)
+    fun editBook(id:Long, name: String, description: String) {
+        val book = this.bookRepository.findById(id)
         book.map {
             it.name = name
             it.description = description
-            it.status = status
         }
          this.bookRepository.save(book.get())
 

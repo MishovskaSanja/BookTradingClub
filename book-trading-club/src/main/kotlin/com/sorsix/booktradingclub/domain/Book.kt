@@ -15,5 +15,6 @@ data class Book(
         @ManyToOne
         val owner: User,
 
+        @Enumerated(EnumType.STRING)
         var status: BookStatus
 )

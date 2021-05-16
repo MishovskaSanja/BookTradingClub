@@ -25,13 +25,13 @@ class BookController(
 
     @PutMapping("/edit/{id}")
     fun updateBook(@PathVariable id: Long, @RequestBody bookDto: BookDto): ResponseEntity<Unit> {
-        return this.bookService.editBook(id, bookDto.name, bookDto.description, bookDto.status).let {
+        return this.bookService.editBook(id, bookDto.name, bookDto.description).let {
             ResponseEntity.ok(it)
         }
     }
 
     @DeleteMapping("/delete/{id}")
-    fun deleteHero(@PathVariable id: Long) {
+    fun deleteBook(@PathVariable id: Long) {
         return this.bookService.deleteBook(id)
     }
 

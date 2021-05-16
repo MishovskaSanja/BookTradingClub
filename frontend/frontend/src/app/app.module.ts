@@ -7,7 +7,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from '../app/components/login/login.component';
 import { RegisterComponent } from '../app/components/register/register.component';
 import { AddBookComponent } from '../app/components/add-book/add-book.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+import { AppRoutingModule } from './app-routing.module';
+import { HeaderComponent } from './components/header/header.component';
+import { UsersComponent } from './components/users/users.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { TradesComponent } from './components/trades/trades.component';
 
 
 @NgModule({
@@ -16,13 +21,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     BookComponent,
     LoginComponent,
     RegisterComponent,
-    AddBookComponent
+    AddBookComponent,
+    HeaderComponent,
+    UsersComponent,
+    UserProfileComponent,
+    TradesComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
