@@ -13,13 +13,14 @@ import kotlin.collections.ArrayList
 
 @Service
 class BookService(
-        val bookRepository: BookRepository
+        val bookRepository: BookRepository,
+        val userRepository: UserRepository
 ) {
 
     fun getAllAvailableBooks() : List<Book> = bookRepository.findAllByStatus(BookStatus.AVAILABLE)
 
-    fun createBook(name: String, description: String, request: HttpServletRequest) : Book {
-        val user = request.session.getAttribute("user") as User
+    fun createBook(name: String, description: String, username: String) : Book {
+        val user = userRepository.findByUsername(username).get()
         val book = Book(id=0, name = name, description = description, owner = user, status = BookStatus.AVAILABLE)
         return this.bookRepository.save(book);
     }

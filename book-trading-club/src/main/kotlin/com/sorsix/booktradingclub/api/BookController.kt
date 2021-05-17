@@ -17,11 +17,7 @@ class BookController(
     @GetMapping
     fun getBooks(): List<Book> = bookService.getAllAvailableBooks()
 
-    @PostMapping
-    fun addBook(@RequestBody bookDto: BookDto, request: HttpServletRequest): ResponseEntity<Book>{
-        val book = bookService.createBook(bookDto.name, bookDto.description, request)
-        return ResponseEntity.ok(book)
-    }
+
 
     @PutMapping("/edit/{id}")
     fun updateBook(@PathVariable id: Long, @RequestBody bookDto: BookDto): ResponseEntity<Unit> {

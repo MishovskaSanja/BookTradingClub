@@ -43,9 +43,4 @@ internal class RequestController(
         return requestService.acceptRequest(id)
     }
 
-    @GetMapping("/myRequests")
-    fun getAllIncomingRequests(request: HttpServletRequest): ResponseEntity<List<Request>>{
-        return ResponseEntity.of(userService.getIncomingRequests(request))
-    }
-
 }

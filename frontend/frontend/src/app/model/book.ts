@@ -1,4 +1,8 @@
+import { User } from "./user";
+
 export interface Book {
-  name: String
-  description: String
+  id: number
+  name: string
+  description: string
+  owner: User
 }

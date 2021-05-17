@@ -6,17 +6,15 @@
         <tr>
           <th scope="col">Name</th>
           <th scope="col">Description</th>
-          <th scope="col">Owner</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let book of books">
           <td>{{ book.name }}</td>
           <td>{{ book.description }}</td>
-          <td>{{ book.owner.username }}</td>
         </tr>
       </tbody>
     </table>
   </div>
 </div>
-
+<button routerLink="/addbook">Add book</button>

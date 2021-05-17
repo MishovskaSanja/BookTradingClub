@@ -13,6 +13,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { UsersComponent } from './components/users/users.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { TradesComponent } from './components/trades/trades.component';
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+import { MyBooksComponent } from './components/my-books/my-books.component';
 
 
 @NgModule({
@@ -25,7 +27,9 @@ import { TradesComponent } from './components/trades/trades.component';
     HeaderComponent,
     UsersComponent,
     UserProfileComponent,
-    TradesComponent
+    TradesComponent,
+    EditProfileComponent,
+    MyBooksComponent
   ],
   imports: [
     BrowserModule,

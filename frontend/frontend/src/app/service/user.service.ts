@@ -4,6 +4,7 @@ import { User } from '../model/user'
 import { Observable } from 'rxjs';
 
 import { RequestOptions } from '@angular/http';
+import { Book } from '../model/book';
 
 
 @Injectable({
@@ -31,8 +32,14 @@ export class UserService {
     return this.http.get<User[]>(this.baseUrl);
   }
 
-  getCurrentUser() : Observable<User>{
-    return this.http.get<User>(this.baseUrl+'/current')
+  editInfo(data) : Observable<User>{
+    const headers = { 'content-type': 'application/json'}
+    return this.http.put<User>(this.baseUrl+'/edit', data,  {'headers':headers})
+  }
+
+  getAllUserBooks(username: String) : Observable<Book[]>{
+    const param = "/userBooks?username=" + username
+    return this.http.get<Book[]>(this.baseUrl+param)
   }
 
 }

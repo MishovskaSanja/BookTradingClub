@@ -1,8 +1,9 @@
 package com.sorsix.booktradingclub.api.dto
 
 data class UserEditDto (
-    val fullName: String,
-    val city: String,
-    val state: String,
-    val address: String
+        val username: String,
+        val fullName: String,
+        val city: String,
+        val state: String,
+        val address: String
 )

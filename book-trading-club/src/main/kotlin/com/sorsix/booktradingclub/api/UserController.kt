@@ -1,5 +1,6 @@
 package com.sorsix.booktradingclub.api
 
+import com.sorsix.booktradingclub.api.dto.BookDto
 import com.sorsix.booktradingclub.api.dto.UserEditDto
 import com.sorsix.booktradingclub.api.dto.UserLoginDto
 import com.sorsix.booktradingclub.api.dto.UserRegisterDto
@@ -8,6 +9,7 @@ import com.sorsix.booktradingclub.domain.Request
 import com.sorsix.booktradingclub.domain.User
 import com.sorsix.booktradingclub.domain.exception.InvalidCredentialsException
 import com.sorsix.booktradingclub.domain.exception.UsernameAlreadyExistsException
+import com.sorsix.booktradingclub.service.BookService
 import com.sorsix.booktradingclub.service.UserService
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Controller
@@ -18,7 +20,8 @@ import javax.servlet.http.HttpServletRequest
 @RequestMapping("/api/user")
 @CrossOrigin( "http://localhost:4200")
 class UserController(
-        val userService: UserService
+        val userService: UserService,
+        val bookService: BookService
 ){
 
     @PostMapping("/register")
@@ -61,20 +64,19 @@ class UserController(
     }
 
     @PutMapping("/edit")
-    fun editInfo(@RequestBody userDto: UserEditDto, request: HttpServletRequest) : ResponseEntity<User>{
-        return ResponseEntity.ok(this.userService.editInfo(userDto.fullName, userDto.city, userDto.address, userDto.state, request))
+    fun editInfo(@RequestBody userDto: UserEditDto) : ResponseEntity<User>{
+        return ResponseEntity.ok(this.userService.editInfo(userDto.username, userDto.fullName, userDto.city, userDto.address, userDto.state))
+    }
+
+    @PostMapping("/addBook")
+    fun addBook(@RequestBody bookDto: BookDto): ResponseEntity<Book>{
+        val book = bookService.createBook(bookDto.name, bookDto.description, bookDto.username)
+        return ResponseEntity.ok(book)
     }
 
     @GetMapping("/userBooks")
-    fun getUserBooks(httpServletRequest: HttpServletRequest): ResponseEntity<List<Book>>{
-        return ResponseEntity.ok(this.userService.findAllUserBooks(httpServletRequest))
-    }
-
-    @GetMapping("/current")
-    fun getCurrentUser(request: HttpServletRequest): ResponseEntity<User>{
-        var user = request.session.getAttribute("user") as User
-        return ResponseEntity.ok(user)
-
+    fun getUserBooks(@RequestParam username: String): ResponseEntity<List<Book>>{
+        return ResponseEntity.ok(this.userService.findAllUserBooks(username))
     }
 
     @GetMapping("/incomingRequests")

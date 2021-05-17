@@ -1,3 +1,5 @@
+<app-header>
+</app-header>
 <div *ngIf="user" class="container">
   <table>
     <tr>
@@ -23,3 +25,5 @@
 
   </table>
 </div>
+<a class="btn btn-primary" href="user/edit-profile">Edit profile</a>
+<a class="btn btn-dark" href="user/myBooks"><span>{{user.username}}'s books</span></a>

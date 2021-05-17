@@ -36,9 +36,8 @@ class UserService(
         return this.userRepository.findByUsernameAndPassword(username, password)
     }
 
-    @Transactional
-    fun editInfo(fullName: String, city: String, address: String, state: String, request: HttpServletRequest) : User{
-        val user: User = request.session.getAttribute("user") as User
+    fun editInfo(username: String, fullName: String, city: String, address: String, state: String) : User{
+        val user: User = userRepository.findByUsername(username).get()
         user.fullName = fullName
         user.address= address
         user.state = state
@@ -46,8 +45,8 @@ class UserService(
         return this.userRepository.save(user)
     }
 
-    fun findAllUserBooks(request: HttpServletRequest): List<Book> {
-        val user: User = request.session.getAttribute("user") as User
+    fun findAllUserBooks(username: String): List<Book> {
+        val user: User = userRepository.findByUsername(username).get()
         return this.bookRepository.findAllByOwner(user)
     }
 

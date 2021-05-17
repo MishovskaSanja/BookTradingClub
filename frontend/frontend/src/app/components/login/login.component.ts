@@ -15,12 +15,12 @@ export class LoginComponent implements OnInit {
 
   onSubmit(data){
     this.userService.login(data).subscribe(result => {
-      console.log(result)
       sessionStorage.setItem("user", JSON.stringify(result))
+      const navigationDetails: string[] = ['/books'];
+    this.router.navigate(navigationDetails);
     })
 
-    const navigationDetails: string[] = ['/books'];
-    this.router.navigate(navigationDetails);
+
   }
 
 

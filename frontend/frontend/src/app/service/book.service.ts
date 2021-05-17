@@ -27,6 +27,6 @@ export class BookService {
   }
 
   public addBook(data) : Observable<Book>{
-    return this.http.post<Book>(this.url, data)
+    return this.http.post<Book>('http://localhost:8080/api/user/addBook', data)
   }
 }
