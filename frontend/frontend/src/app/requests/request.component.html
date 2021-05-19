@@ -1,5 +1,4 @@
 <app-header></app-header>
-<h1>TRADES</h1>
 <div class="card my-5">
   <div class="card-body">
     <table class="table table-bordered table-striped">
@@ -13,6 +12,9 @@
         <tr *ngFor="let r of requests">
           <td>{{ r.userRequesting.username }} | {{ r.bookToGive.name }}</td>
           <td>{{ r.userReceiving.username }}  | {{ r.wantedBook.name }}</td>
+
+          <td *ngIf="r.userReceiving.username == user.username">
+            <button class="bt btn-primary" (click)="accept(r.requestId)">Accept</button></td>
         </tr>
       </tbody>
     </table>

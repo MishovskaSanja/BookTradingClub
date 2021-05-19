@@ -9,17 +9,14 @@ import { Observable } from 'rxjs';
 })
 export class BookService {
 
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type':  'application/json',
-      Authorization: 'my-auth-token'
-    })
-  };
+  headers= new HttpHeaders()
+  .set('content-type', 'application/json')
+  .set('Access-Control-Allow-Origin', '*');
 
   url: string;
 
   constructor(private http: HttpClient){
-    this.url = 'http://localhost:8080/api/books'
+    this.url = 'http://localhost:8083/api/books'
   }
 
   public getAllBooks(): Observable<Book[]>{
@@ -27,6 +24,16 @@ export class BookService {
   }
 
   public addBook(data) : Observable<Book>{
-    return this.http.post<Book>('http://localhost:8080/api/user/addBook', data)
+    return this.http.post<Book>('http://localhost:8083/api/user/addBook', data)
   }
+
+  public editBook(data) : Observable<Book>{
+    return this.http.put<Book>(this.url+'/edit', data,  {'headers': this.headers})
+  }
+
+  public deleteBook(id:bigint){
+    const param = "/delete?id=" + id
+    return this.http.delete(this.url+param, {"headers": this.headers})
+  }
+
 }

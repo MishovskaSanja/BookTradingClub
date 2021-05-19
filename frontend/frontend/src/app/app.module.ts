@@ -15,6 +15,9 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { TradesComponent } from './components/trades/trades.component';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 import { MyBooksComponent } from './components/my-books/my-books.component';
+import { EditBookComponent } from './components/edit-book/edit-book.component';
+import { CreateRequestComponent } from './components/create-request/create-request.component';
+import { RequestComponent } from './requests/request.component';
 
 
 @NgModule({
@@ -29,7 +32,10 @@ import { MyBooksComponent } from './components/my-books/my-books.component';
     UserProfileComponent,
     TradesComponent,
     EditProfileComponent,
-    MyBooksComponent
+    MyBooksComponent,
+    EditBookComponent,
+    CreateRequestComponent,
+    RequestComponent
   ],
   imports: [
     BrowserModule,

@@ -19,15 +19,16 @@ class BookController(
 
 
 
-    @PutMapping("/edit/{id}")
-    fun updateBook(@PathVariable id: Long, @RequestBody bookDto: BookDto): ResponseEntity<Unit> {
-        return this.bookService.editBook(id, bookDto.name, bookDto.description).let {
+    //TODO()
+    @PutMapping("/edit")
+    fun updateBook(@RequestBody bookDto: Book): ResponseEntity<Unit> {
+        return this.bookService.editBook(bookDto.id, bookDto.name, bookDto.description).let {
             ResponseEntity.ok(it)
         }
     }
 
-    @DeleteMapping("/delete/{id}")
-    fun deleteBook(@PathVariable id: Long) {
+    @DeleteMapping("/delete")
+    fun deleteBook(@RequestParam id: Long) {
         return this.bookService.deleteBook(id)
     }
 

@@ -6,15 +6,21 @@
         <tr>
           <th scope="col">Name</th>
           <th scope="col">Description</th>
+          <th scope="col">Status</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let book of books">
           <td>{{ book.name }}</td>
           <td>{{ book.description }}</td>
+          <td>{{ book.status }}</td>
+          <td *ngIf="book.status =='AVAILABLE'">
+              <button  class="btn btn-warning" [routerLink]="['/editBook']" [state]="book">Edit book</button> |
+              <button class="btn btn-danger" (click)='delete(book.id)'> Delete </button>
+          </td>
         </tr>
       </tbody>
     </table>
   </div>
 </div>
-<button routerLink="/addbook">Add book</button>
+<button routerLink="/addBook">Add book</button>

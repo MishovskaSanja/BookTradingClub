@@ -18,6 +18,7 @@ class BookService(
 ) {
 
     fun getAllAvailableBooks() : List<Book> = bookRepository.findAllByStatus(BookStatus.AVAILABLE)
+    fun getAllTakenBooks(): List<Book> = bookRepository.findAllByStatus(BookStatus.TAKEN)
 
     fun createBook(name: String, description: String, username: String) : Book {
         val user = userRepository.findByUsername(username).get()

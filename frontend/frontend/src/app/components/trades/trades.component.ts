@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { from } from 'rxjs';
+import { Request } from 'src/app/model/request'
+import { RequestService } from 'src/app/service/request.service';
 
 @Component({
   selector: 'app-trades',
@@ -7,9 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TradesComponent implements OnInit {
 
-  constructor() { }
+  requests: Request[];
+
+  constructor(public requestService : RequestService) { }
 
   ngOnInit(): void {
+    this.requestService.getAllTrades().subscribe(result => {
+      this.requests = result;
+    });
   }
 
 }

@@ -33,13 +33,13 @@ internal class RequestController(
        }
 
     
-    @DeleteMapping("/{id}")
-    fun deleteRequest(@PathVariable id: Long){
+    @DeleteMapping("/delete")
+    fun deleteRequest(@RequestParam id: Long){
         return requestService.cancelRequest(id)
     }
 
-    @PostMapping("/accept/{id}")
-    fun acceptRequest(@PathVariable id: Long){
+    @PostMapping("/accept")
+    fun acceptRequest(@RequestParam id: Long){
         return requestService.acceptRequest(id)
     }
 
