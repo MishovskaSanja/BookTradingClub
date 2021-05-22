@@ -38,7 +38,12 @@
       <li *ngIf="user" class="nav-item">
         <a class="nav-link" routerLink="/user/myBooks">My Books</a>
       </li>
-
+      <li *ngIf="user" class="nav-item">
+        <a class="nav-link" routerLink="/user/myRequests">My Requests</a>
+      </li>
+      <li *ngIf="user" class="nav-item">
+        <a class="nav-link" routerLink="/user/incomingRequests">Incoming Requests</a>
+      </li>
     </ul>
   </div>
 </nav>

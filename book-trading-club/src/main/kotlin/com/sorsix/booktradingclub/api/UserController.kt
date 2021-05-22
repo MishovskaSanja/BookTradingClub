@@ -20,8 +20,7 @@ import javax.servlet.http.HttpServletRequest
 @RequestMapping("/api/user")
 @CrossOrigin( "http://localhost:4200")
 class UserController(
-        val userService: UserService,
-        val bookService: BookService
+        val userService: UserService
 ){
 
     @PostMapping("/register")
@@ -38,13 +37,8 @@ class UserController(
     }
 
     @PostMapping("/login")
-    fun login(@RequestBody userLoginDto : UserLoginDto, request: HttpServletRequest) : ResponseEntity<User>{
-        return userService.login(userLoginDto.username, userLoginDto.password).map {
-            request.session.setAttribute("user", it);
-            ResponseEntity.ok(it);
-        }.orElseThrow{
-           InvalidCredentialsException()
-        }
+    fun login(@RequestBody userLoginDto : UserLoginDto, request: HttpServletRequest) : ResponseEntity<Any>{
+        return ResponseEntity.ok(userService.authenticateUser(userLoginDto.username, userLoginDto.password))
     }
 
     @ExceptionHandler(InvalidCredentialsException::class)
@@ -57,34 +51,39 @@ class UserController(
         return ResponseEntity.ok(userService.findAllUsers());
     }
 
-    @PostMapping("/logout")
-    fun logout(request: HttpServletRequest) : ResponseEntity<String> {
-        request.session.invalidate()
-        return ResponseEntity.ok("success!")
-    }
 
     @PutMapping("/edit")
-    fun editInfo(@RequestBody userDto: UserEditDto) : ResponseEntity<User>{
-        return ResponseEntity.ok(this.userService.editInfo(userDto.username, userDto.fullName, userDto.city, userDto.address, userDto.state))
-    }
-
-    @PostMapping("/addBook")
-    fun addBook(@RequestBody bookDto: BookDto): ResponseEntity<Book>{
-        val book = bookService.createBook(bookDto.name, bookDto.description, bookDto.username)
-        return ResponseEntity.ok(book)
+    fun editInfo(@RequestBody userDto: UserEditDto) : ResponseEntity<Any>{
+        print("here")
+        this.userService.editInfo(userDto.fullName, userDto.city, userDto.address, userDto.state)
+        return ResponseEntity.ok().build()
     }
 
     @GetMapping("/userBooks")
-    fun getUserBooks(@RequestParam username: String): ResponseEntity<List<Book>>{
-        return ResponseEntity.ok(this.userService.findAllUserBooks(username))
+    fun getUserBooks(): ResponseEntity<List<Book>>{
+        return ResponseEntity.ok(this.userService.findAllUserBooks())
     }
 
     @GetMapping("/incomingRequests")
-    fun getIncomingRequests(request: HttpServletRequest) : ResponseEntity<List<Request>>{
-        return userService.getIncomingRequests(request).map {
+    fun getIncomingRequests() : ResponseEntity<List<Request>>{
+        return userService.getIncomingRequests().map {
             ResponseEntity.ok(it)
         }.orElseGet{
             ResponseEntity.badRequest().build()
         }
+    }
+
+    @GetMapping("/myRequests")
+    fun getMyRequests() : ResponseEntity<List<Request>>{
+        return userService.getMyRequests().map {
+            ResponseEntity.ok(it)
+        }.orElseGet{
+            ResponseEntity.badRequest().build()
+        }
+    }
+
+    @GetMapping("/info")
+    fun getCurrentUserInfo() : ResponseEntity<User>{
+        return ResponseEntity.ok(userService.getCurrentUser())
     }
 }

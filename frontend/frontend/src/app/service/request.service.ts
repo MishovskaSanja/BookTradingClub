@@ -15,7 +15,7 @@ export class RequestService {
   url: string;
 
   constructor(private http: HttpClient){
-    this.url = 'http://localhost:8083/api/requests'
+    this.url = 'http://localhost:8080/api/requests'
   }
 
   public getAllRequests(): Observable<Request[]>{
@@ -26,14 +26,16 @@ export class RequestService {
     return this.http.get<Request[]>(this.url+'/accepted')
   }
 
-  //TODO()
   public makeRequest(data) : Observable<Request>{
-    return this.http.post<Request>(this.url+'/post',  {"headers": this.headers})
+    return this.http.post<Request>(this.url+'/post', data,  {"headers": this.headers})
   }
 
-  public acceptRequest(id: bigint) : Observable<Request>{
-    const param = "/accept?id=" + id
-    return this.http.post<Request>(this.url+param, {"headers": this.headers} )
+  public cancelRequest(id){
+    return this.http.delete(this.url+"/delete/"+id)
+  }
+
+  public acceptRequest(id) : Observable<Request>{
+    return this.http.post<Request>(this.url+"/accept/"+id, '')
   }
 
 

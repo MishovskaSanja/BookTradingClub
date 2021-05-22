@@ -17,21 +17,23 @@ import javax.servlet.http.HttpServletRequest
 @Service
 class RequestService(
         val requestRepository: RequestRepository,
-        val bookRepository: BookRepository
+        val bookRepository: BookRepository,
+        val userService: UserService
 ) {
-
-    val logger = LoggerFactory.getLogger(Logger::class.java)
 
     fun getAllRequests(): List<Request> = requestRepository.getAllByStatus(RequestStatus.PENDING)
 
     fun getAllAcceptedRequests(): List<Request> = requestRepository.getAllByStatus(RequestStatus.ACCEPTED)
 
+    fun findBookById(id: Long) : Book{
+        return bookRepository.findById(id).orElseThrow{RuntimeException("Book not found")}
+    }
 
-    fun createRequest(bookToGiveId: Long, bookWantedId: Long, httpServletRequest: HttpServletRequest): Optional<Request> {
-        val userRequesting = httpServletRequest.session.getAttribute("user") as User
+    fun createRequest(bookToGiveId: Long, bookWantedId: Long): Optional<Request> {
+        val userRequesting = userService.getCurrentUser()
 
-        val bookWanted: Book = bookRepository.findById(bookWantedId).get()
-        val bookToGive: Book = bookRepository.findById(bookToGiveId).get()
+        val bookWanted: Book = findBookById(bookWantedId)
+        val bookToGive: Book = findBookById(bookToGiveId)
 
         return if (bookWanted.status == BookStatus.AVAILABLE && bookToGive.status == BookStatus.AVAILABLE) {
             val userReceiving = bookWanted.owner
@@ -39,12 +41,11 @@ class RequestService(
             this.requestRepository.save(request)
             Optional.of(request)
         } else {
-            logger.warn("Status of the books wanted: [{}], to give: [{}]", bookWanted.status, bookToGive.status)
             return Optional.empty()
         }
     }
 
-    fun cancelRequest(id: Long) {
+    fun deleteRequest(id: Long) {
         return this.requestRepository.deleteById(id)
     }
 
@@ -57,14 +58,10 @@ class RequestService(
                 this.bookRepository.findById(it.wantedBook.id).map {
                     it.status = BookStatus.TAKEN
                 }
-                this.requestRepository.findById(requestId).map { it2 ->
-                    this.requestRepository.save(Request(requestId = it2.requestId, userRequesting = it2.userRequesting, userReceiving = it2.userReceiving,
-                            wantedBook = it2.wantedBook, bookToGive = it2.bookToGive, status = RequestStatus.ACCEPTED))
+                this.requestRepository.save(Request(requestId = it.requestId, userRequesting = it.userRequesting, userReceiving = it.userReceiving,
+                            wantedBook = it.wantedBook, bookToGive = it.bookToGive, status = RequestStatus.ACCEPTED))
                 }
             }
-            //TODO: if the request is accepted, all the books from both sides should be deleted
-            // s: i added new prop to the entity book ( status ), we dont have to delete them
         }
-        //TODO: some exception here!!!
-    }
+
 }

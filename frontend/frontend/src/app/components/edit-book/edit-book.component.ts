@@ -13,24 +13,17 @@ import { from } from 'rxjs';
 export class EditBookComponent implements OnInit {
 
   constructor(private bookService: BookService, private router: Router) { }
-
-  user: User
   book: any
 
-
-
-
   ngOnInit(): void {
-    this.user = JSON.parse(sessionStorage.getItem("user")) as User
     this.book =  history.state as Book
   }
 
   onSubmit(data){
     this.bookService.editBook({
-      "id": data.id,
+      "id" : this.book.id,
       "name": data.name,
-      "description": data.description,
-      "owner": this.user
+      "description": data.description
     }).subscribe(result => {
       const navigationDetails: string[] = ['user/myBooks'];
     this.router.navigate(navigationDetails);

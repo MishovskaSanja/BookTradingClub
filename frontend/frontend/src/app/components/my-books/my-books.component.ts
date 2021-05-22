@@ -25,14 +25,13 @@ export class MyBooksComponent implements OnInit {
   }
 
   public getAllUserBooks(){
-    this.userService.getAllUserBooks(this.user.username).subscribe(result => {
+    this.userService.getAllUserBooks().subscribe(result => {
       this.books = result
     })
   }
   public delete(id: bigint){
     this.bookService.deleteBook(id).subscribe(
       data => {
-        console.log('deleted book ', data)
         this.getAllUserBooks()
       }
     )

@@ -17,19 +17,19 @@ class BookController(
     @GetMapping
     fun getBooks(): List<Book> = bookService.getAllAvailableBooks()
 
-
-
-    //TODO()
-    @PutMapping("/edit")
-    fun updateBook(@RequestBody bookDto: Book): ResponseEntity<Unit> {
-        return this.bookService.editBook(bookDto.id, bookDto.name, bookDto.description).let {
-            ResponseEntity.ok(it)
-        }
+    @PostMapping("/addBook")
+    fun addBook(@RequestBody bookDto: BookDto): ResponseEntity<Book>{
+        val book = bookService.createBook(bookDto.name, bookDto.description)
+        return ResponseEntity.ok(book)
     }
 
-    @DeleteMapping("/delete")
-    fun deleteBook(@RequestParam id: Long) {
-        return this.bookService.deleteBook(id)
+    @PutMapping("/edit/{id}")
+    fun updateBook(@PathVariable id: Long, @RequestBody bookDto: BookDto) {
+        this.bookService.editBook(id, bookDto.name, bookDto.description)
     }
 
+    @DeleteMapping("/delete/{id}")
+    fun deleteBook(@PathVariable id: Long) {
+        this.bookService.deleteBook(id)
+    }
 }

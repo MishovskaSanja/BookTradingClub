@@ -28,18 +28,18 @@ internal class RequestController(
     }
 
     @PostMapping("/post")
-    fun postRequest(@RequestBody requestDto: RequestDto, request: HttpServletRequest) : ResponseEntity<Request>{
-       return ResponseEntity.of(requestService.createRequest(requestDto.bookToGive, requestDto.wantedBook, request))
-       }
-
-    
-    @DeleteMapping("/delete")
-    fun deleteRequest(@RequestParam id: Long){
-        return requestService.cancelRequest(id)
+    fun postRequest(@RequestBody requestDto: RequestDto) : ResponseEntity<Request>{
+       return ResponseEntity.of(requestService.createRequest(requestDto.bookToGive, requestDto.wantedBook))
     }
 
-    @PostMapping("/accept")
-    fun acceptRequest(@RequestParam id: Long){
+    
+    @DeleteMapping("/delete/{id}")
+    fun deleteRequest(@PathVariable id: Long){
+        return requestService.deleteRequest(id)
+    }
+
+    @PostMapping("/accept/{id}")
+    fun acceptRequest(@PathVariable id: Long){
         return requestService.acceptRequest(id)
     }
 

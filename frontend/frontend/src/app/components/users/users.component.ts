@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Book } from 'src/app/model/book';
 import { User } from 'src/app/model/user';
 import { UserService } from 'src/app/service/user.service';
 
@@ -17,6 +18,7 @@ export class UsersComponent implements OnInit {
     this.userService.getAllUsers().subscribe(result => {
       this.users = result
     })
+  
   }
 
 }

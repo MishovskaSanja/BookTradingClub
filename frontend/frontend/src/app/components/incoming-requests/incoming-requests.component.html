@@ -1,0 +1,11 @@
+<app-header></app-header>
+<ul *ngFor="let req of incomingRequests">
+  <li>
+    <div>Offered book: {{req.bookToGive.name}} from {{req.userRequesting.username}}</div>
+    <div>wantedBook: {{req.wantedBook.name}} </div>
+    <button class="btn btn-success" (click)="accept(req.requestId)">Accept</button>
+    <button class="btn btn-danger" (click)="reject(req.requestId)">Reject</button>
+    </li>
+
+</ul>
+

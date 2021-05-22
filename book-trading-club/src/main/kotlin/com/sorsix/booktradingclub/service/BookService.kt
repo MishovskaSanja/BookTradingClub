@@ -14,31 +14,44 @@ import kotlin.collections.ArrayList
 @Service
 class BookService(
         val bookRepository: BookRepository,
-        val userRepository: UserRepository
+        val userService: UserService
 ) {
 
     fun getAllAvailableBooks() : List<Book> = bookRepository.findAllByStatus(BookStatus.AVAILABLE)
-    fun getAllTakenBooks(): List<Book> = bookRepository.findAllByStatus(BookStatus.TAKEN)
 
-    fun createBook(name: String, description: String, username: String) : Book {
-        val user = userRepository.findByUsername(username).get()
+    fun createBook(name: String, description: String) : Book {
+        val user = this.userService.getCurrentUser()
         val book = Book(id=0, name = name, description = description, owner = user, status = BookStatus.AVAILABLE)
         return this.bookRepository.save(book);
     }
 
-    @Transactional
+    //edna kniga mozhe da se promeni samo ako e dostapna, i mozhe da se promeni samo od nejziniot owner!!!
     fun editBook(id:Long, name: String, description: String) {
         val book = this.bookRepository.findById(id)
         book.map {
-            it.name = name
-            it.description = description
+            if (it.status == BookStatus.AVAILABLE && it.owner == userService.getCurrentUser()) {
+                it.name = name
+                it.description = description
+            } else{
+                throw RuntimeException("Book can't be edited!") //BookCantBeEditedException
+            }
+        }?: run {
+            throw RuntimeException("Book doesn't exist!") //BookIdDoesntExistException
         }
          this.bookRepository.save(book.get())
-
     }
 
-    // TODO: this will only work for books that are not accepted in a request, we maybe need to  fix the logic again
+    //edna kniga mozhe da se izbrishe samo ako e dostapna, i mozhe da se izbrishe samo od nejziniot owner!!!
     fun deleteBook(id: Long) {
-        return this.bookRepository.deleteById(id)
+        val book = this.bookRepository.findById(id)
+        book.map {
+            if (it.status == BookStatus.AVAILABLE && it.owner == userService.getCurrentUser()) {
+                this.bookRepository.deleteById(id)
+            }else{
+                throw RuntimeException("Book can't be deleted!") //BookCantBeDeleted
+            }
+        }?: run{
+            throw RuntimeException("Book doesn't exist!") //BookIdDoesntExist
+        }
     }
 }

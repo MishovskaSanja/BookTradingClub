@@ -17,7 +17,10 @@ import { EditProfileComponent } from './components/edit-profile/edit-profile.com
 import { MyBooksComponent } from './components/my-books/my-books.component';
 import { EditBookComponent } from './components/edit-book/edit-book.component';
 import { CreateRequestComponent } from './components/create-request/create-request.component';
-import { RequestComponent } from './requests/request.component';
+import { RequestComponent } from './components/requests/request.component';
+import { authInterceptorProviders } from './components/auth.interceptor';
+import { MyRequestsComponent } from './components/my-requests/my-requests.component';
+import { IncomingRequestsComponent } from './components/incoming-requests/incoming-requests.component';
 
 
 @NgModule({
@@ -35,7 +38,9 @@ import { RequestComponent } from './requests/request.component';
     MyBooksComponent,
     EditBookComponent,
     CreateRequestComponent,
-    RequestComponent
+    RequestComponent,
+    MyRequestsComponent,
+    IncomingRequestsComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +48,7 @@ import { RequestComponent } from './requests/request.component';
     FormsModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

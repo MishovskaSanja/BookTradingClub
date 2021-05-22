@@ -10,19 +10,15 @@ import { BookService } from 'src/app/service/book.service';
 })
 export class AddBookComponent implements OnInit {
 
-  constructor(private bookService: BookService, private router: Router) { }
-
-  user: User
+  constructor(private bookService: BookService, private router: Router) {}
 
   ngOnInit() {
-    this.user = JSON.parse(sessionStorage.getItem("user")) as User
   }
 
   onSubmit(data){
      this.bookService.addBook({
         "name" : data.name,
-        "description" : data.description,
-        "username" : this.user.username
+        "description" : data.description
     }).subscribe(result => {
       const navigationDetails: string[] = ['/user/myBooks'];
       this.router.navigate(navigationDetails);

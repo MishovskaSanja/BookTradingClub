@@ -19,9 +19,6 @@ export class BookComponent implements OnInit {
     this.bookService.getAllBooks().subscribe(result => {
       this.books = result;
     });
-    this.user = JSON.parse(sessionStorage.getItem("user")) as User
-    console.log("User: " +this.user)
-
   }
 
 }

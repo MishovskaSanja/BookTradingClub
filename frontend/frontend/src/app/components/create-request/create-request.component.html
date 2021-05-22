@@ -1,5 +1,27 @@
 <app-header></app-header>
 <h3>Make a request</h3>
-<!--
-  ne raboti dropdown
--->
+<h2>My Books</h2>
+<form  #createRequest = "ngForm" (ngSubmit) = "onSubmit(createRequest.value)">
+<ul *ngFor="let book of myBooks">
+
+<li>
+  <input type="radio" value="{{book.id}}" name="bookToGive" ngModel>
+  <div>Book: {{book.name}}</div>
+  <div>Description: {{book.description}}</div>
+</li>
+</ul>
+
+<h2>Books</h2>
+<ul *ngFor="let book of booksByOtherUsers">
+
+<li *ngIf="book.owner.username != currentUserUsername">
+  <input type="radio" value="{{book.id}}" name="wantedBook" ngModel>
+  <div>{{book.owner.username}}</div>
+  <div>{{currentUserUsername}}</div>
+  <div>Book: {{book.name}}</div>
+  <div>Description: {{book.description}}</div>
+</li>
+</ul>
+
+<button type="submit" value="submit">Submit</button>
+</form>

@@ -1,45 +1,50 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http'
+import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { User } from '../model/user'
 import { Observable } from 'rxjs';
-
-import { RequestOptions } from '@angular/http';
 import { Book } from '../model/book';
+import { TokenStorageService } from './token-storage.service';
+import { Request } from '../model/request';
 
+const BASE_URL = 'http://localhost:8080/api/user'
+
+const httpOptions = {
+  headers: new HttpHeaders({'Content-Type': 'application/json'})
+};
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  private baseUrl: string
+  constructor(private http: HttpClient, private tokenStorage: TokenStorageService){}
 
-  constructor(private http: HttpClient){
-    this.baseUrl = 'http://localhost:8083/api/user'
-  }
-
-  login(data) : Observable<string> {
-    return this.http.post<string>(this.baseUrl + '/login', data)
-  }
-
-  register(data) : Observable<User>{
-    const headers = { 'content-type': 'application/json'}
-    console.log(data)
-    return this.http.post<User>(this.baseUrl + '/register', data, {'headers':headers})
+  public register(data) : Observable<User>{
+    return this.http.post<User>(BASE_URL+"/register", data)
   }
 
   getAllUsers() : Observable<User[]>{
-    return this.http.get<User[]>(this.baseUrl);
+    return this.http.get<User[]>(BASE_URL);
   }
 
   editInfo(data) : Observable<User>{
-    const headers = { 'content-type': 'application/json'}
-    return this.http.put<User>(this.baseUrl+'/edit', data,  {'headers':headers})
+    return this.http.put<User>(BASE_URL+'/edit', data)
   }
 
-  getAllUserBooks(username: String) : Observable<Book[]>{
-    const param = "/userBooks?username=" + username
-    return this.http.get<Book[]>(this.baseUrl+param)
+  getAllUserBooks() : Observable<Book[]>{
+    return this.http.get<Book[]>(BASE_URL+"/userBooks")
+  }
+
+  getCurrentUser() : Observable<User>{
+    return this.http.get<User>(BASE_URL+"/info")
+  }
+
+  getIncomingRequests() : Observable<Request[]> {
+    return this.http.get<Request[]>(BASE_URL + "/incomingRequests")
+  }
+
+  getMyRequests() : Observable<Request[]> {
+    return this.http.get<Request[]>(BASE_URL + "/myRequests")
   }
 
 }

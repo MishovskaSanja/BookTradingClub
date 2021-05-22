@@ -3,7 +3,7 @@ import { from } from 'rxjs';
 import { RequestService } from 'src/app/service/request.service'
 import { Request } from 'src/app/model/request'
 import { Router } from '@angular/router';
-import { User } from '../model/user';
+import { User } from '../../model/user';
 
 
 @Component({

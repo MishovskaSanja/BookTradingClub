@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { User } from 'src/app/model/user';
 import { UserService } from 'src/app/service/user.service';
 
@@ -11,24 +12,24 @@ export class EditProfileComponent implements OnInit {
 
   user: User
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
-    this.user = JSON.parse(sessionStorage.getItem("user")) as User
+    this.userService.getCurrentUser().subscribe(result =>{
+      this.user = result
+    })
   }
 
   onSubmit(data){
+    console.log("here")
+    console.log(data)
       this.userService.editInfo({
-        username: this.user.username,
         fullName: data.fullName,
         city: data.city,
         address: data.address,
         state: data.state
-      }).subscribe(result => {
-        sessionStorage.removeItem("user")
-        sessionStorage.setItem("user", JSON.stringify(result))
-        
-      })
+      }).subscribe()
+      this.router.navigateByUrl("/user/profile")
   }
 
 }

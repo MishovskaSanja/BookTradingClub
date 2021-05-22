@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/service/auth.service';
+import { TokenStorageService } from 'src/app/service/token-storage.service';
 import { UserService } from '../../service/user.service'
 @Component({
   selector: 'app-login',
@@ -8,19 +10,16 @@ import { UserService } from '../../service/user.service'
 })
 export class LoginComponent implements OnInit {
 
-
-  constructor(private userService: UserService,private  router: Router) { }
+  constructor(private tokenStorage: TokenStorageService, private authService: AuthService, private router: Router, private userService: UserService) { }
 
   ngOnInit(): void {}
 
   onSubmit(data){
-    this.userService.login(data).subscribe(result => {
-      sessionStorage.setItem("user", JSON.stringify(result))
-      const navigationDetails: string[] = ['/books'];
-    this.router.navigate(navigationDetails);
-    })
-
-
+      this.authService.login(data).subscribe(result => {
+        this.tokenStorage.saveUser(result.username)
+        this.tokenStorage.saveToken(result.accessToken)
+        this.router.navigateByUrl('/books')
+      })
   }
 
 

@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Book } from 'src/app/model/book';
 import { User } from 'src/app/model/user';
+import { BookService } from 'src/app/service/book.service';
+import { RequestService } from 'src/app/service/request.service';
+import { UserService } from 'src/app/service/user.service';
 
 @Component({
   selector: 'app-create-request',
@@ -10,19 +14,28 @@ import { User } from 'src/app/model/user';
 export class CreateRequestComponent implements OnInit {
 
 
-  // bookToGive: Book
-  // bookToTake: Book
-  // fromUser: User
-  // toUser: User
+  myBooks : Book[]
+  booksByOtherUsers: Book[]
+  currentUserUsername : string
 
-  request: Request
-
-
-  constructor() { }
+  constructor(private userService: UserService, private bookService: BookService, private requestService: RequestService, private router: Router) { }
 
   ngOnInit(): void {
+    this.userService.getAllUserBooks().subscribe(result =>{
+      this.myBooks = result
+    })
+
+    this.bookService.getAllBooks().subscribe(result => {
+      this.booksByOtherUsers = result
+    })
+
+    this.currentUserUsername = sessionStorage.getItem("user")
   }
 
-  //TODO: create request
+  onSubmit(data){
+    this.requestService.makeRequest(data).subscribe(result => {
+      this.router.navigateByUrl("/requests")
+    })
+  }
 
 }

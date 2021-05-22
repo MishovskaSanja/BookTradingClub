@@ -1,0 +1,8 @@
+<app-header></app-header>
+<ul *ngFor="let req of myRequests">
+  <li>
+    <div>Offered book: {{req.bookToGive.name}} </div>
+    <div>wantedBook: {{req.wantedBook.name}}from {{req.userReceiving.username}} </div>
+    <button class="btn btn-danger" (click)="cancelRequest(req.requestId)">Cancel request</button>
+    </li>
+</ul>

@@ -5,12 +5,10 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "users")
-@Data
-data class User (
+data class User(
         @Id
         val username: String,
         val password: String,
-
         var fullName: String,
         var city: String,
         var state: String,

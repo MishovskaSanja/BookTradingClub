@@ -1,6 +1,6 @@
 <app-header>
 </app-header>
-<div *ngIf="user" class="container">
+<div *ngIf="user != undefined" class="container">
   <table>
     <tr>
       <td>Username: </td>
@@ -24,6 +24,7 @@
     </tr>
 
   </table>
+  <a class="btn btn-primary" href="user/edit-profile">Edit profile</a>
+  <a class="btn btn-dark" href="user/myBooks"><span>{{user.username}}'s books</span></a>
 </div>
-<a class="btn btn-primary" href="user/edit-profile">Edit profile</a>
-<a class="btn btn-dark" href="user/myBooks"><span>{{user.username}}'s books</span></a>
+
