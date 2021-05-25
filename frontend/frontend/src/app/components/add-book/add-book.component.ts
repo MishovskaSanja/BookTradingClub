@@ -18,7 +18,8 @@ export class AddBookComponent implements OnInit {
   onSubmit(data){
      this.bookService.addBook({
         "name" : data.name,
-        "description" : data.description
+        "description" : data.description,
+        "imgUrl": data.img
     }).subscribe(result => {
       const navigationDetails: string[] = ['/user/myBooks'];
       this.router.navigate(navigationDetails);

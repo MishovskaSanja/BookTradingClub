@@ -23,7 +23,8 @@ export class EditBookComponent implements OnInit {
     this.bookService.editBook({
       "id" : this.book.id,
       "name": data.name,
-      "description": data.description
+      "description": data.description,
+      "imgUrl": data.imgUrl
     }).subscribe(result => {
       const navigationDetails: string[] = ['user/myBooks'];
     this.router.navigate(navigationDetails);

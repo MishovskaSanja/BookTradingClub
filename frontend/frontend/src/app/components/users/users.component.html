@@ -1,11 +1,62 @@
 <app-header></app-header>
-<ul >
-  <li *ngFor="let u of users" >
-    <div>{{u.username}}</div>
-    <div>City: {{u.city}}</div>
-    <div>
-      <span>Books: </span>
-      <span>Requests: </span>
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="content">
+  <div class="container">
+    <div class="row">
+      <!-- end col -->
     </div>
-  </li>
-</ul>
+    <!-- end row -->
+    <div class="row">
+      <div class="col-lg-4" *ngFor="let u of users">
+        <div class="text-center card-box">
+          <div class="member-card pt-2 pb-2">
+            <div class="thumb-lg member-thumb mx-auto"><img
+                src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
+                class="rounded-circle img-thumbnail" alt="profile-image"></div>
+            <div class="">
+              <h4 class="text-dark">{{u.fullName}}</h4>
+              <p class="text-muted">username: <span>| </span><span><a href="#"
+                    class="text-pink">{{u.username}}</a></span></p>
+            </div>
+            <ul class="social-links list-inline">
+              <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips"
+                  href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a></li>
+              <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips"
+                  href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>
+              <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips"
+                  href="" data-original-title="Skype"><i class="fa fa-skype"></i></a></li>
+            </ul>
+            <button type="button"
+              class="btn btn-primary mt-3 btn-rounded waves-effect w-md waves-light">{{u.username}}'s Books</button>
+            <div class="mt-4">
+              <div class="row">
+                <div class="col-4">
+                  <div class="mt-3">
+                    <h4>{{u.state}}</h4>
+                    <p class="mb-0 text-muted">State</p>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="mt-3">
+                    <h4>{{u.city}}</h4>
+                    <p class="mb-0 text-muted">City</p>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="mt-3">
+                    <h4>Address</h4>
+                    <p class="mb-0 text-muted">{{u.address}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- end col -->
+    </div>
+  </div>
+  <!-- container -->
+</div>

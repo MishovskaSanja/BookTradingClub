@@ -8,42 +8,46 @@
       <li class="nav-item">
         <a class="nav-link" href="/books">Books</a>
       </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="/requests" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <li *ngIf="user" class="nav-item">
+        <a class="nav-link" routerLink="/user/myBooks">My Books</a>
+      </li>
+      <li class="nav-item dropdown" ngbDropdown>
+        <a class="nav-link dropdown-toggle" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown"
+          aria-expanded="false" ngbDropdownToggle>
           Requests
         </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="/requests">All Requests</a>
-          <a class="dropdown-item" href="#">My Requests</a>
-        </div>
+        <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="navbarScrollingDropdown">
+          <li ngbDropdownItem><a class="dropdown-item" href="/requests">All Requests</a></li>
+          <li *ngIf="user" ngbDropdownItem><a class="dropdown-item" href="/user/myRequests">My Requests</a></li>
+          <li *ngIf="user" class="nav-item">
+            <a class="nav-link" routerLink="/user/incomingRequests">Incoming Requests</a>
+          </li>
+        </ul>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/trades">Trades</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/users">Users</a>
+      <li class="nav-item dropdown" ngbDropdown>
+        <a class="nav-link dropdown-toggle" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown"
+          aria-expanded="false" ngbDropdownToggle>
+          User
+        </a>
+        <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="navbarScrollingDropdown">
+          <li ngbDropdownItem><a class="dropdown-item" href="/users">All users</a></li>
+          <li *ngIf="user" ngbDropdownItem><a class="dropdown-item" href="/user/profile">My Profile</a></li>
+          <li *ngIf="user == undefined" class="nav-item">
+            <a class="nav-link" routerLink="/register">Register</a>
+          </li>
+          <li *ngIf="user == undefined" class="nav-item">
+            <a class="nav-link" routerLink="/login">Login</a>
+          </li>
+          <li *ngIf="user" class="nav-item">
+            <a class='nav-link' routerLink="/user/logout">Logout</a>
+          </li>
+        </ul>
       </li>
-      <li *ngIf="user == undefined" class="nav-item">
-        <a class="nav-link" routerLink="/register">Register</a>
-      </li>
-      <li *ngIf="user == undefined" class="nav-item">
-        <a class="nav-link" routerLink="/login">Login</a>
-      </li>
-      <li *ngIf="user" class="nav-item">
-        <a class="nav-link" routerLink="/user/profile">Profile</a>
-      </li>
-      <li *ngIf="user" class="nav-item">
-        <a class="nav-link" routerLink="/user/edit-profile">Edit Profile</a>
-      </li>
-      <li *ngIf="user" class="nav-item">
-        <a class="nav-link" routerLink="/user/myBooks">My Books</a>
-      </li>
-      <li *ngIf="user" class="nav-item">
-        <a class="nav-link" routerLink="/user/myRequests">My Requests</a>
-      </li>
-      <li *ngIf="user" class="nav-item">
-        <a class="nav-link" routerLink="/user/incomingRequests">Incoming Requests</a>
-      </li>
+
+
     </ul>
   </div>
 </nav>

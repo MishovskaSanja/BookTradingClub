@@ -1,27 +1,46 @@
 <app-header></app-header>
-<h3>Make a request</h3>
-<h2>My Books</h2>
-<form  #createRequest = "ngForm" (ngSubmit) = "onSubmit(createRequest.value)">
-<ul *ngFor="let book of myBooks">
 
-<li>
-  <input type="radio" value="{{book.id}}" name="bookToGive" ngModel>
-  <div>Book: {{book.name}}</div>
-  <div>Description: {{book.description}}</div>
-</li>
-</ul>
+<div class="cotainer">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">Create Request</div>
+        <div class="card-body">
+          <form class="text-center border border-light p-5" #createRequest="ngForm"
+            (ngSubmit)="onSubmit(createRequest.value)">
 
-<h2>Books</h2>
-<ul *ngFor="let book of booksByOtherUsers">
+            <!--My Books-->
+            <div class="form-group row">
+              <label for="address" class="col-md-4 col-form-label text-md-right">myBooks</label>
+              <div class="col" *ngFor="let book of myBooks">
+                <input type="radio" value="{{book.id}}" name="bookToGive" ngModel>
+                <div>Book: {{book.name}}</div>
+                <div>Description: {{book.description}}</div>
+              </div>
+            </div>
+            <br>
+            <!--All Books-->
+            <div class="form-group row">
+              <label for="address" class="col-md-4 col-form-label text-md-right">All Books</label>
+              <div class="col" *ngFor="let book of booksByOtherUsers">
+                <input type="radio" value="{{book.id}}" name="wantedBook" ngModel>
+                <div>{{book.owner.username}}</div>
+                <div>{{currentUserUsername}}</div>
+                <div>Book: {{book.name}}</div>
+                <div>Description: {{book.description}}</div>
+              </div>
+            </div>
 
-<li *ngIf="book.owner.username != currentUserUsername">
-  <input type="radio" value="{{book.id}}" name="wantedBook" ngModel>
-  <div>{{book.owner.username}}</div>
-  <div>{{currentUserUsername}}</div>
-  <div>Book: {{book.name}}</div>
-  <div>Description: {{book.description}}</div>
-</li>
-</ul>
 
-<button type="submit" value="submit">Submit</button>
-</form>
+
+            <!--  button -->
+            <div class="col-md-6 offset-md-4">
+              <button class="btn btn-primary my-4" block="true" type="submit">Submit</button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

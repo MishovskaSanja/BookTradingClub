@@ -15,7 +15,7 @@ export class RequestService {
   url: string;
 
   constructor(private http: HttpClient){
-    this.url = 'http://localhost:8080/api/requests'
+    this.url = 'http://localhost:8083/api/requests'
   }
 
   public getAllRequests(): Observable<Request[]>{

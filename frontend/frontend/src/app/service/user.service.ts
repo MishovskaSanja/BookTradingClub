@@ -6,7 +6,7 @@ import { Book } from '../model/book';
 import { TokenStorageService } from './token-storage.service';
 import { Request } from '../model/request';
 
-const BASE_URL = 'http://localhost:8080/api/user'
+const BASE_URL = 'http://localhost:8083/api/user'
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -23,6 +23,10 @@ export class UserService {
     return this.http.post<User>(BASE_URL+"/register", data)
   }
 
+  public logout(){
+    this.tokenStorage.clear
+  }
+  
   getAllUsers() : Observable<User[]>{
     return this.http.get<User[]>(BASE_URL);
   }

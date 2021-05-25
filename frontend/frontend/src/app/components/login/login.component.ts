@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
       this.authService.login(data).subscribe(result => {
         this.tokenStorage.saveUser(result.username)
         this.tokenStorage.saveToken(result.accessToken)
+        console.log(data)
         this.router.navigateByUrl('/books')
       })
   }

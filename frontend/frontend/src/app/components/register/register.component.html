@@ -1,4 +1,4 @@
-<form #useregister = "ngForm" (ngSubmit) = "onSubmit(useregister.value)">
+<!-- <form #useregister = "ngForm" (ngSubmit) = "onSubmit(useregister.value)">
   <label for="username">Username</label>
   <input type="text" id="username" name="username" placeholder="Username" ngModel>
   <br/>
@@ -18,4 +18,71 @@
   <input type="text" id="address" name="address" placeholder="Address" ngModel>
 <br>
   <button type="submit" value="submit">Submit</button>
-</form>
+</form> -->
+
+<h1>Book Trading Club</h1>
+
+<div class="cotainer">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">Register</div>
+        <div class="card-body">
+          <form class="text-center border border-light p-5" #useregister="ngForm"
+            (ngSubmit)="onSubmit(useregister.value)">
+            <!--Username-->
+            <div class="form-group row">
+              <label for="username" class="col-md-4 col-form-label text-md-right">Username</label>
+              <div class="col-md-6">
+                <input type="text" id="username" name="username" class="form-control mb-4" placeholder="Username"
+                  ngModel>
+              </div>
+            </div>
+            <!-- Password -->
+            <div class="form-group row">
+              <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
+              <div class="col-md-6">
+                <input type="password" id="password" name="password" class="form-control mb-4" ngModel>
+              </div>
+            </div>
+            <!--Full Name-->
+            <div class="form-group row">
+              <label for="fullName" class="col-md-4 col-form-label text-md-right">Full Name</label>
+              <div class="col-md-6">
+                <input type="fullName" id="fullName" name="fullName" class="form-control mb-4" ngModel>
+              </div>
+            </div>
+            <!--State-->
+            <div class="form-group row">
+              <label for="state" class="col-md-4 col-form-label text-md-right">State</label>
+              <div class="col-md-6">
+                <input type="state" id="state" name="state" class="form-control mb-4" ngModel>
+              </div>
+            </div>
+            <!--City-->
+            <div class="form-group row">
+              <label for="city" class="col-md-4 col-form-label text-md-right">City</label>
+              <div class="col-md-6">
+                <input type="city" id="city" name="city" class="form-control mb-4" ngModel>
+              </div>
+            </div>
+            <!--Address-->
+            <div class="form-group row">
+              <label for="address" class="col-md-4 col-form-label text-md-right">Address</label>
+              <div class="col-md-6">
+                <input type="address" id="address" name="address" class="form-control mb-4" ngModel>
+              </div>
+            </div>
+            <!--  button -->
+            <div class="col-md-6 offset-md-4">
+              <button class="btn btn-primary my-4" block="true" type="submit">Register</button>
+              <br>
+              <a routerLink="/login">Login</a>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -11,6 +11,7 @@ data class Book(
 
         var name:String,
         var description:String,
+        var imgUrl: String,
 
         @ManyToOne
         val owner: User,

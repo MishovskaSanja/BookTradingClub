@@ -1,30 +1,67 @@
 <app-header>
 </app-header>
-<div *ngIf="user != undefined" class="container">
-  <table>
-    <tr>
-      <td>Username: </td>
-      <td>{{user.username}}</td>
-    </tr>
-    <tr>
-      <td>Full name: </td>
-      <td>{{user.fullName}}</td>
-    </tr>
-    <tr>
-      <td>City: </td>
-      <td>{{user.city}}</td>
-    </tr>
-    <tr>
-      <td>State: </td>
-      <td>{{user.state}}</td>
-    </tr>
-    <tr>
-      <td>Address: </td>
-      <td>{{user.address}}</td>
-    </tr>
 
-  </table>
-  <a class="btn btn-primary" href="user/edit-profile">Edit profile</a>
-  <a class="btn btn-dark" href="user/myBooks"><span>{{user.username}}'s books</span></a>
-</div>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="content">
+  <div class="container">
+    <div class="row">
+      <!-- end col -->
+    </div>
+    <!--<div *ngIf="user != undefined" class="container"> -->
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="text-center card-box">
+          <div class="member-card pt-2 pb-2">
+            <div class="thumb-lg member-thumb mx-auto"><img
+                src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
+                class="rounded-circle img-thumbnail" alt="profile-image"></div>
+            <div class="">
+              <h4 class="text-dark">{{user.fullName}}</h4>
+              <p class="text-muted">username: <span>| </span><span><a href="#"
+                    class="text-pink">{{user.username}}</a></span></p>
+            </div>
+            <ul class="social-links list-inline">
+              <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips"
+                  href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a></li>
+              <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips"
+                  href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>
+              <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips"
+                  href="" data-original-title="Skype"><i class="fa fa-skype"></i></a></li>
+            </ul>
+            <span>
+              <a type="button" class="btn btn-primary mt-3 btn-rounded waves-effect w-md waves-light"
+                href="user/edit-profile">Edit Profile</a>
+            </span>
+            <br>
+            <span>
+              <a type="button" class="btn btn-primary mt-3 btn-rounded waves-effect w-md waves-light"
+                href="user/myBooks">My Books</a>
+            </span>
+            <div class="mt-4">
+              <div class="row">
+                <div class="col-4">
+                  <div class="mt-3">
+                    <h4>{{user.state}}</h4>
+                    <p class="mb-0 text-muted">State</p>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="mt-3">
+                    <h4>{{user.city}}</h4>
+                    <p class="mb-0 text-muted">City</p>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="mt-3">
+                    <h4>Address</h4>
+                    <p class="mb-0 text-muted">{{user.address}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
+    </div>
+  </div>

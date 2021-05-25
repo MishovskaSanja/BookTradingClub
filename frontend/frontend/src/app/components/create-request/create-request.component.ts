@@ -14,6 +14,7 @@ import { UserService } from 'src/app/service/user.service';
 export class CreateRequestComponent implements OnInit {
 
 
+  user: User
   myBooks : Book[]
   booksByOtherUsers: Book[]
   currentUserUsername : string
@@ -29,7 +30,8 @@ export class CreateRequestComponent implements OnInit {
       this.booksByOtherUsers = result
     })
 
-    this.currentUserUsername = sessionStorage.getItem("user")
+    this.user = JSON.parse(sessionStorage.getItem("user")) as User
+
   }
 
   onSubmit(data){

@@ -1,26 +1,35 @@
 <app-header></app-header>
-<div class="card my-5">
-  <div class="card-body">
-    <table class="table table-bordered table-striped">
-      <thead class="thead-dark">
-        <tr>
-          <th scope="col">Name</th>
-          <th scope="col">Description</th>
-          <th scope="col">Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let book of books">
-          <td>{{ book.name }}</td>
-          <td>{{ book.description }}</td>
-          <td>{{ book.status }}</td>
-          <td *ngIf="book.status =='AVAILABLE'">
-              <button  class="btn btn-warning" [routerLink]="['/editBook']" [state]="book">Edit book</button> |
-              <button class="btn btn-danger" (click)='delete(book.id)'> Delete </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container">
+  <div class="row">
+    <div class="col-md-3" *ngFor="let book of books">
+      <div class="ibox">
+        <div class="ibox-content product-box">
+          <div class="product-imitation" style="background-image:url('{{book.imgUrl}}'); background-size: auto 100%;">
+          </div>
+          <div class="product-desc">
+            <span class="product-price">
+              {{book.status}}
+            </span>
+            <h5 class="product-name"> {{book.name}}</h5>
+            <div class="small m-t-xs">
+              {{book.description}}
+            </div>
+            <hr>
+            <br>
+            <div class="m-t text-righ grid">
+              <div class="row">
+                <td *ngIf="book.status =='AVAILABLE'">
+                  <button class="btn btn-warning" [routerLink]="['/editBook']" [state]="book">Edit book</button> |
+                  <button class="btn btn-danger" (click)='delete(book.id)'> Delete </button>
+                </td>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+  <button class="btn btn-primary" routerLink="/addBook">Add book</button>
 </div>
-<button routerLink="/addBook">Add book</button>

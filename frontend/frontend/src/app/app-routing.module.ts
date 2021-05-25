@@ -32,6 +32,7 @@ const routes: Routes = [
   { path: 'trades', component: TradesComponent},
   { path: 'user/myRequests', component: MyRequestsComponent},
   { path: 'user/incomingRequests', component: IncomingRequestsComponent}
+
 ];
 @NgModule({
   imports: [

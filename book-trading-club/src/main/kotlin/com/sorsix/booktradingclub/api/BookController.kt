@@ -19,13 +19,13 @@ class BookController(
 
     @PostMapping("/addBook")
     fun addBook(@RequestBody bookDto: BookDto): ResponseEntity<Book>{
-        val book = bookService.createBook(bookDto.name, bookDto.description)
+        val book = bookService.createBook(bookDto.name, bookDto.description, bookDto.imgUrl)
         return ResponseEntity.ok(book)
     }
 
     @PutMapping("/edit/{id}")
     fun updateBook(@PathVariable id: Long, @RequestBody bookDto: BookDto) {
-        this.bookService.editBook(id, bookDto.name, bookDto.description)
+        this.bookService.editBook(id, bookDto.name, bookDto.description, bookDto.imgUrl)
     }
 
     @DeleteMapping("/delete/{id}")

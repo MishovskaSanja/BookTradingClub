@@ -21,6 +21,7 @@ import { RequestComponent } from './components/requests/request.component';
 import { authInterceptorProviders } from './components/auth.interceptor';
 import { MyRequestsComponent } from './components/my-requests/my-requests.component';
 import { IncomingRequestsComponent } from './components/incoming-requests/incoming-requests.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -40,13 +41,15 @@ import { IncomingRequestsComponent } from './components/incoming-requests/incomi
     CreateRequestComponent,
     RequestComponent,
     MyRequestsComponent,
-    IncomingRequestsComponent
+    IncomingRequestsComponent,
+    
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgbModule
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent]

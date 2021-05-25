@@ -19,19 +19,20 @@ class BookService(
 
     fun getAllAvailableBooks() : List<Book> = bookRepository.findAllByStatus(BookStatus.AVAILABLE)
 
-    fun createBook(name: String, description: String) : Book {
+    fun createBook(name: String, description: String, imgUrl:String) : Book {
         val user = this.userService.getCurrentUser()
-        val book = Book(id=0, name = name, description = description, owner = user, status = BookStatus.AVAILABLE)
+        val book = Book(id=0, name = name, description = description, imgUrl = imgUrl, owner = user, status = BookStatus.AVAILABLE)
         return this.bookRepository.save(book);
     }
 
     //edna kniga mozhe da se promeni samo ako e dostapna, i mozhe da se promeni samo od nejziniot owner!!!
-    fun editBook(id:Long, name: String, description: String) {
+    fun editBook(id:Long, name: String, description: String, imgUrl: String) {
         val book = this.bookRepository.findById(id)
         book.map {
             if (it.status == BookStatus.AVAILABLE && it.owner == userService.getCurrentUser()) {
                 it.name = name
                 it.description = description
+                it.imgUrl = imgUrl
             } else{
                 throw RuntimeException("Book can't be edited!") //BookCantBeEditedException
             }
