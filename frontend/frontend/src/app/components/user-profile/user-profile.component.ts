@@ -20,6 +20,7 @@ export class UserProfileComponent implements OnInit {
       this.user = result
     })
   }
+  
 
 
 }

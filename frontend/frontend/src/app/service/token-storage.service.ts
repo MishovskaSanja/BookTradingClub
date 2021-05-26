@@ -29,7 +29,11 @@ export class TokenStorageService {
     return JSON.parse(sessionStorage.getItem(USER_KEY))
   }
 
-  public clear(){
-    sessionStorage.clear
-  }
+  logout() {
+    window.sessionStorage.removeItem(TOKEN_KEY)
+    window.sessionStorage.removeItem(USER_KEY)
+
+}
+
+
 }

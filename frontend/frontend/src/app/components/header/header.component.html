@@ -19,8 +19,9 @@
         <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="navbarScrollingDropdown">
           <li ngbDropdownItem><a class="dropdown-item" href="/requests">All Requests</a></li>
           <li *ngIf="user" ngbDropdownItem><a class="dropdown-item" href="/user/myRequests">My Requests</a></li>
-          <li *ngIf="user" class="nav-item">
-            <a class="nav-link" routerLink="/user/incomingRequests">Incoming Requests</a>
+
+          <li *ngIf="user" class="dropdown-item">
+            <a class="dropdown-item" routerLink="/user/incomingRequests">Incoming Requests</a>
           </li>
         </ul>
       </li>
@@ -42,7 +43,7 @@
             <a class="nav-link" routerLink="/login">Login</a>
           </li>
           <li *ngIf="user" class="nav-item">
-            <a class='nav-link' routerLink="/user/logout">Logout</a>
+            <a class='nav-link' routerLink="/logout">Logout</a>
           </li>
         </ul>
       </li>

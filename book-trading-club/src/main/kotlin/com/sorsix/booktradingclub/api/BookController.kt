@@ -32,4 +32,6 @@ class BookController(
     fun deleteBook(@PathVariable id: Long) {
         this.bookService.deleteBook(id)
     }
+
+
 }

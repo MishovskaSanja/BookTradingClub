@@ -33,7 +33,8 @@ export class BookService {
   public editBook(data) : Observable<Book>{
     return this.http.put<Book>(this.url+'/edit/'+data.id,{
     "name" : data.name,
-    "description" : data.description
+    "description" : data.description,
+    "imgUrl": data.imgUrl
     },  {'headers': this.headers})
   }
 

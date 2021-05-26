@@ -23,10 +23,8 @@ export class UserService {
     return this.http.post<User>(BASE_URL+"/register", data)
   }
 
-  public logout(){
-    this.tokenStorage.clear
-  }
-  
+
+
   getAllUsers() : Observable<User[]>{
     return this.http.get<User[]>(BASE_URL);
   }
