@@ -6,6 +6,8 @@ import com.sorsix.booktradingclub.domain.Book
 import com.sorsix.booktradingclub.domain.Request
 import com.sorsix.booktradingclub.domain.User
 import com.sorsix.booktradingclub.domain.enumeration.BookStatus
+import com.sorsix.booktradingclub.domain.exception.NoAuthenticatedUserException
+import com.sorsix.booktradingclub.domain.exception.UsernameAlreadyExistsException
 import com.sorsix.booktradingclub.repository.BookRepository
 import com.sorsix.booktradingclub.repository.RequestRepository
 import com.sorsix.booktradingclub.repository.UserRepository
@@ -37,7 +39,7 @@ class UserService(
         return if (!userRepository.existsByUsername(username)) {
             Optional.of(this.userRepository.save(User(username, passwordEncoder.encode(password), fullName, city, state, address)));
         }else{
-            Optional.empty() //ili da se frli exception?
+            throw UsernameAlreadyExistsException("User with username $username already exists!")
         }
     }
 
@@ -54,7 +56,7 @@ class UserService(
             val principal = SecurityContextHolder.getContext().authentication.principal as UserDetailsImpl
             return userRepository.findByUsername(principal.username).get()
         }catch (e: Exception){
-            throw RuntimeException("no authenticated user") //NoAuthenticatedUserException
+            throw NoAuthenticatedUserException("There is no authenticated user")
         }
     }
 
@@ -64,7 +66,6 @@ class UserService(
         user.address= address
         user.state = state
         user.city = city
-        println(user)
         this.userRepository.save(user)
     }
 

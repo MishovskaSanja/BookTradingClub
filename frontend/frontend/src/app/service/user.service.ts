@@ -23,8 +23,6 @@ export class UserService {
     return this.http.post<User>(BASE_URL+"/register", data)
   }
 
-
-
   getAllUsers() : Observable<User[]>{
     return this.http.get<User[]>(BASE_URL);
   }

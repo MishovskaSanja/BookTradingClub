@@ -43,7 +43,7 @@
             <a class="nav-link" routerLink="/login">Login</a>
           </li>
           <li *ngIf="user" class="nav-item">
-            <a class='nav-link' routerLink="/logout">Logout</a>
+            <button class='nav-link' (click)="logout()">Logout</button>
           </li>
         </ul>
       </li>

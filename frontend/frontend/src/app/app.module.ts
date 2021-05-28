@@ -22,7 +22,6 @@ import { authInterceptorProviders } from './components/auth.interceptor';
 import { MyRequestsComponent } from './components/my-requests/my-requests.component';
 import { IncomingRequestsComponent } from './components/incoming-requests/incoming-requests.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { LogoutComponent } from './components/logout/logout.component';
 
 
 @NgModule({
@@ -42,8 +41,7 @@ import { LogoutComponent } from './components/logout/logout.component';
     CreateRequestComponent,
     RequestComponent,
     MyRequestsComponent,
-    IncomingRequestsComponent,
-    LogoutComponent,
+    IncomingRequestsComponent
 
   ],
   imports: [

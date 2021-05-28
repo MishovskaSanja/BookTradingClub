@@ -3,6 +3,8 @@ package com.sorsix.booktradingclub.service
 import com.sorsix.booktradingclub.domain.Book
 import com.sorsix.booktradingclub.domain.User
 import com.sorsix.booktradingclub.domain.enumeration.BookStatus
+import com.sorsix.booktradingclub.domain.exception.BookNotFoundException
+import com.sorsix.booktradingclub.domain.exception.UserAndBookOwnerDoNotMatchException
 import com.sorsix.booktradingclub.repository.BookRepository
 import com.sorsix.booktradingclub.repository.UserRepository
 import org.springframework.stereotype.Service
@@ -25,7 +27,6 @@ class BookService(
         return this.bookRepository.save(book);
     }
 
-    //edna kniga mozhe da se promeni samo ako e dostapna, i mozhe da se promeni samo od nejziniot owner!!!
     fun editBook(id:Long, name: String, description: String, imgUrl: String) {
         val book = this.bookRepository.findById(id)
         book.map {
@@ -33,26 +34,25 @@ class BookService(
                 it.name = name
                 it.description = description
                 it.imgUrl = imgUrl
+                this.bookRepository.save(it)
             } else{
-                throw RuntimeException("Book can't be edited!") //BookCantBeEditedException
+               throw UserAndBookOwnerDoNotMatchException("Permission to edit $it.name denied.")
             }
         }?: run {
-            throw RuntimeException("Book doesn't exist!") //BookIdDoesntExistException
+            throw BookNotFoundException("Book with id $id can't be found.")
         }
-         this.bookRepository.save(book.get())
     }
 
-    //edna kniga mozhe da se izbrishe samo ako e dostapna, i mozhe da se izbrishe samo od nejziniot owner!!!
     fun deleteBook(id: Long) {
         val book = this.bookRepository.findById(id)
         book.map {
             if (it.status == BookStatus.AVAILABLE && it.owner == userService.getCurrentUser()) {
                 this.bookRepository.deleteById(id)
             }else{
-                throw RuntimeException("Book can't be deleted!") //BookCantBeDeleted
+                throw UserAndBookOwnerDoNotMatchException("Permission to delete $it.name denied.")
             }
         }?: run{
-            throw RuntimeException("Book doesn't exist!") //BookIdDoesntExist
+            throw BookNotFoundException("Book with id $id can't be found.")
         }
     }
 }

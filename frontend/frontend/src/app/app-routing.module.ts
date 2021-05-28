@@ -14,7 +14,6 @@ import { TradesComponent } from './components/trades/trades.component';
 import { CreateRequestComponent } from './components/create-request/create-request.component';
 import { MyRequestsComponent } from './components/my-requests/my-requests.component';
 import { IncomingRequestsComponent } from './components/incoming-requests/incoming-requests.component';
-import { LogoutComponent } from './components/logout/logout.component';
 
 
 const routes: Routes = [
@@ -22,7 +21,6 @@ const routes: Routes = [
   { path: 'books', component: BookComponent},
   { path: 'register', component: RegisterComponent},
   { path: 'login', component: LoginComponent},
-  { path: 'logout', component:LogoutComponent},
   { path: 'users', component: UsersComponent},
   { path: "addBook", component: AddBookComponent},
   { path: "editBook", component: EditBookComponent},

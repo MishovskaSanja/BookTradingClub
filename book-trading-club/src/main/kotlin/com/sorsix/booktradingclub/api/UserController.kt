@@ -27,7 +27,7 @@ class UserController(
     fun register(@RequestBody user: UserRegisterDto) : ResponseEntity<User>{
         return userService.register(user.username, user.password, user.fullName, user.city, user.state, user.address)
                 .map { ResponseEntity.ok().body(it) }.orElseThrow{
-                    UsernameAlreadyExistsException()
+                    UsernameAlreadyExistsException("User with username alrwady exists")
                 }
     }
 
