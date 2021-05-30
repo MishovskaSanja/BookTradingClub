@@ -15,21 +15,21 @@
               </tr>
             </thead>
             <tbody>
-              <tr class="candidates-list" *ngFor="let u of users">
+              <tr class="candidates-list" *ngFor="let user of users">
                 <td class="title">
                   <div class="thumb">
-                    <img class="img-fluid" src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="">
+                    <img class="img-fluid" src={{user.imgUrl}} alt="">
                   </div>
                   <div class="candidate-list-details">
                     <div class="candidate-list-info">
                       <div class="candidate-list-title">
-                        <h5 class="mb-0">{{u.fullName}}</h5>
+                        <h5 class="mb-0">{{user.fullName}}</h5>
                       </div>
                       <div class="candidate-list-option">
                         <ul class="list-unstyled">
-                          <li><i class="fas fa-filter pr-1"></i>{{u.username}}</li>
+                          <li><i class="fas fa-filter pr-1"></i>{{user.username}}</li>
 
-                          <li><i class="fas fa-map-marker-alt pr-1"></i>{{u.state}}, {{u.city}} {{u.address}}</li>
+                          <li><i class="fas fa-map-marker-alt pr-1"></i>{{user.state}}, {{user.city}} {{user.address}}</li>
                         </ul>
                       </div>
                     </div>
@@ -37,32 +37,21 @@
                 </td>
                 <td class="candidate-list-favourite-time text-center">
                   <button type="button"
-              class="btn btn-primary mt-3 btn-rounded waves-effect w-md waves-light">{{u.username}}'s Books</button>
+              class="btn btn-primary mt-3 btn-rounded waves-effect w-md waves-light" (click)="navigateToUserBooks(user.username)">{{user.username}}'s Books</button>
                 </td>
                 <td>
                   <ul class="social-links list-inline">
                     <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips"
-                        href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                        href="https://www.facebook.com/" data-original-title="Facebook"><i class="fa fa-facebook"></i></a></li>
                     <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips"
-                        href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                        href="https://www.twitter.com/" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>
                     <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips"
-                        href="" data-original-title="Skype"><i class="fa fa-skype"></i></a></li>
+                        href="https://www.skype.com/" data-original-title="Skype"><i class="fa fa-skype"></i></a></li>
                   </ul>
                 </td>
               </tr>
             </tbody>
           </table>
-          <div class="text-center mt-3 mt-sm-3">
-            <ul class="pagination justify-content-center mb-0">
-              <li class="page-item disabled"> <span class="page-link">Prev</span> </li>
-              <li class="page-item active" aria-current="page"><span class="page-link">1 </span> <span class="sr-only">(current)</span></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item"><a class="page-link" href="#">...</a></li>
-              <li class="page-item"><a class="page-link" href="#">25</a></li>
-              <li class="page-item"> <a class="page-link" href="#">Next</a> </li>
-            </ul>
-          </div>
         </div>
       </div>
     </div>

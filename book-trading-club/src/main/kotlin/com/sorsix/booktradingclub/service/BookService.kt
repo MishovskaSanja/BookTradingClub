@@ -21,6 +21,7 @@ class BookService(
 
     fun getAllAvailableBooks() : List<Book> = bookRepository.findAllByStatus(BookStatus.AVAILABLE)
 
+
     fun findById(id: Long): Optional<Book>{
         return this.bookRepository.findById(id)
     }

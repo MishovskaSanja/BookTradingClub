@@ -4,5 +4,6 @@ export interface User {
   fullName: string,
   city: string,
   state: string,
-  address: string
+  address: string,
+  imgUrl: string
 }

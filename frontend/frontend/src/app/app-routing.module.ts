@@ -14,6 +14,7 @@ import { TradesComponent } from './components/trades/trades.component';
 import { CreateRequestComponent } from './components/create-request/create-request.component';
 import { MyRequestsComponent } from './components/my-requests/my-requests.component';
 import { IncomingRequestsComponent } from './components/incoming-requests/incoming-requests.component';
+import { UserBooksComponent } from './components/user-books/user-books.component';
 
 
 const routes: Routes = [
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: "user/edit-profile", component: EditProfileComponent},
   { path: 'user/myBooks', component: MyBooksComponent},
   { path: 'user/profile', component: UserProfileComponent},
+  { path: 'userBooks', component: UserBooksComponent},
   { path: 'createRequest', component: CreateRequestComponent},
   { path: 'requests', component: RequestComponent},
   { path: 'trades', component: TradesComponent},

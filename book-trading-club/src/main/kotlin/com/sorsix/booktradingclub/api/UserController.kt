@@ -7,6 +7,7 @@ import com.sorsix.booktradingclub.api.dto.UserRegisterDto
 import com.sorsix.booktradingclub.domain.Book
 import com.sorsix.booktradingclub.domain.Request
 import com.sorsix.booktradingclub.domain.User
+import com.sorsix.booktradingclub.domain.enumeration.BookStatus
 import com.sorsix.booktradingclub.domain.exception.InvalidCredentialsException
 import com.sorsix.booktradingclub.domain.exception.RequestAlreadyExists
 import com.sorsix.booktradingclub.domain.exception.UsernameAlreadyExistsException
@@ -26,7 +27,7 @@ class UserController(
 
     @PostMapping("/register")
     fun register(@RequestBody user: UserRegisterDto) : ResponseEntity<User>{
-        return userService.register(user.username, user.password, user.fullName, user.city, user.state, user.address)
+        return userService.register(user.username, user.password, user.fullName, user.city, user.state, user.address, user.imgUrl)
                 .map { ResponseEntity.ok().body(it) }.orElseThrow{
                     UsernameAlreadyExistsException("User with username alrwady exists")
                 }
@@ -58,13 +59,18 @@ class UserController(
     @PutMapping("/edit")
     fun editInfo(@RequestBody userDto: UserEditDto) : ResponseEntity<Any>{
         print("here")
-        this.userService.editInfo(userDto.fullName, userDto.city, userDto.address, userDto.state)
+        this.userService.editInfo(userDto.fullName, userDto.city, userDto.address, userDto.state, userDto.imgUrl)
         return ResponseEntity.ok().build()
     }
 
-    @GetMapping("/userBooks")
-    fun getUserBooks(): ResponseEntity<List<Book>>{
+    @GetMapping("/currentUserBooks")
+    fun getCurrentUserBooks(): ResponseEntity<List<Book>>{
         return ResponseEntity.ok(this.userService.findAllUserBooks())
+    }
+
+    @GetMapping("/userBooks/{id}")
+    fun getUserBooks(@PathVariable id: String):ResponseEntity<List<Book>>{
+        return ResponseEntity.ok(this.userService.findAllByOwnerAndStatus(id))
     }
 
     @GetMapping("/takenUserBooks")

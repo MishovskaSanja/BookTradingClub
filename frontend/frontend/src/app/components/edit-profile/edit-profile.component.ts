@@ -26,7 +26,8 @@ export class EditProfileComponent implements OnInit {
         fullName: data.fullName,
         city: data.city,
         address: data.address,
-        state: data.state
+        state: data.state,
+        imgUrl: data.imgUrl
       }).subscribe(result => {
         this.router.navigateByUrl("/user/profile")
       })

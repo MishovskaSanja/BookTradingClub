@@ -6,5 +6,6 @@ data class UserRegisterDto (
         val fullName: String,
         val city: String,
         val state: String,
-        val address: String
+        val address: String,
+        val imgUrl: String
 )

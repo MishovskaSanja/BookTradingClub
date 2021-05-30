@@ -7,6 +7,14 @@
         <div class="card-body">
           <form class="text-center border py-5" #useregister="ngForm"
             (ngSubmit)="onSubmit(useregister.value)">
+              <!--Profile Picture-->
+              <div class="form-group row">
+                <label for="imgUrl" class="col-md-4 col-form-label text-md-right">Profile picture</label>
+                <div class="col-md-6">
+                  <input type="text" id="imgUrl" name="imgUrl" class="form-control mb-4" placeholder="imgUrl"
+                    ngModel>
+                </div>
+              </div>
             <!--Username-->
             <div class="form-group row">
               <label for="username" class="col-md-4 col-form-label text-md-right">Username*</label>

@@ -37,9 +37,9 @@ class UserService(
     }
 
     fun register(username: String, password: String,
-                 fullName: String, city: String, state: String, address: String) : Optional<User>{
+                 fullName: String, city: String, state: String, address: String, imgUrl:String) : Optional<User>{
         return if (!userRepository.existsByUsername(username)) {
-            Optional.of(this.userRepository.save(User(username, passwordEncoder.encode(password), fullName, city, state, address)));
+            Optional.of(this.userRepository.save(User(username, passwordEncoder.encode(password), fullName, city, state, address, imgUrl)));
         }else{
             throw UsernameAlreadyExistsException("User with username $username already exists!")
         }
@@ -62,12 +62,14 @@ class UserService(
         }
     }
 
-    fun editInfo(fullName: String, city: String, address: String, state: String) {
+    fun editInfo(fullName: String, city: String, address: String, state: String, imgUrl: String
+    ) {
         val user = getCurrentUser()
         user.fullName = fullName
         user.address= address
         user.state = state
         user.city = city
+        user.imgUrl = imgUrl
         this.userRepository.save(user)
     }
 
@@ -87,6 +89,9 @@ class UserService(
         return getCurrentUser().let {
             this.bookRepository.findAllByOwner(it)
         }
+    }
+    fun findAllByOwnerAndStatus(username: String): List<Book>{
+        return bookRepository.findAllByOwnerUsernameAndStatus(username, BookStatus.AVAILABLE);
     }
 
     fun getIncomingRequests(): Optional<List<Request>>{

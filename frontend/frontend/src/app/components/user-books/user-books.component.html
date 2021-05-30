@@ -1,0 +1,37 @@
+
+<app-header></app-header>
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container mb-3 mt-1">
+  <div class="row">
+    <h4 class="ml-3">AVAILABLE</h4>
+    <div *ngIf="books.length > 0" >
+    <div class="col-md-3" style="display: inline;" *ngFor="let book of books">
+      <div class="ibox" style="display: inline-block !important;">
+        <div class="ibox-content product-box">
+          <div class="product-imitation" style="background-image:url('{{book.imgUrl}}'); background-size: auto 100%; background-repeat: no-repeat; margin-left: 20px; margin-right: 20px;">
+          </div>
+          <div class="product-desc">
+            <span class="product-price">
+              {{book.status}}
+            </span>
+            <h5 class="product-name"> {{book.name}}</h5>
+            <div class="small m-t-xs">
+              {{book.description}}
+            </div>
+            <hr>
+          </div>
+          <div class="btn-group btn-group-sm ml-3" role="group">
+            <button class="btn btn-warning mr-1" routerLink="/editBook/{{book.id}}" [state]="book">Edit book</button>
+            <button class="btn btn-danger" (click)='delete(book.id)'> Delete </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    </div>
+    <div *ngIf="books.length &lt; 1" >
+      <span class="ml-3">There aren't any available books.</span>
+    </div>
+    </div>
+</div>

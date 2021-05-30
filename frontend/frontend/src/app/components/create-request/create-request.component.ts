@@ -30,7 +30,7 @@ export class CreateRequestComponent implements OnInit {
      private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.userService.getAllUserBooks().subscribe(result =>{
+    this.userService.getAllCurrentUserBooks().subscribe(result =>{
       this.myBooks = result
       console.log("users books")
     });

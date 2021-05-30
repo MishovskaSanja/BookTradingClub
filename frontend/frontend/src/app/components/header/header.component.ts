@@ -21,7 +21,6 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(){
-
     this.user = JSON.parse(sessionStorage.getItem("user")) as User
   }
 

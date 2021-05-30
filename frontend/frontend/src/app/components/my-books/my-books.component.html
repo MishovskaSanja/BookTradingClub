@@ -6,7 +6,7 @@
     <div class="col-md-3" style="display: inline;" *ngFor="let book of availableBooks">
       <div class="ibox" style="display: inline-block !important;">
         <div class="ibox-content product-box">
-          <div class="product-imitation" style="background-image:url('{{book.imgUrl}}'); background-size: cover; background-repeat: no-repeat;">
+          <div class="product-imitation" style="background-image:url('{{book.imgUrl}}'); background-size: auto 100%; background-repeat: no-repeat; margin-left: 20px; margin-right: 20px;">
           </div>
           <div class="product-desc">
             <span class="product-price">
@@ -27,7 +27,7 @@
       </div>
     </div>
     </div>
-    <div *ngIf="availableBooks.length < 1" >
+    <div *ngIf="availableBooks.length &lt; 1" >
       <span class="ml-3">There aren't any available books. Click <a routerLink="/addBook">here</a> to add a new book.</span>
     </div>
     </div>
@@ -39,7 +39,7 @@
       <div class="col-md-3" style="display: inline;" *ngFor="let book of takenBooks">
         <div class="ibox" style="display: inline-block !important;">
           <div class="ibox-content product-box">
-            <div class="product-imitation" style="background-image:url('{{book.imgUrl}}'); background-size: auto 100%;">
+            <div class="product-imitation" style="background-image:url('{{book.imgUrl}}'); background-size: auto 100%; background-repeat: no-repeat; margin-left: 20px; margin-right: 20px;">
             </div>
             <div class="product-desc">
               <span class="product-price bg-danger ">

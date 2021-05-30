@@ -8,25 +8,25 @@
           <form #addbook="ngForm" (ngSubmit)="onSubmit(addbook.value)">
             <div class="col-md-6 graphicdesign illustrator photography">
               <div class="form-group">
-                <label for="name">Title</label>
+                <label class="col-md-4 col-form-label text-md-right" for="name">Title</label>
                 <input type="text" name="name" id="name" placeholder="Title" ngModel>
               </div>
             </div>
             <div class="col-md-6 graphicdesign illustrator photography">
               <div class="form-group">
-                <label for="description">Description</label>
+                <label class="col-md-4 col-form-label text-md-right" for="description">Description</label>
                 <input type="text" name="description" id="description" placeholder="Desciption..." ngModel>
               </div>
             </div>
             <div class="col-md-6 graphicdesign illustrator photography">
               <div class="form-group">
-                <label for="img">Image Url</label>
+                <label class="col-md-4 col-form-label text-md-right" for="img">Image Url</label>
                 <input type="text" name="img" id="img" placeholder="url..." ngModel>
               </div>
             </div>
             <div class="col-md-6 graphicdesign illustrator photography">
               <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                <div class="text-right">
+                <div class="col-md-4 col-form-label text-md-rightt">
                   <button type="submit" value="submit" class="btn btn-primary">Submit</button>
                 </div>
               </div>

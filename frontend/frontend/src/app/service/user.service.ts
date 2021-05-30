@@ -8,14 +8,15 @@ import { Request } from '../model/request';
 
 const BASE_URL = 'http://localhost:8083/api/user'
 
-const httpOptions = {
-  headers: new HttpHeaders({'Content-Type': 'application/json'})
-};
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+
+  headers = new HttpHeaders()
+  .set('content-type', 'application/json')
+  .set('Access-Control-Allow-Origin', '*');
 
   constructor(private http: HttpClient, private tokenStorage: TokenStorageService){}
 
@@ -31,8 +32,12 @@ export class UserService {
     return this.http.put<User>(BASE_URL+'/edit', data)
   }
 
-  getAllUserBooks() : Observable<Book[]>{
-    return this.http.get<Book[]>(BASE_URL+"/userBooks")
+  getAllCurrentUserBooks() : Observable<Book[]>{
+    return this.http.get<Book[]>(BASE_URL+"/currentUserBooks")
+  }
+
+  getAllUserBooks(username:String): Observable<Book[]>{
+    return this.http.get<Book[]>(BASE_URL+"/userBooks/"+username, {"headers": this.headers})
   }
 
   getAllAvailableUserBooks() : Observable<Book[]>{
