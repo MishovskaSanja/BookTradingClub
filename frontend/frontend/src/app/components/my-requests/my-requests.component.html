@@ -1,7 +1,8 @@
 <app-header></app-header>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-<div class="container pb-5 mb-2">
+<div class="container pb-5 mb-2 my-3">
   <!--Item-->
+  <div *ngIf="myRequests.length > 0">
   <div class="cart-item d-md-flex justify-content-between" *ngFor="let r of myRequests">
     <span class="remove-item" (click)="cancelRequest(r.requestId)"><i class="fa fa-times"></i></span>
 
@@ -35,5 +36,10 @@
         class="text-xl font-weight-medium">{{r.wantedBook.owner.fullName}}</span>
     </div>
   </div>
-
+</div>
+</div>
+<div class="container mx-auto w-50 h-50" *ngIf="myRequests.length < 1">
+  <div class="bg-light h-50">
+    <p class="h-50">To make a request, choose a book from all the <a routerLink="/books">available books</a>.<p>
+  </div>
 </div>

@@ -23,7 +23,6 @@ export class BookComponent implements OnInit {
     });
 
     this.user = JSON.parse(sessionStorage.getItem("user")) as User
-
   }
 
   navigateToRequest(id: bigint) {

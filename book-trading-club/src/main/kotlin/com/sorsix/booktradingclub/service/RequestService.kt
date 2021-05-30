@@ -5,6 +5,7 @@ import com.sorsix.booktradingclub.domain.Request
 import com.sorsix.booktradingclub.domain.User
 import com.sorsix.booktradingclub.domain.enumeration.BookStatus
 import com.sorsix.booktradingclub.domain.enumeration.RequestStatus
+import com.sorsix.booktradingclub.domain.exception.RequestAlreadyExists
 import com.sorsix.booktradingclub.repository.BookRepository
 import com.sorsix.booktradingclub.repository.RequestRepository
 import org.slf4j.Logger
@@ -38,8 +39,13 @@ class RequestService(
         return if (bookWanted.status == BookStatus.AVAILABLE && bookToGive.status == BookStatus.AVAILABLE) {
             val userReceiving = bookWanted.owner
             val request = Request(requestId = 0, userRequesting = userRequesting, userReceiving = userReceiving, bookToGive = bookToGive, wantedBook = bookWanted, status = RequestStatus.PENDING)
-            this.requestRepository.save(request)
-            Optional.of(request)
+            if (requestRepository.findByUserReceivingAndUserRequestingAndBookToGiveAndWantedBook(userReceiving, userRequesting, bookToGive, bookWanted).isEmpty){
+
+                this.requestRepository.save(request)
+                Optional.of(request)
+            }else{
+               Optional.empty()
+            }
         } else {
             return Optional.empty()
         }

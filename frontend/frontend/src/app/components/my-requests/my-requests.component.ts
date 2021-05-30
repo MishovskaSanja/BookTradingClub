@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Request } from 'src/app/model/request';
-import { User } from 'src/app/model/user';
 import { RequestService } from 'src/app/service/request.service';
 import { UserService } from 'src/app/service/user.service';
 
@@ -26,7 +25,9 @@ export class MyRequestsComponent implements OnInit {
   }
 
   cancelRequest(id){
-    this.requestService.cancelRequest(id).subscribe()
+    this.requestService.cancelRequest(id).subscribe(result => {
+      this.load()
+    })
   }
 
 }

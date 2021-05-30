@@ -1,10 +1,8 @@
 <app-header></app-header>
-
-
-
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-<div class="container pb-5 mb-2">
+<div class="container pb-5 mb-2 my-4">
   <!--  Item-->
+  <h3 class="ml-3">All requests</h3>
   <div class="cart-item d-md-flex justify-content-between" *ngFor="let r of requests">
     <div class="px-3 my-3">
       <a class="cart-item-product" href="https://www.google.com/search?q={{r.bookToGive.name}}">
@@ -16,7 +14,7 @@
         </div>
       </a>
     </div>
-    <div class="px-3 my-3 text-center">
+    <div class="px-3 my-3">
       <a class="cart-item-product" href="https://www.google.com/search?q={{r.wantedBook.name}}">
         <div class="cart-item-product-thumb"><img src="{{r.wantedBook.imgUrl}}" alt="Product"></div>
         <div class="cart-item-product-info">

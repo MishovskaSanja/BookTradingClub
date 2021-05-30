@@ -1,5 +1,6 @@
 package com.sorsix.booktradingclub.repository
 
+import com.sorsix.booktradingclub.domain.Book
 import com.sorsix.booktradingclub.domain.Request
 import com.sorsix.booktradingclub.domain.User
 import com.sorsix.booktradingclub.domain.enumeration.RequestStatus
@@ -14,4 +15,6 @@ interface RequestRepository: JpaRepository<Request, Long> {
     fun getAllByUserRequesting(user: User): Optional<List<Request>>
 
     fun getAllByUserReceiving(user: User): Optional<List<Request>>
+
+    fun findByUserReceivingAndUserRequestingAndBookToGiveAndWantedBook(userReceiving: User, userRequesting: User, bookToGive: Book, wantedBook: Book) : Optional<Request>
 }

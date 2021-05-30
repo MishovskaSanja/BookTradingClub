@@ -198,6 +198,11 @@ border: none;
 color: #228bdf !important;
 }
 
+.list-group {
+  list-style-type: none;
+  align-items: center;
+  margin-left: 33%;
+}
 .nav.nav-tabs + .tab-content {
   background: #ffffff;
   margin-bottom: 20px;
@@ -206,4 +211,8 @@ color: #228bdf !important;
 .progress.progress-sm .progress-bar {
   font-size: 8px;
   line-height: 5px;
+}
+
+.user-links a{
+  text-decoration: none;
 }

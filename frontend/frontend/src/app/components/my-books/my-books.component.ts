@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { Book } from 'src/app/model/book';
 import { User } from 'src/app/model/user';
 import { BookService } from 'src/app/service/book.service';
@@ -13,27 +12,37 @@ import { UserService } from 'src/app/service/user.service';
 export class MyBooksComponent implements OnInit {
 
   user: User
-  books : Book[]
+  takenBooks : Book[]
+  availableBooks: Book[]
 
   constructor(private userService: UserService,
-                private bookService: BookService,
-                private router : Router) { }
+                private bookService: BookService) { }
 
   ngOnInit(): void {
     this.user = JSON.parse(sessionStorage.getItem("user")) as User
-    this.getAllUserBooks()
+    this.getAllTakenBooks()
+    this.getAllAvailableBooks()
   }
 
-  public getAllUserBooks(){
-    this.userService.getAllUserBooks().subscribe(result => {
-      this.books = result
+  public getAllTakenBooks(){
+    this.userService.getAllTakenUserBooks().subscribe(result => {
+      this.takenBooks = result
+      console.log(result)
     })
   }
+
+  public getAllAvailableBooks(){
+    this.userService.getAllAvailableUserBooks().subscribe(result => {
+      this.availableBooks = result
+      console.log(result)
+    })
+  }
+
+
   public delete(id: bigint){
-    this.bookService.deleteBook(id).subscribe(
-      data => {
-        this.getAllUserBooks()
-      }
-    )
+    this.bookService.deleteBook(id).subscribe(result => {
+      this.getAllTakenBooks()
+      this.getAllAvailableBooks()
+    })
   }
 }

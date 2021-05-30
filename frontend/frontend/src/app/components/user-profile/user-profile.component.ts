@@ -16,11 +16,10 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.userService.getCurrentUser().subscribe(result => {
-      console.log(result)
       this.user = result
     })
   }
-  
+
 
 
 }

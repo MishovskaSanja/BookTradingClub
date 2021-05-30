@@ -35,6 +35,14 @@ export class UserService {
     return this.http.get<Book[]>(BASE_URL+"/userBooks")
   }
 
+  getAllAvailableUserBooks() : Observable<Book[]>{
+    return this.http.get<Book[]>(BASE_URL+"/availableUserBooks")
+  }
+
+  getAllTakenUserBooks() : Observable<Book[]>{
+    return this.http.get<Book[]>(BASE_URL+"/takenUserBooks")
+  }
+
   getCurrentUser() : Observable<User>{
     return this.http.get<User>(BASE_URL+"/info")
   }

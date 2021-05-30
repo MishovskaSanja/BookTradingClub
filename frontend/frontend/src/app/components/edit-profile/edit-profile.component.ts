@@ -21,15 +21,16 @@ export class EditProfileComponent implements OnInit {
   }
 
   onSubmit(data){
-    console.log("here")
     console.log(data)
       this.userService.editInfo({
         fullName: data.fullName,
         city: data.city,
         address: data.address,
         state: data.state
-      }).subscribe()
-      this.router.navigateByUrl("/user/profile")
+      }).subscribe(result => {
+        this.router.navigateByUrl("/user/profile")
+      })
+
   }
 
 }

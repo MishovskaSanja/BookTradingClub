@@ -2,6 +2,7 @@ package com.sorsix.booktradingclub.api
 
 import com.sorsix.booktradingclub.api.dto.RequestDto
 import com.sorsix.booktradingclub.domain.Request
+import com.sorsix.booktradingclub.domain.exception.RequestAlreadyExists
 import com.sorsix.booktradingclub.service.RequestService
 import com.sorsix.booktradingclub.service.UserService
 import org.springframework.http.ResponseEntity
@@ -29,7 +30,16 @@ internal class RequestController(
 
     @PostMapping("/post")
     fun postRequest(@RequestBody requestDto: RequestDto) : ResponseEntity<Request>{
-       return ResponseEntity.of(requestService.createRequest(requestDto.bookToGive, requestDto.wantedBook))
+       return requestService.createRequest(requestDto.bookToGive, requestDto.wantedBook).map {
+            ResponseEntity.ok(it)
+       }.orElseThrow {
+           RequestAlreadyExists("Request already exists")
+       }
+    }
+
+    @ExceptionHandler(RequestAlreadyExists::class)
+    fun handleException(exception: RequestAlreadyExists) : ResponseEntity<String> {
+        return ResponseEntity.badRequest().body("Request already exists")
     }
 
     

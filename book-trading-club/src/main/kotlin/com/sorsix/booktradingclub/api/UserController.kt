@@ -8,6 +8,7 @@ import com.sorsix.booktradingclub.domain.Book
 import com.sorsix.booktradingclub.domain.Request
 import com.sorsix.booktradingclub.domain.User
 import com.sorsix.booktradingclub.domain.exception.InvalidCredentialsException
+import com.sorsix.booktradingclub.domain.exception.RequestAlreadyExists
 import com.sorsix.booktradingclub.domain.exception.UsernameAlreadyExistsException
 import com.sorsix.booktradingclub.service.BookService
 import com.sorsix.booktradingclub.service.UserService
@@ -36,6 +37,8 @@ class UserController(
         return ResponseEntity.badRequest().body("Username already exists")
     }
 
+
+
     @PostMapping("/login")
     fun login(@RequestBody userLoginDto : UserLoginDto, request: HttpServletRequest) : ResponseEntity<Any>{
         return ResponseEntity.ok(userService.authenticateUser(userLoginDto.username, userLoginDto.password))
@@ -62,6 +65,16 @@ class UserController(
     @GetMapping("/userBooks")
     fun getUserBooks(): ResponseEntity<List<Book>>{
         return ResponseEntity.ok(this.userService.findAllUserBooks())
+    }
+
+    @GetMapping("/takenUserBooks")
+    fun getTakenUserBooks(): ResponseEntity<List<Book>>{
+        return ResponseEntity.ok(this.userService.findAllTakenUserBooks())
+    }
+
+    @GetMapping("/availableUserBooks")
+    fun getAvailableUserBooks(): ResponseEntity<List<Book>>{
+        return ResponseEntity.ok(this.userService.findAllAvailableUserBooks())
     }
 
     @GetMapping("/incomingRequests")

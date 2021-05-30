@@ -18,7 +18,6 @@ export class UsersComponent implements OnInit {
     this.userService.getAllUsers().subscribe(result => {
       this.users = result
     })
-  
   }
 
 }

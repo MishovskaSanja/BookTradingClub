@@ -22,6 +22,8 @@ export class CreateRequestComponent implements OnInit {
 
   wantedBookId: number;
   wantedBook: Book;
+  hasError: Boolean;
+  error: string;
 
 
   constructor(private userService: UserService, private bookService: BookService, private requestService: RequestService,
@@ -49,6 +51,9 @@ export class CreateRequestComponent implements OnInit {
   onSubmit(data){
     this.requestService.makeRequest(data).subscribe(result => {
       this.router.navigateByUrl("/requests")
+    }, error => {
+      this.hasError = true
+      this.error = error.error
     })
   }
 

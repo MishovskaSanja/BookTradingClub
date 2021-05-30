@@ -20,8 +20,6 @@ export class BookService {
     this.url = 'http://localhost:8083/api/books'
   }
 
-
-
   public getAllBooks(): Observable<Book[]>{
     return this.http.get<Book[]>(this.url)
   }
@@ -36,7 +34,7 @@ export class BookService {
   }
 
   public editBook(data) : Observable<Book>{
-    return this.http.put<Book>(this.url+'/edit/'+data.id,{
+    return this.http.put<Book>(this.url+'/edit/'+data.id, {
     "name" : data.name,
     "description" : data.description,
     "imgUrl": data.imgUrl

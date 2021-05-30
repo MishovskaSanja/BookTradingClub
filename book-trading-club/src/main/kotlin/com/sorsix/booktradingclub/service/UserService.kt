@@ -6,6 +6,7 @@ import com.sorsix.booktradingclub.domain.Book
 import com.sorsix.booktradingclub.domain.Request
 import com.sorsix.booktradingclub.domain.User
 import com.sorsix.booktradingclub.domain.enumeration.BookStatus
+import com.sorsix.booktradingclub.domain.enumeration.RequestStatus
 import com.sorsix.booktradingclub.domain.exception.NoAuthenticatedUserException
 import com.sorsix.booktradingclub.domain.exception.UsernameAlreadyExistsException
 import com.sorsix.booktradingclub.repository.BookRepository
@@ -19,6 +20,7 @@ import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import java.util.*
+import java.util.stream.Collectors
 import javax.servlet.http.HttpServletRequest
 
 @Service
@@ -69,6 +71,17 @@ class UserService(
         this.userRepository.save(user)
     }
 
+    fun findAllAvailableUserBooks() : List<Book>{
+        return getCurrentUser().let {
+            this.bookRepository.findAllByOwner(it).stream().filter { it2 -> it2.status == BookStatus.AVAILABLE }.collect(Collectors.toList())
+        }
+    }
+
+    fun findAllTakenUserBooks() : List<Book>{
+        return getCurrentUser().let {
+            this.bookRepository.findAllByOwner(it).stream().filter { it2 -> it2.status == BookStatus.TAKEN }.collect(Collectors.toList())
+        }
+    }
 
     fun findAllUserBooks(): List<Book> {
         return getCurrentUser().let {
@@ -84,7 +97,7 @@ class UserService(
 
     fun getMyRequests() : Optional<List<Request>>{
         return getCurrentUser().let {
-            this.requestRepository.getAllByUserRequesting(it)
+            this.requestRepository.getAllByUserRequesting(it).map { it.stream().filter { it2 -> it2.status == RequestStatus.PENDING}.collect(Collectors.toList()) }
         }
     }
 }

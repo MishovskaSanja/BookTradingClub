@@ -1,64 +1,4 @@
 <app-header></app-header>
-<!--
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-<div class="content">
-  <div class="container">
-    <div class="row">
-    </div>
-    <div class="row">
-      <div class="col-lg-4" *ngFor="let u of users">
-        <div class="text-center card-box">
-          <div class="member-card pt-2 pb-2">
-            <div class="thumb-lg member-thumb mx-auto"><img
-                src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
-                class="rounded-circle img-thumbnail" alt="profile-image"></div>
-            <div class="">
-              <h4 class="text-dark">{{u.fullName}}</h4>
-              <p class="text-muted">username: <span>| </span><span><a href="#"
-                    class="text-pink">{{u.username}}</a></span></p>
-            </div>
-            <ul class="social-links list-inline">
-              <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips"
-                  href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a></li>
-              <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips"
-                  href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>
-              <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips"
-                  href="" data-original-title="Skype"><i class="fa fa-skype"></i></a></li>
-            </ul>
-            <button type="button"
-              class="btn btn-primary mt-3 btn-rounded waves-effect w-md waves-light">{{u.username}}'s Books</button>
-            <div class="mt-4">
-              <div class="row">
-                <div class="col-4">
-                  <div class="mt-3">
-                    <h4>{{u.state}}</h4>
-                    <p class="mb-0 text-muted">State</p>
-                  </div>
-                </div>
-                <div class="col-4">
-                  <div class="mt-3">
-                    <h4>{{u.city}}</h4>
-                    <p class="mb-0 text-muted">City</p>
-                  </div>
-                </div>
-                <div class="col-4">
-                  <div class="mt-3">
-                    <h4>Address</h4>
-                    <p class="mb-0 text-muted">{{u.address}}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-    </div>
-  </div>
-</div> -->
-
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <div class="container mt-3 mb-4">
@@ -69,7 +9,7 @@
           <table class="table manage-candidates-top mb-0">
             <thead>
               <tr>
-                <th>User</th>
+                <th><h3>Users</h3></th>
                 <th class="text-center"> </th>
                 <th class="action text-right"> </th>
               </tr>
@@ -83,11 +23,12 @@
                   <div class="candidate-list-details">
                     <div class="candidate-list-info">
                       <div class="candidate-list-title">
-                        <h5 class="mb-0"><a href="#">{{u.fullName}}</a></h5>
+                        <h5 class="mb-0">{{u.fullName}}</h5>
                       </div>
                       <div class="candidate-list-option">
                         <ul class="list-unstyled">
                           <li><i class="fas fa-filter pr-1"></i>{{u.username}}</li>
+
                           <li><i class="fas fa-map-marker-alt pr-1"></i>{{u.state}}, {{u.city}} {{u.address}}</li>
                         </ul>
                       </div>
@@ -109,9 +50,6 @@
                   </ul>
                 </td>
               </tr>
-
-
-
             </tbody>
           </table>
           <div class="text-center mt-3 mt-sm-3">

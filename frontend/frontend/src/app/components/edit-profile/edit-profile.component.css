@@ -1,2 +1,7 @@
+body{
+  margin-top:20px;
+}
 
-body{margin-top:20px;}				              
+.container{
+  background-color: white;
+}

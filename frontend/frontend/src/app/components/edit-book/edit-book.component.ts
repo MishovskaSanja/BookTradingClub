@@ -26,8 +26,7 @@ export class EditBookComponent implements OnInit {
       "description": data.description,
       "imgUrl": data.imgUrl
     }).subscribe(result => {
-      const navigationDetails: string[] = ['user/myBooks'];
-    this.router.navigate(navigationDetails);
+      this.router.navigateByUrl("/user/profile");
     })
 }
 }

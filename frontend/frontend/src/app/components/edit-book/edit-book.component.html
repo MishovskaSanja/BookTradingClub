@@ -1,7 +1,7 @@
 <app-header></app-header>
 
 <div class="container bootstrap snippets bootdey">
-  <h1 class="text-primary"><span class="glyphicon glyphicon-user"></span>Edit Book</h1>
+  <h1><span class="glyphicon glyphicon-user"></span>Edit Book</h1>
   <hr>
   <div class="row">
     <!-- left column -->
@@ -13,7 +13,7 @@
 
     <!-- edit form column -->
     <div class="col-md-9 personal-info">
-      <h3>Information</h3>
+      <h3 class="ml-3">Information</h3>
 
       <form class="form-horizontal" role="form" #editbook="ngForm" (ngSubmit)="onSubmit(editbook.value)">
         <div class="form-group">
@@ -37,7 +37,8 @@
               name="imgUrl" ngModel>
           </div>
         </div>
-        <button class='btn btn-primary' type="submit" value="submit">Save changes</button>
+        <button class='btn btn-primary ml-3' type="submit" value="submit">Save changes</button>
+
       </form>
     </div>
   </div>

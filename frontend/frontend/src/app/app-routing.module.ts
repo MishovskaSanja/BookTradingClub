@@ -23,7 +23,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: 'users', component: UsersComponent},
   { path: "addBook", component: AddBookComponent},
-  { path: "editBook", component: EditBookComponent},
+  { path: "editBook/:id", component: EditBookComponent},
   { path: "user/edit-profile", component: EditProfileComponent},
   { path: 'user/myBooks', component: MyBooksComponent},
   { path: 'user/profile', component: UserProfileComponent},

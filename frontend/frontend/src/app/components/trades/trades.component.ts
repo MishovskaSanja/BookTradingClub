@@ -10,13 +10,13 @@ import { RequestService } from 'src/app/service/request.service';
 })
 export class TradesComponent implements OnInit {
 
-  requests: Request[];
+  trades: Request[];
 
   constructor(public requestService : RequestService) { }
 
   ngOnInit(): void {
     this.requestService.getAllTrades().subscribe(result => {
-      this.requests = result;
+      this.trades = result;
     });
   }
 
