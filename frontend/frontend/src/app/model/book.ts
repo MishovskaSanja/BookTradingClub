@@ -1,7 +1,7 @@
 import { User } from "./user";
 
 export interface Book {
-  id: bigint
+  id: number
   name: string
   description: string
   imgUrl: string

@@ -1,4 +1,3 @@
-<app-header></app-header>
 
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <div class="container">
@@ -21,8 +20,12 @@
             <div class="m-t text-righ grid">
               <div class="row">
                 <td *ngIf="book.status =='AVAILABLE'">
-                  <button class="btn btn-warning" [routerLink]="['/editBook']" [state]="book">Edit book</button> |
-                  <button class="btn btn-danger" (click)='delete(book.id)'> Delete </button>
+                  <div class="col-sm">
+                    <button class="btn btn-warning" [routerLink]="['/editBook']" [state]="book">Edit book</button>
+                  </div>
+                  <div class="col-sm">
+                    <button class="btn btn-danger" (click)='delete(book.id)'> Delete </button>
+                  </div>
                 </td>
               </div>
             </div>
@@ -31,5 +34,5 @@
       </div>
     </div>
   </div>
-  <button class="btn btn-primary" routerLink="/addBook">Add book</button>
+  <!-- <button class="btn btn-primary" routerLink="/addBook">Add book</button> -->
 </div>

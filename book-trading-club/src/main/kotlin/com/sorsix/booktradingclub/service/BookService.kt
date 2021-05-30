@@ -21,6 +21,10 @@ class BookService(
 
     fun getAllAvailableBooks() : List<Book> = bookRepository.findAllByStatus(BookStatus.AVAILABLE)
 
+    fun findById(id: Long): Optional<Book>{
+        return this.bookRepository.findById(id)
+    }
+
     fun createBook(name: String, description: String, imgUrl:String) : Book {
         val user = this.userService.getCurrentUser()
         val book = Book(id=0, name = name, description = description, imgUrl = imgUrl, owner = user, status = BookStatus.AVAILABLE)

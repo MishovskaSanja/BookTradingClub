@@ -5,7 +5,7 @@
 <div class="container pb-5 mb-2">
   <!--Item-->
   <div class="cart-item d-md-flex justify-content-between" *ngFor="let r of incomingRequests">
-    <span class="remove-item btn btn-danger" (click)="reject(r.requestId)"><i class="fa fa-times"></i></span>
+    <span class="remove-item" (click)="reject(r.requestId)"><i class="fa fa-times"></i></span>
 
     <div class="px-3 my-3">
       <a class="cart-item-product" href="https://www.google.com/search?q={{r.bookToGive.name}}">
@@ -36,7 +36,9 @@
       <div class="cart-item-label">To: </div><span
         class="text-xl font-weight-medium">{{r.wantedBook.owner.fullName}}</span>
     </div>
-    <button class="btn btn-success" (click)="accept(r.requestId)">Accept</button>
+    <div class="px-3 my-3 text-center">
+      <button class="btn btn-success btn-bg" (click)="accept(r.requestId)">Accept</button>
+    </div>
   </div>
 
 </div>

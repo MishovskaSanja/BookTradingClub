@@ -5,6 +5,7 @@ import { User } from 'src/app/model/user';
 import { BookService } from 'src/app/service/book.service';
 import { RequestService } from 'src/app/service/request.service';
 import { UserService } from 'src/app/service/user.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-create-request',
@@ -19,19 +20,30 @@ export class CreateRequestComponent implements OnInit {
   booksByOtherUsers: Book[]
   currentUserUsername : string
 
-  constructor(private userService: UserService, private bookService: BookService, private requestService: RequestService, private router: Router) { }
+  wantedBookId: number;
+  wantedBook: Book;
+
+
+  constructor(private userService: UserService, private bookService: BookService, private requestService: RequestService,
+     private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.userService.getAllUserBooks().subscribe(result =>{
       this.myBooks = result
-    })
-
-    this.bookService.getAllBooks().subscribe(result => {
-      this.booksByOtherUsers = result
-    })
+      console.log("users books")
+    });
 
     this.user = JSON.parse(sessionStorage.getItem("user")) as User
 
+     this.route.queryParams.subscribe(params => {
+      this.wantedBookId = parseInt(this.route.snapshot.queryParams['id']);
+      console.log()
+    })
+
+      this.bookService.getBook(this.wantedBookId).subscribe(
+        res => {
+          this.wantedBook = res as Book
+        });
   }
 
   onSubmit(data){

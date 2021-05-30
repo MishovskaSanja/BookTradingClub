@@ -30,7 +30,7 @@ export class RequestComponent implements OnInit {
 
   }
 
- public accept(id: bigint){
+ public accept(id: number){
     this.requestService.acceptRequest(id).subscribe( result => {
       const navigationDetails: string[] = ['/trades'];
       this.router.navigate(navigationDetails);

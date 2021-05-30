@@ -30,6 +30,11 @@ export class BookService {
     return this.http.post<Book>('http://localhost:8083/api/books/addBook', data)
   }
 
+  public getBook(id:number) : Observable<Book>{
+    const param = "/book/" + id
+    return this.http.get<Book>(this.url+param, {"headers": this.headers})
+  }
+
   public editBook(data) : Observable<Book>{
     return this.http.put<Book>(this.url+'/edit/'+data.id,{
     "name" : data.name,
@@ -42,5 +47,7 @@ export class BookService {
     const param = "/delete/" + id
     return this.http.delete(this.url+param, {"headers": this.headers})
   }
+
+
 
 }

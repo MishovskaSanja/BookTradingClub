@@ -2,53 +2,46 @@
 
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Book Trading Club <span class="sr-only">(current)</span></a>
-      </li>
+      <a class="navbar-brand" href="#">
+        <img src="https://www.kindpng.com/picc/m/114-1145859_transparent-book-png-transparent-circle-icon-book-png.png" width="60" height="60" alt="logo">
+        BookTradingClub
+      </a>
       <li class="nav-item">
         <a class="nav-link" href="/books">Books</a>
       </li>
-      <li *ngIf="user" class="nav-item">
-        <a class="nav-link" routerLink="/user/myBooks">My Books</a>
-      </li>
-      <li class="nav-item dropdown" ngbDropdown>
-        <a class="nav-link dropdown-toggle" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown"
-          aria-expanded="false" ngbDropdownToggle>
-          Requests
-        </a>
-        <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="navbarScrollingDropdown">
-          <li ngbDropdownItem><a class="dropdown-item" href="/requests">All Requests</a></li>
-          <li *ngIf="user" ngbDropdownItem><a class="dropdown-item" href="/user/myRequests">My Requests</a></li>
-
-          <li *ngIf="user" class="dropdown-item">
-            <a class="dropdown-item" routerLink="/user/incomingRequests">Incoming Requests</a>
-          </li>
-        </ul>
+      <li class="nav-item">
+        <a class="nav-link" href="/requests">All Requests</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/trades">Trades</a>
       </li>
-      <li class="nav-item dropdown" ngbDropdown>
-        <a class="nav-link dropdown-toggle" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown"
-          aria-expanded="false" ngbDropdownToggle>
-          User
+      <li class="nav_item">
+        <a class="nav-link" href="/users">All users</a>
+      </li>
+      <li class="nav-item dropdown" style=" text-align: right;" ngbDropdown>
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/fox.jpg" width="40" height="40" class="rounded-circle" ngbDropdownToggle>
         </a>
         <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="navbarScrollingDropdown">
-          <li ngbDropdownItem><a class="dropdown-item" href="/users">All users</a></li>
           <li *ngIf="user" ngbDropdownItem><a class="dropdown-item" href="/user/profile">My Profile</a></li>
-          <li *ngIf="user == undefined" class="nav-item">
-            <a class="nav-link" routerLink="/register">Register</a>
-          </li>
-          <li *ngIf="user == undefined" class="nav-item">
-            <a class="nav-link" routerLink="/login">Login</a>
-          </li>
+
           <li *ngIf="user" class="nav-item">
             <button class='nav-link' (click)="logout()">Logout</button>
           </li>
         </ul>
       </li>
 
+      <li *ngIf="user == undefined" class="nav-link pull-right">
+        <a class="nav-link" routerLink="/register">Register</a>
+      </li>
+      <li *ngIf="user == undefined" class="nav-link">
+        <a class="nav-link" routerLink="/login">Login</a>
+      </li>
+
 
     </ul>
   </div>
 </nav>
+
+
+

@@ -8,36 +8,48 @@
         <div class="card-body">
           <form class="text-center border border-light p-5" #createRequest="ngForm"
             (ngSubmit)="onSubmit(createRequest.value)">
-
             <!--My Books-->
             <div class="form-group row">
-              <label for="address" class="col-md-4 col-form-label text-md-right">myBooks</label>
-              <div class="col" *ngFor="let book of myBooks">
-                <input type="radio" value="{{book.id}}" name="bookToGive" ngModel>
-                <div>Book: {{book.name}}</div>
-                <div>Description: {{book.description}}</div>
+
+              <div class="col-md-6 graphicdesign illustrator photography">
+                <h5> <label for="bookToGive" class="col-md-4 col-form-label block text-center">My Books</label></h5>
+                <div *ngFor="let book of myBooks">
+                  <div *ngIf="book.status == 'AVAILABLE'">
+                    <div class="gal-detail thumb">
+                      <a href="#" class="image-popup">
+                        <img src={{book.imgUrl}} class="thumb-img" alt="work-thumbnail">
+                      </a>
+                      <input type="radio" class="option-input radio" value="{{book.id}}" name="bookToGive" ngModel>
+                      <div class="ga-border"></div>
+                      <div>{{book.id}}</div>
+                      <div>Book: {{book.name}}</div>
+                      <p class="text-muted text-center"><small>{{book.description}}</small></p>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
-            <br>
-            <!--All Books-->
-            <div class="form-group row">
-              <label for="address" class="col-md-4 col-form-label text-md-right">All Books</label>
-              <div class="col" *ngFor="let book of booksByOtherUsers">
-                <input type="radio" value="{{book.id}}" name="wantedBook" ngModel>
-                <div>{{book.owner.username}}</div>
-                <div>{{currentUserUsername}}</div>
-                <div>Book: {{book.name}}</div>
-                <div>Description: {{book.description}}</div>
+
+              <!--Wanted-->
+
+              <div class="col-md-6 graphicdesign illustrator photography">
+                <h5> <label for="bookToGive" class="col-md-4 col-form-label block text-center">Requested</label></h5>
+                <div class="gal-detail thumb">
+                  <a href="#" class="image-popup">
+                    <img src={{wantedBook.imgUrl}} class="thumb-img" alt="work-thumbnail">
+                  </a>
+                  <input type="radio" class="option-input radio" value="{{wantedBook.id}}" name="wantedBook" ngModel>
+                  <div class="ga-border"></div>
+                  <div>{{wantedBook.id}}</div>
+                  <div>Book: {{wantedBook.name}}</div>
+                  <p class="text-muted text-center"><small>{{wantedBook.description}}</small></p>
+                </div>
               </div>
+
             </div>
-
-
-
             <!--  button -->
-            <div class="col-md-6 offset-md-4">
-              <button class="btn btn-primary my-4" block="true" type="submit">Submit</button>
+            <div class="col-md-6 offset-md-4 align-items-right">
+              <button class="btn btn-primary btn-lg" block="true" type="submit">Submit</button>
             </div>
-
           </form>
         </div>
       </div>

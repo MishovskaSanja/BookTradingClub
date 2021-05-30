@@ -21,7 +21,7 @@ export class AddBookComponent implements OnInit {
         "description" : data.description,
         "imgUrl": data.img
     }).subscribe(result => {
-      const navigationDetails: string[] = ['/user/myBooks'];
+      const navigationDetails: string[] = ['user/profile'];
       this.router.navigate(navigationDetails);
     })
   }

@@ -17,6 +17,11 @@ class BookController(
     @GetMapping
     fun getBooks(): List<Book> = bookService.getAllAvailableBooks()
 
+    @GetMapping("/book/{id}")
+    fun getBook(@PathVariable id: Long) : ResponseEntity<Book>{
+        return ResponseEntity.of(bookService.findById(id))
+    }
+
     @PostMapping("/addBook")
     fun addBook(@RequestBody bookDto: BookDto): ResponseEntity<Book>{
         val book = bookService.createBook(bookDto.name, bookDto.description, bookDto.imgUrl)
