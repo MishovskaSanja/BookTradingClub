@@ -2,9 +2,10 @@
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <div class="container pb-5 mb-2 my-4">
   <h3 class="ml-3">All requests</h3>
+  <div *ngIf="requests.length &gt; 0">
   <div class="cart-item d-md-flex justify-content-between" *ngFor="let r of requests">
     <div class="px-3 my-3">
-      <a class="cart-item-product" href="https://www.google.com/search?q={{r.bookToGive.name}}">
+      <a  class="cart-item-product" href="https://www.google.com/search?q={{r.bookToGive.name}}">
         <div class="cart-item-product-thumb"><img src="{{r.bookToGive.imgUrl}}" alt="Product"></div>
         <div class="cart-item-product-info">
           <h4 class="cart-item-product-title">{{r.bookToGive.name}}</h4><span><strong>Description:
@@ -32,5 +33,8 @@
         class="text-xl font-weight-medium">{{r.wantedBook.owner.fullName}}</span>
     </div>
   </div>
-
+  </div>
+  <div *ngIf="requests.length == 0">
+    <span class="ml-3">There aren't any requests.</span>
+  </div>
 </div>

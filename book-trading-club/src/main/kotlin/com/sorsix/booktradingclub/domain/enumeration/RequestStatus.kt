@@ -1,5 +1,5 @@
 package com.sorsix.booktradingclub.domain.enumeration
 
 enum class RequestStatus {
-    PENDING, ACCEPTED
+    PENDING, ACCEPTED, CANCELED
 }

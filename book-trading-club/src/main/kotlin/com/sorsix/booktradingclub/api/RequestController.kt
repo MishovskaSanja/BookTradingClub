@@ -7,8 +7,7 @@ import com.sorsix.booktradingclub.service.RequestService
 import com.sorsix.booktradingclub.service.UserService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import java.util.*
-import javax.servlet.http.HttpServletRequest
+
 
 @RestController
 @RequestMapping("/api/requests")
@@ -19,37 +18,36 @@ internal class RequestController(
 ) {
 
     @GetMapping
-    fun getRequests(): List<Request>{
+    fun getRequests(): List<Request> {
         return requestService.getAllRequests()
     }
 
     @GetMapping("/accepted")
-    fun getTrades(): List<Request>{
+    fun getTrades(): List<Request> {
         return requestService.getAllAcceptedRequests()
     }
 
     @PostMapping("/post")
-    fun postRequest(@RequestBody requestDto: RequestDto) : ResponseEntity<Request>{
-       return requestService.createRequest(requestDto.bookToGive, requestDto.wantedBook).map {
+    fun postRequest(@RequestBody requestDto: RequestDto): ResponseEntity<Request> {
+        return requestService.createRequest(requestDto.bookToGive, requestDto.wantedBook).map {
             ResponseEntity.ok(it)
-       }.orElseThrow {
-           RequestAlreadyExists("Request already exists")
-       }
+        }.orElseThrow {
+            RequestAlreadyExists("Request for these books already exists.")
+        }
     }
 
     @ExceptionHandler(RequestAlreadyExists::class)
-    fun handleException(exception: RequestAlreadyExists) : ResponseEntity<String> {
-        return ResponseEntity.badRequest().body("Request already exists")
+    fun handleException(exception: RequestAlreadyExists): ResponseEntity<String> {
+        return ResponseEntity.badRequest().body(exception.message)
     }
 
-    
     @DeleteMapping("/delete/{id}")
-    fun deleteRequest(@PathVariable id: Long){
+    fun deleteRequest(@PathVariable id: Long) {
         return requestService.deleteRequest(id)
     }
 
     @PostMapping("/accept/{id}")
-    fun acceptRequest(@PathVariable id: Long){
+    fun acceptRequest(@PathVariable id: Long) {
         return requestService.acceptRequest(id)
     }
 

@@ -14,47 +14,51 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class CreateRequestComponent implements OnInit {
 
-
   user: User
-  myBooks : Book[]
+  myBooks: Book[]
   booksByOtherUsers: Book[]
-  currentUserUsername : string
-
+  currentUserUsername: string
   wantedBookId: number;
   wantedBook: Book;
   hasError: Boolean;
   error: string;
 
-
   constructor(private userService: UserService, private bookService: BookService, private requestService: RequestService,
-     private router: Router, private route: ActivatedRoute) { }
+    private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.userService.getAllCurrentUserBooks().subscribe(result =>{
+    this.userService.getAllCurrentUserBooks().subscribe(result => {
       this.myBooks = result
-      console.log("users books")
     });
 
-    this.user = JSON.parse(sessionStorage.getItem("user")) as User
+    this.getUser()
 
-     this.route.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe(params => {
       this.wantedBookId = parseInt(this.route.snapshot.queryParams['id']);
-      console.log()
     })
 
-      this.bookService.getBook(this.wantedBookId).subscribe(
-        res => {
-          this.wantedBook = res as Book
-        });
+    this.bookService.getBook(this.wantedBookId).subscribe(
+      res => {
+        this.wantedBook = res as Book
+      });
   }
 
-  onSubmit(data){
-    this.requestService.makeRequest(data).subscribe(result => {
-      this.router.navigateByUrl("/requests")
-    }, error => {
+  getUser() {
+    this.user = JSON.parse(sessionStorage.getItem("user")) as User
+  }
+
+  onSubmit(data) {
+    if (data.bookToGive == '' || data.wantedBook == '') {
       this.hasError = true
-      this.error = error.error
-    })
+      this.error = 'Please select the books!'
+    } else {
+      this.requestService.makeRequest(data).subscribe(result => {
+        this.router.navigateByUrl("/requests")
+      }, error => {
+        this.hasError = true
+        this.error = error.error
+      })
+    }
   }
 
 }

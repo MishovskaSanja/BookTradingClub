@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/model/user';
 import { TokenStorageService } from 'src/app/service/token-storage.service';
-import { UserService } from 'src/app/service/user.service';
 
 
 @Component({
@@ -14,21 +13,24 @@ export class HeaderComponent implements OnInit {
 
   user: User
 
-
-
   constructor(private tokenStorage: TokenStorageService, private router: Router) {
-
   }
 
-  ngOnInit(){
+  ngOnInit() {
     this.user = JSON.parse(sessionStorage.getItem("user")) as User
   }
 
-  logout(){
+  logout() {
     this.tokenStorage.logout()
+   if(this.router.url == '/books'){
+    let currentUrl = this.router.url;
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+        this.router.navigate([currentUrl]);
+    });
+   }
+   else{
     this.router.navigateByUrl("/books")
+
+   }
   }
-
-
-
 }

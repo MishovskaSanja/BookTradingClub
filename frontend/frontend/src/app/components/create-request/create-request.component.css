@@ -1,6 +1,4 @@
 @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
-
-
 body{
     margin: 0;
     font-size: .9rem;
@@ -10,37 +8,26 @@ body{
     text-align: left;
     background-color: #f5f8fa;
 }
-
-.navbar-laravel
-{
+.navbar-laravel {
     box-shadow: 0 2px 4px rgba(0,0,0,.04);
 }
-
-.navbar-brand , .nav-link, .my-form, .login-form
-{
+.navbar-brand , .nav-link, .my-form, .login-form {
     font-family: Raleway, sans-serif;
 }
-
-.my-form
-{
+.my-form {
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
 }
-
-.my-form .row
-{
+.my-form .row {
     margin-left: 0;
     margin-right: 0;
 }
-
-.login-form
-{
+.login-form {
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
 }
 
-.login-form .row
-{
+.login-form .row {
     margin-left: 0;
     margin-right: 0;
 }
@@ -76,9 +63,6 @@ body{
   background-color: #228bdf;
   margin: 10px auto;
 }
-
-
-
 @keyframes click-wave {
   0% {
     height: 40px;
@@ -94,7 +78,6 @@ body{
     opacity: 0;
   }
 }
-
 .option-input {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -170,5 +153,3 @@ body label {
   display: block;
   line-height: 40px;
 }
-
-

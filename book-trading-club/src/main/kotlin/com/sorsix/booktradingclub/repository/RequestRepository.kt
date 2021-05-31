@@ -17,4 +17,6 @@ interface RequestRepository: JpaRepository<Request, Long> {
     fun getAllByUserReceiving(user: User): Optional<List<Request>>
 
     fun findByUserReceivingAndUserRequestingAndBookToGiveAndWantedBook(userReceiving: User, userRequesting: User, bookToGive: Book, wantedBook: Book) : Optional<Request>
+
+    fun findAllByBookToGive_IdOrWantedBook_Id(idGive: Long, idTake: Long ): List<Request>
 }

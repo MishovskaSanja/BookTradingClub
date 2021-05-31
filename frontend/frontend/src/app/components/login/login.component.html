@@ -10,7 +10,7 @@
               <label for="username" class="col-md-4 col-form-label text-md-right">Username</label>
               <div class="col-md-6">
                 <input type="text" id="username" name="username" class="form-control mb-4" placeholder="Username"
-                  ngModel>
+                  ngModel required>
               </div>
             </div>
             <!-- Password -->
@@ -18,8 +18,11 @@
               <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
               <div class="col-md-6">
                 <input type="password" id="password" name="password" class="form-control mb-4" placeholder="Password"
-                  ngModel>
+                  ngModel required>
               </div>
+            </div>
+            <div class="col-md-6 offset-md-4" *ngIf="hasError">
+              <span class="text-danger">{{error}}. Please try again.</span>
             </div>
             <!-- Sign in button -->
             <div class="col-md-6 offset-md-4">

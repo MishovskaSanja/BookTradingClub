@@ -7,6 +7,7 @@ import com.sorsix.booktradingclub.domain.Request
 import com.sorsix.booktradingclub.domain.User
 import com.sorsix.booktradingclub.domain.enumeration.BookStatus
 import com.sorsix.booktradingclub.domain.enumeration.RequestStatus
+import com.sorsix.booktradingclub.domain.exception.InvalidCredentialsException
 import com.sorsix.booktradingclub.domain.exception.NoAuthenticatedUserException
 import com.sorsix.booktradingclub.domain.exception.UsernameAlreadyExistsException
 import com.sorsix.booktradingclub.repository.BookRepository
@@ -45,13 +46,14 @@ class UserService(
         }
     }
 
-    fun authenticateUser(username: String, password: String) : JwtResponse{
+    fun authenticateUser(username: String, password: String) : Optional<JwtResponse>{
             val authentication = authenticationManager.authenticate(UsernamePasswordAuthenticationToken(username, password))
             SecurityContextHolder.getContext().authentication = authentication
             val token = jwtToken.generateJwtToken(authentication)
             val userDetails: UserDetailsImpl = authentication.principal as UserDetailsImpl
-            return JwtResponse(token, userDetails.username)
+            return Optional.of(JwtResponse(token, userDetails.username))
     }
+
 
     fun getCurrentUser() : User{
         try{
@@ -97,7 +99,7 @@ class UserService(
 
     fun getIncomingRequests(): Optional<List<Request>>{
         return getCurrentUser().let {
-            this.requestRepository.getAllByUserReceiving(it)
+            this.requestRepository.getAllByUserReceiving(it).map { it.stream().filter { it2 -> it2.status == RequestStatus.PENDING}.collect(Collectors.toList()) }
         }
     }
 

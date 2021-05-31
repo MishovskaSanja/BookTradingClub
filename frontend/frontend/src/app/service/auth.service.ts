@@ -17,10 +17,12 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   login(credentials): Observable<any> {
+    console.log(credentials);
     return this.http.post(BASE_URL + "login", {
       username: credentials.username,
       password: credentials.password
     }, httpOptions)
+
   }
 
   register(user): Observable<User> {

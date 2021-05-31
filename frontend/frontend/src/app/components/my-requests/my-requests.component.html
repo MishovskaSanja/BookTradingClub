@@ -5,7 +5,7 @@
   <div *ngIf="myRequests.length &gt; 0">
     <div class="cart-item d-md-flex justify-content-between" *ngFor="let r of myRequests">
       <span class="remove-item" (click)="cancelRequest(r.requestId)"><i class="fa fa-times"></i></span>
-      <div class="px-3 my-3">
+      <div class="px-3 my-3" *ngIf="r.bookToGive.status != 'TAKEN' && r.wantedBook.status != 'TAKEN'">
         <a class="cart-item-product" href="https://www.google.com/search?q={{r.bookToGive.name}}">
           <div class="cart-item-product-thumb"><img src="{{r.bookToGive.imgUrl}}" alt="Product"></div>
           <div class="cart-item-product-info">
@@ -15,7 +15,7 @@
           </div>
         </a>
       </div>
-      <div class="px-3 my-3 text-center">
+      <div class="px-3 my-3 text-center" *ngIf="r.bookToGive.status != 'TAKEN' && r.wantedBook.status != 'TAKEN'">
         <a class="cart-item-product" href="https://www.google.com/search?q={{r.wantedBook.name}}">
           <div class="cart-item-product-thumb"><img src="{{r.wantedBook.imgUrl}}" alt="Product"></div>
           <div class="cart-item-product-info">
@@ -25,11 +25,11 @@
           </div>
         </a>
       </div>
-      <div class="px-3 my-3 text-center">
+      <div class="px-3 my-3 text-center" *ngIf="r.bookToGive.status != 'TAKEN' && r.wantedBook.status != 'TAKEN'">
         <div class="cart-item-label">From: </div><span
           class="text-xl font-weight-medium">{{r.bookToGive.owner.fullName}}</span>
       </div>
-      <div class="px-3 my-3 text-center">
+      <div class="px-3 my-3 text-center" *ngIf="r.bookToGive.status != 'TAKEN' && r.wantedBook.status != 'TAKEN'">
         <div class="cart-item-label">To: </div><span
           class="text-xl font-weight-medium">{{r.wantedBook.owner.fullName}}</span>
       </div>

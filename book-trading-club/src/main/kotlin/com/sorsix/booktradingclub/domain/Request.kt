@@ -22,6 +22,6 @@ class Request (
         val bookToGive: Book,
 
         @Enumerated(EnumType.STRING)
-        val status: RequestStatus
+        var status: RequestStatus
 )
 

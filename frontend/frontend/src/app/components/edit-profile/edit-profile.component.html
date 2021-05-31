@@ -10,14 +10,8 @@
         <img src={{user.imgUrl}} class="avatar img-circle" alt="avatar" style="height: 200px; width: 100;">
       </div>
     </div>
-
     <!-- edit form column -->
     <div class="col-md-9 personal-info">
-      <!-- <div class="alert alert-info alert-dismissable">
-        <a class="panel-close close" data-dismiss="alert">×</a>
-        <i class="fa fa-coffee"></i>
-        This is an <strong>.alert</strong>. editing the user profile.
-      </div> -->
       <h3 class="ml-3">Information for {{user.username}}</h3>
       <br>
       <form class="form-horizontal" role="form" *ngIf="user" #useredit="ngForm" (ngSubmit)="onSubmit(useredit.value)">
@@ -53,8 +47,11 @@
           <label class="col-lg-3 control-label font-weight-bold">Profile picture</label>
           <div class="col-lg-8">
             <input class='form-control' type="text" [(ngModel)]="user.imgUrl" name="imgUrl"
-              placeholder="{{user.imgUrl}}" ngModel>
+              placeholder="{{user.imgUrl}}" placeholder="Image url" ngModel>
           </div>
+        </div>
+        <div *ngIf="hasError" class="my-2">
+          <span class="text-danger ml-3 font-weight-bold">{{error}}</span>
         </div>
         <button class='btn btn-primary ml-3' type="submit" value="submiy">Save changes</button>
       </form>

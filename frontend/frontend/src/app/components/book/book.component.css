@@ -70,6 +70,7 @@ margin: 2px 0 5px 0;
 .product-name:hover,
 .product-name:focus {
 color: #1ab394;
+cursor: pointer;
 }
 .product-price {
 font-size: 14px;

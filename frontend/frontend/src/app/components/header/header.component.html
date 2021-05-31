@@ -1,40 +1,45 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 
-  <div class="collapse navbar-collapse" id="navbarNavDropdown">
-    <ul class="navbar-nav">
-      <a class="navbar-brand" href="#">
-        <img src="https://www.kindpng.com/picc/m/114-1145859_transparent-book-png-transparent-circle-icon-book-png.png" width="60" height="60" alt="logo">
+  <div class="collapse navbar-collapse container-fluid" id="navbarNavDropdown">
+    <ul class="navbar-nav  ">
+      <a class="navbar-brand" href="/books">
+        <img src="https://lh3.googleusercontent.com/proxy/Vxr7f43YcOejmdzp7U2ZGD-379FjSicyw52SQXdisXuUxkjJ4RfqfaIbRgFpbfvQU_1FzwZS6s4yUnoq3CO1aSgTlfe9Sx1zobMkoakaqLAqYnMLcWP9YzsxVAq7cBo-ZItSA2ucJ0sVghF29SNI_gRsOOZz"
+         style="width: 60px; height: 60px; border: 1;" alt="logo"  class="bg-light">
         BookTradingClub
       </a>
       <li class="nav-item">
-       <h5> <a class="nav-link" href="/books">Books</a></h5>
+        <h5> <a class="nav-link" href="/books">Books</a></h5>
       </li>
       <li class="nav-item">
-      <h5> <a class="nav-link" href="/users">Users</a></h5>
-     </li>
-      <li class="nav-item">
-      <h5> <a class="nav-link" href="/requests">Requests</a></h5>
+        <h5> <a class="nav-link" href="/users">Users</a></h5>
       </li>
       <li class="nav-item">
-      <h5> <a class="nav-link" href="/trades">Trades</a></h5>
+        <h5> <a class="nav-link" href="/requests">Requests</a></h5>
       </li>
-      <li *ngIf="user != undefined" class="nav-item dropdown" id="profile" ngbDropdown>
-        <a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <img src='https://toppng.com/uploads/preview/user-account-management-logo-user-icon-11562867145a56rus2zwu.png' width="40" height="40" class="rounded-circle" ngbDropdownToggle>
-        </a>
-        <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="navbarScrollingDropdown">
-          <li *ngIf="user" ngbDropdownItem><a class="dropdown-item" href="/user/profile">My Profile</a></li>
-          <li *ngIf="user" class="nav-item">
-            <button class='btn btn-primary  nav-link' (click)="logout()">Logout</button>
-          </li>
-        </ul>
+      <li class="nav-item">
+        <h5> <a class="nav-link" href="/trades">Trades</a></h5>
       </li>
+      <div style="margin-left: 750px;">
+        <li *ngIf="user != undefined" class="nav-item dropdown " id="profile" ngbDropdown>
+          <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <img
+              src='https://toppng.com/uploads/preview/user-account-management-logo-user-icon-11562867145a56rus2zwu.png'
+              width="40" height="40" class="rounded-circle" ngbDropdownToggle>
+          </a>
+          <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="navbarScrollingDropdown">
+            <li *ngIf="user" ngbDropdownItem><a class="dropdown-item text-left" href="/user/profile">My Profile</a></li>
+            <li *ngIf="user" ngbDropdownItem>
+              <a class='dropdown-item text-left' (click)="logout()">Logout</a>
+            </li>
+          </ul>
+        </li>
+      </div>
     </ul>
   </div>
 </nav>
 
-
-<div class="jumbotron jumbotron-fluid bg-dark"  *ngIf="!user">
+<div class="jumbotron jumbotron-fluid bg-dark" *ngIf="!user">
   <div class="jumbotron-background">
     <img src="https://www.wallpapersdsc.net/wp-content/uploads/2017/10/Books-Wallpaper-for-Laptop.jpg">
   </div>
@@ -45,22 +50,15 @@
     <hr class="my-4">
     <p>An easy and fun way to trade books you no longer
       need for those you want to read.</p>
-      <div class="row text-center">
-        <div class="col-sm-1">
-          <button class="btn btn-primary" routerLink="/login">Login</button>
-        </div>
-        <div class="col-sm-1">
-          <button class="btn btn-primary" routerLink="/register">Register</button>
-        </div>
+    <div class="row text-center">
+      <div class="col-sm-1">
+        <button class="btn btn-primary" routerLink="/login">Login</button>
       </div>
+      <div class="col-sm-1">
+        <button class="btn btn-primary" routerLink="/register">Register</button>
+      </div>
+    </div>
 
   </div>
 
 </div>
-
-
-
-
-
-
-

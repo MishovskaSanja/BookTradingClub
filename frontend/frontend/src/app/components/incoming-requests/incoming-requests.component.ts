@@ -19,21 +19,22 @@ export class IncomingRequestsComponent implements OnInit {
     this.load()
   }
 
-  load(){
+  load() {
     this.userService.getIncomingRequests().subscribe(result => {
       this.incomingRequests = result
+      console.log(result)
     })
   }
 
-  reject(id){
+  reject(id) {
     this.requestService.cancelRequest(id).subscribe(result => {
       this.load()
     })
   }
 
-  accept(id){
+  accept(id) {
     this.requestService.acceptRequest(id).subscribe(result => {
-        this.router.navigateByUrl("/trades")
+      this.router.navigateByUrl("/trades")
     })
   }
 

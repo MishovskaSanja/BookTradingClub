@@ -2,18 +2,13 @@ package com.sorsix.booktradingclub.service
 
 import com.sorsix.booktradingclub.domain.Book
 import com.sorsix.booktradingclub.domain.Request
-import com.sorsix.booktradingclub.domain.User
 import com.sorsix.booktradingclub.domain.enumeration.BookStatus
 import com.sorsix.booktradingclub.domain.enumeration.RequestStatus
-import com.sorsix.booktradingclub.domain.exception.RequestAlreadyExists
 import com.sorsix.booktradingclub.repository.BookRepository
 import com.sorsix.booktradingclub.repository.RequestRepository
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 import java.util.*
-import javax.servlet.http.HttpServletRequest
-
+import java.util.stream.Collectors
 
 @Service
 class RequestService(
@@ -26,8 +21,8 @@ class RequestService(
 
     fun getAllAcceptedRequests(): List<Request> = requestRepository.getAllByStatus(RequestStatus.ACCEPTED)
 
-    fun findBookById(id: Long) : Book{
-        return bookRepository.findById(id).orElseThrow{RuntimeException("Book not found")}
+    fun findBookById(id: Long): Book {
+        return bookRepository.findById(id).orElseThrow { RuntimeException("Book not found") }
     }
 
     fun createRequest(bookToGiveId: Long, bookWantedId: Long): Optional<Request> {
@@ -39,12 +34,12 @@ class RequestService(
         return if (bookWanted.status == BookStatus.AVAILABLE && bookToGive.status == BookStatus.AVAILABLE) {
             val userReceiving = bookWanted.owner
             val request = Request(requestId = 0, userRequesting = userRequesting, userReceiving = userReceiving, bookToGive = bookToGive, wantedBook = bookWanted, status = RequestStatus.PENDING)
-            if (requestRepository.findByUserReceivingAndUserRequestingAndBookToGiveAndWantedBook(userReceiving, userRequesting, bookToGive, bookWanted).isEmpty){
+            if (requestRepository.findByUserReceivingAndUserRequestingAndBookToGiveAndWantedBook(userReceiving, userRequesting, bookToGive, bookWanted).isEmpty) {
 
                 this.requestRepository.save(request)
                 Optional.of(request)
-            }else{
-               Optional.empty()
+            } else {
+                Optional.empty()
             }
         } else {
             return Optional.empty()
@@ -65,9 +60,16 @@ class RequestService(
                     it.status = BookStatus.TAKEN
                 }
                 this.requestRepository.save(Request(requestId = it.requestId, userRequesting = it.userRequesting, userReceiving = it.userReceiving,
-                            wantedBook = it.wantedBook, bookToGive = it.bookToGive, status = RequestStatus.ACCEPTED))
-                }
+                        wantedBook = it.wantedBook, bookToGive = it.bookToGive, status = RequestStatus.ACCEPTED))
             }
+            var req = this.requestRepository.findAllByBookToGive_IdOrWantedBook_Id(it.bookToGive.id, it.wantedBook.id)
+                    .stream().filter { r -> r.requestId != requestId }.collect(Collectors.toList())
+            req.stream().forEach { r ->
+                r.status = RequestStatus.CANCELED
+            }
+            requestRepository.saveAll(req)
         }
+
+    }
 
 }

@@ -11,6 +11,9 @@ import { UserService } from '../../service/user.service'
 })
 export class LoginComponent implements OnInit {
 
+  error: string
+  hasError: Boolean
+
   constructor(private tokenStorage: TokenStorageService,
     private authService: AuthService, private router: Router, private userService: UserService) { }
 
@@ -20,12 +23,17 @@ export class LoginComponent implements OnInit {
     this.login(data)
   }
 
- public login(data) {
+  public login(data) {
     this.authService.login(data).subscribe(result => {
       this.tokenStorage.saveUser(result.username)
       this.tokenStorage.saveToken(result.accessToken)
       console.log(data)
       this.router.navigateByUrl('/books')
+    }, error => {
+      this.hasError = true
+      if (error.error) {
+        this.error = error.error.message;
+      }
     })
   }
 
