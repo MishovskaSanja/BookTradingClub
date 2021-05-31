@@ -2,8 +2,8 @@
 
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <div class="container pb-5 mb-2 my-4">
-  <h3 class="ml-3">All trades</h3>
   <div *ngIf="trades.length &gt; 0">
+    <h3 class="ml-3">All trades</h3>
   <div class="cart-item d-md-flex justify-content-between" *ngFor="let r of trades">
     <div class="px-3 my-3">
       <a class="cart-item-product" href="https://www.google.com/search?q={{r.bookToGive.name}}">
@@ -36,6 +36,14 @@
   </div>
   </div>
   <div *ngIf="trades.length == 0">
-    <span class="ml-3">There aren't any requests.</span>
+    <div id="notfound">
+      <div class="notfound">
+      <div class="notfound-2">
+      <h1>Oops!</h1>
+      <h2>It looks like there are no trades.</h2>
+      </div>
+      <a href="/books">Go back</a>
+      </div>
+      </div>
   </div>
 </div>

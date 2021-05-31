@@ -27,11 +27,12 @@
                     </div>
                   </div>
                 </div>
+                <div *ngIf="myBooks && myBooks.length == 0">
+                  <span class="text-danger">You don't have any books. To add a book click <a
+                      routerLink="/addBook">here.</a></span>
+                </div>
               </div>
-              <div *ngIf="myBooks && myBooks.length &lt; 1">
-                <span class="text-danger">You don't have any books. To add a book click <a
-                    routerLink="/addBook">here.</a></span>
-              </div>
+
               <div class="col-md-6 graphicdesign illustrator photography">
                 <div class="w-75 text-center">
                   <h5>Requested book</h5>

@@ -37,8 +37,14 @@
   </div>
 </div>
 <div class="container mx-auto w-50 h-50" *ngIf="myRequests.length &lt; 1">
-  <div class="bg-light h-50">
-    <p class="h-50">To make a request, choose a book from all the <a routerLink="/books">available books</a>.
-    <p>
-  </div>
+  <div id="notfound">
+    <div class="notfound">
+    <div class="notfound-2">
+    <h1>Oops!</h1>
+    <h2>It looks like you haven't made any request. </h2>
+    </div>
+    <a href="/user/profile" class="mr-2">Go back</a>
+    <a href="/books">Request a book</a>
+    </div>
+    </div>
 </div>

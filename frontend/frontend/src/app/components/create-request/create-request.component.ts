@@ -27,8 +27,9 @@ export class CreateRequestComponent implements OnInit {
     private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.userService.getAllCurrentUserBooks().subscribe(result => {
+    this.userService.getAllAvailableUserBooks().subscribe(result => {
       this.myBooks = result
+      console.log(result)
     });
 
     this.getUser()
