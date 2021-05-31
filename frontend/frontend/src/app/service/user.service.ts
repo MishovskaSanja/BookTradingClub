@@ -37,6 +37,7 @@ export class UserService {
   }
 
   getAllUserBooks(username:String): Observable<Book[]>{
+    console.log(username)
     return this.http.get<Book[]>(BASE_URL+"/userBooks/"+username, {"headers": this.headers})
   }
 

@@ -91,7 +91,8 @@ class UserService(
         }
     }
     fun findAllByOwnerAndStatus(username: String): List<Book>{
-        return bookRepository.findAllByOwnerUsernameAndStatus(username, BookStatus.AVAILABLE);
+        val user = userRepository.findByUsername(username).get()
+        return bookRepository.findAllByOwnerAndStatus(user, BookStatus.AVAILABLE);
     }
 
     fun getIncomingRequests(): Optional<List<Request>>{

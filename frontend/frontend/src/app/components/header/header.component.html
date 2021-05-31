@@ -18,7 +18,7 @@
       <li class="nav-item">
       <h5> <a class="nav-link" href="/trades">Trades</a></h5>
       </li>
-      <li *ngIf="user != undefined" class="nav-item dropdown"  id="profile" ngbDropdown>
+      <li *ngIf="user != undefined" class="nav-item dropdown" id="profile" ngbDropdown>
         <a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <img src='https://toppng.com/uploads/preview/user-account-management-logo-user-icon-11562867145a56rus2zwu.png' width="40" height="40" class="rounded-circle" ngbDropdownToggle>
         </a>
@@ -29,21 +29,17 @@
           </li>
         </ul>
       </li>
-
-
     </ul>
   </div>
 </nav>
 
 
-<div class="jumbotron jumbotron-fluid bg-dark"  *ngIf="user == undefined">
-
+<div class="jumbotron jumbotron-fluid bg-dark"  *ngIf="!user">
   <div class="jumbotron-background">
     <img src="https://www.wallpapersdsc.net/wp-content/uploads/2017/10/Books-Wallpaper-for-Laptop.jpg">
   </div>
 
   <div class="container text-white">
-
     <h1 class="display-4">Hello, hello!</h1>
     <p class="lead">Trade your old books for exciting new reads</p>
     <hr class="my-4">

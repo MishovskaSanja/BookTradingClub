@@ -11,5 +11,5 @@ import org.springframework.stereotype.Repository
 interface BookRepository : JpaRepository<Book, Long>{
     fun findAllByOwner(owner: User) : List<Book>
     fun findAllByStatus(status: BookStatus) : List<Book>
-    fun findAllByOwnerUsernameAndStatus(owner: String, status: BookStatus): List<Book>
+    fun findAllByOwnerAndStatus(owner: User, status: BookStatus): List<Book>
 }

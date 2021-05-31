@@ -23,12 +23,15 @@ export class UserBooksComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       this.username = JSON.stringify(this.route.snapshot.queryParams['username']);
-      console.log(this.username)
+
     })
+
+    this.username = this.username.replace('"', '')
+    this.username = this.username.replace('"', '')
 
       this.userService.getAllUserBooks(this.username).subscribe(
         res => {
-          this.books = res 
+          this.books = res
           console.log(res)
         });
   }
