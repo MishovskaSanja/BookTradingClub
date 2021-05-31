@@ -18,28 +18,28 @@ import { UserBooksComponent } from './components/user-books/user-books.component
 
 
 const routes: Routes = [
-  { path: '', component: BookComponent},
-  { path: 'books', component: BookComponent},
-  { path: 'register', component: RegisterComponent},
-  { path: 'login', component: LoginComponent},
-  { path: 'users', component: UsersComponent},
-  { path: "addBook", component: AddBookComponent},
-  { path: "editBook/:id", component: EditBookComponent},
-  { path: "user/edit-profile", component: EditProfileComponent},
-  { path: 'user/myBooks', component: MyBooksComponent},
-  { path: 'user/profile', component: UserProfileComponent},
-  { path: 'userBooks', component: UserBooksComponent},
-  { path: 'createRequest', component: CreateRequestComponent},
-  { path: 'requests', component: RequestComponent},
-  { path: 'trades', component: TradesComponent},
-  { path: 'user/myRequests', component: MyRequestsComponent},
-  { path: 'user/incomingRequests', component: IncomingRequestsComponent}
+  { path: '', component: BookComponent },
+  { path: 'books', component: BookComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'users', component: UsersComponent },
+  { path: "addBook", component: AddBookComponent },
+  { path: "editBook/:id", component: EditBookComponent },
+  { path: "user/edit-profile", component: EditProfileComponent },
+  { path: 'user/myBooks', component: MyBooksComponent },
+  { path: 'user/profile', component: UserProfileComponent },
+  { path: 'userBooks', component: UserBooksComponent },
+  { path: 'createRequest', component: CreateRequestComponent },
+  { path: 'requests', component: RequestComponent },
+  { path: 'trades', component: TradesComponent },
+  { path: 'user/myRequests', component: MyRequestsComponent },
+  { path: 'user/incomingRequests', component: IncomingRequestsComponent }
 
 ];
 @NgModule({
   imports: [
     RouterModule.forRoot(routes)
   ],
-  exports : [RouterModule]
+  exports: [RouterModule]
 })
 export class AppRoutingModule { }

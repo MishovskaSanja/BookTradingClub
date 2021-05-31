@@ -11,16 +11,16 @@ export class TokenStorageService {
 
   constructor(private router: Router) { }
 
-  public saveToken(token: string){
+  public saveToken(token: string) {
     window.sessionStorage.removeItem(TOKEN_KEY)
     window.sessionStorage.setItem(TOKEN_KEY, token)
   }
 
-  public getToken() : string{
+  public getToken(): string {
     return sessionStorage.getItem(TOKEN_KEY)
   }
 
-  public saveUser(user){
+  public saveUser(user) {
     window.sessionStorage.removeItem(USER_KEY)
     window.sessionStorage.setItem(USER_KEY, JSON.stringify(user))
   }
@@ -32,7 +32,7 @@ export class TokenStorageService {
   logout() {
     window.sessionStorage.clear()
 
-}
+  }
 
 
 }

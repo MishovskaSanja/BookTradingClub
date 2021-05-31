@@ -15,20 +15,22 @@ export class RequestComponent implements OnInit {
   requests: Request[];
   user: User;
 
-  constructor(public requestService : RequestService,
+  constructor(public requestService: RequestService,
     private router: Router) { }
 
   ngOnInit(): void {
-    this.requestService.getAllRequests().subscribe(result => {
-      this.requests = result;
-    });
+    this.getUser()
+    this.getRequests()
+  }
+
+  getUser() {
     this.user = JSON.parse(sessionStorage.getItem("user")) as User
   }
 
- public accept(id: number){
-    this.requestService.acceptRequest(id).subscribe( result => {
-      this.router.navigateByUrl("/trades");
-    })
+  getRequests() {
+    this.requestService.getAllRequests().subscribe(result => {
+      this.requests = result;
+    });
   }
 
 }

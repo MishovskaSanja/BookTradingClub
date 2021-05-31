@@ -6,5 +6,5 @@ export interface Book {
   description: string
   imgUrl: string
   owner: User
-  status : String
+  status: String
 }

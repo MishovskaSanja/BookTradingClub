@@ -16,10 +16,14 @@ export class RegisterComponent implements OnInit {
 
   constructor(private userService: UserService, private router: Router) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   onSubmit(data) {
-    if (data.username != '' && data.password != '' && data.city != '' && data.fullName != '' && data.address != '' && data.state != ''){
+    this.register(data)
+  }
+
+  register(data) {
+    if (data.username != '' && data.password != '' && data.city != '' && data.fullName != '' && data.address != '' && data.state != '') {
       this.userService.register(data).subscribe(result => {
         this.user = result;
         this.router.navigateByUrl("/login");
@@ -27,14 +31,10 @@ export class RegisterComponent implements OnInit {
         this.hasError = true
         this.error = error.error;
       })
-    }else{
+    } else {
       this.hasError = true
       this.error = "Please fill out all the fields"
-
     }
-
-
-
   }
 
 }

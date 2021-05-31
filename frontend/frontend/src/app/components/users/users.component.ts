@@ -13,9 +13,13 @@ export class UsersComponent implements OnInit {
 
   users: User[]
 
-  constructor(private userService: UserService,private router: Router) { }
+  constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
+    this.getAllUsers()
+  }
+
+  getAllUsers() {
     this.userService.getAllUsers().subscribe(result => {
       this.users = result
     })
@@ -27,6 +31,6 @@ export class UsersComponent implements OnInit {
         'username': username
       }
     };
-    this.router.navigate(['/userBooks'], {queryParams : { 'username': username }});
+    this.router.navigate(['/userBooks'], { queryParams: { 'username': username } });
   }
 }

@@ -15,11 +15,13 @@ export class UserProfileComponent implements OnInit {
   constructor(private token: TokenStorageService, private userService: UserService) { }
 
   ngOnInit(): void {
+    this.getCurrentUser()
+  }
+
+  getCurrentUser() {
     this.userService.getCurrentUser().subscribe(result => {
       this.user = result
     })
   }
-
-
 
 }

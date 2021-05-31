@@ -1,15 +1,18 @@
 <app-header></app-header>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css"
+  integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <div class="container mt-3 mb-4">
-<div class="col-lg-9 mt-4 mt-lg-0">
+  <div class="col-lg-9 mt-4 mt-lg-0">
     <div class="row">
       <div class="col-md-12">
         <div class="user-dashboard-info-box table-responsive mb-0 bg-white p-4 shadow-sm">
           <table class="table manage-candidates-top mb-0">
             <thead>
               <tr>
-                <th><h3>Users</h3></th>
+                <th>
+                  <h3>Users</h3>
+                </th>
                 <th class="text-center"> </th>
                 <th class="action text-right"> </th>
               </tr>
@@ -28,23 +31,25 @@
                       <div class="candidate-list-option">
                         <ul class="list-unstyled">
                           <li><i class="fas fa-filter pr-1"></i>{{user.username}}</li>
-
-                          <li><i class="fas fa-map-marker-alt pr-1"></i>{{user.state}}, {{user.city}} {{user.address}}</li>
+                          <li><i class="fas fa-map-marker-alt pr-1"></i>{{user.state}}, {{user.city}} {{user.address}}
+                          </li>
                         </ul>
                       </div>
                     </div>
                   </div>
                 </td>
                 <td class="candidate-list-favourite-time text-center">
-                  <button type="button"
-              class="btn btn-primary mt-3 btn-rounded waves-effect w-md waves-light" (click)="navigateToUserBooks(user.username)">{{user.username}}'s Books</button>
+                  <button type="button" class="btn btn-primary mt-3 btn-rounded waves-effect w-md waves-light"
+                    (click)="navigateToUserBooks(user.username)">Books</button>
                 </td>
                 <td>
                   <ul class="social-links list-inline">
                     <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips"
-                        href="https://www.facebook.com/" data-original-title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                        href="https://www.facebook.com/" data-original-title="Facebook"><i
+                          class="fa fa-facebook"></i></a></li>
                     <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips"
-                        href="https://www.twitter.com/" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                        href="https://www.twitter.com/" data-original-title="Twitter"><i class="fa fa-twitter"></i></a>
+                    </li>
                     <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips"
                         href="https://www.skype.com/" data-original-title="Skype"><i class="fa fa-skype"></i></a></li>
                   </ul>

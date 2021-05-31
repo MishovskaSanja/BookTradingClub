@@ -12,19 +12,20 @@ export class MyRequestsComponent implements OnInit {
 
   myRequests: Request[]
 
-  constructor(private userService: UserService, private requestService: RequestService) { }
+  constructor(private userService: UserService,
+    private requestService: RequestService) { }
 
   ngOnInit(): void {
-      this.load()
+    this.load()
   }
 
-  load(){
+  load() {
     this.userService.getMyRequests().subscribe(result => {
       this.myRequests = result
     })
   }
 
-  cancelRequest(id){
+  cancelRequest(id) {
     this.requestService.cancelRequest(id).subscribe(result => {
       this.load()
     })

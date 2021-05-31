@@ -36,7 +36,7 @@ width: 30px;
 }
 
 /* ===========
- Gallery
+ Books photos
 =============*/
 .portfolioFilter a {
 -moz-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
@@ -89,8 +89,6 @@ width: 40px;
 background-color: #228bdf;
 margin: 10px auto;
 }
-
-
 
 
 .tabs-vertical-env .tab-content {

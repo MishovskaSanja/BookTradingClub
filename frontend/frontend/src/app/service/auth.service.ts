@@ -6,7 +6,7 @@ import { User } from '../model/user';
 const BASE_URL = "http://localhost:8083/api/user/"
 
 const httpOptions = {
-  headers: new HttpHeaders({'Content-Type': 'application/json'})
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
 @Injectable({
@@ -14,9 +14,9 @@ const httpOptions = {
 })
 export class AuthService {
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  login(credentials): Observable<any>{
+  login(credentials): Observable<any> {
     return this.http.post(BASE_URL + "login", {
       username: credentials.username,
       password: credentials.password
@@ -25,16 +25,13 @@ export class AuthService {
 
   register(user): Observable<User> {
     return this.http.post<User>(BASE_URL + 'register', {
-        username: user.username,
-        password: user.password,
-        fullName: user.name,
-        city: user.city,
-        address: user.address,
-        state: user.state
+      username: user.username,
+      password: user.password,
+      fullName: user.name,
+      city: user.city,
+      address: user.address,
+      state: user.state
     }, httpOptions)
   }
-
- 
-
 
 }

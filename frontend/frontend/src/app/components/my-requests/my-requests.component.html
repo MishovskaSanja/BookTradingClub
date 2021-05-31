@@ -2,44 +2,43 @@
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <div class="container pb-5 mb-2 my-3">
   <!--Item-->
-  <div *ngIf="myRequests.length > 0">
-  <div class="cart-item d-md-flex justify-content-between" *ngFor="let r of myRequests">
-    <span class="remove-item" (click)="cancelRequest(r.requestId)"><i class="fa fa-times"></i></span>
-
-    <div class="px-3 my-3">
-      <a class="cart-item-product" href="https://www.google.com/search?q={{r.bookToGive.name}}">
-        <div class="cart-item-product-thumb"><img src="{{r.bookToGive.imgUrl}}" alt="Product"></div>
-        <div class="cart-item-product-info">
-          <h4 class="cart-item-product-title">{{r.bookToGive.name}}</h4><span><strong>Description:
-            </strong>{{r.bookToGive.description}}
-          </span>
-        </div>
-      </a>
-    </div>
-    <div class="px-3 my-3 text-center">
-      <a class="cart-item-product" href="https://www.google.com/search?q={{r.wantedBook.name}}">
-        <div class="cart-item-product-thumb"><img src="{{r.wantedBook.imgUrl}}" alt="Product"></div>
-        <div class="cart-item-product-info">
-          <h4 class="cart-item-product-title">{{r.wantedBook.name}}</h4><span><strong>Description:
-            </strong>{{r.wantedBook.description}}
-          </span>
-        </div>
-      </a>
-    </div>
-
-    <div class="px-3 my-3 text-center">
-      <div class="cart-item-label">From: </div><span
-        class="text-xl font-weight-medium">{{r.bookToGive.owner.fullName}}</span>
-    </div>
-    <div class="px-3 my-3 text-center">
-      <div class="cart-item-label">To: </div><span
-        class="text-xl font-weight-medium">{{r.wantedBook.owner.fullName}}</span>
+  <div *ngIf="myRequests.length &gt; 0">
+    <div class="cart-item d-md-flex justify-content-between" *ngFor="let r of myRequests">
+      <span class="remove-item" (click)="cancelRequest(r.requestId)"><i class="fa fa-times"></i></span>
+      <div class="px-3 my-3">
+        <a class="cart-item-product" href="https://www.google.com/search?q={{r.bookToGive.name}}">
+          <div class="cart-item-product-thumb"><img src="{{r.bookToGive.imgUrl}}" alt="Product"></div>
+          <div class="cart-item-product-info">
+            <h4 class="cart-item-product-title">{{r.bookToGive.name}}</h4><span><strong>Description:
+              </strong>{{r.bookToGive.description}}
+            </span>
+          </div>
+        </a>
+      </div>
+      <div class="px-3 my-3 text-center">
+        <a class="cart-item-product" href="https://www.google.com/search?q={{r.wantedBook.name}}">
+          <div class="cart-item-product-thumb"><img src="{{r.wantedBook.imgUrl}}" alt="Product"></div>
+          <div class="cart-item-product-info">
+            <h4 class="cart-item-product-title">{{r.wantedBook.name}}</h4><span><strong>Description:
+              </strong>{{r.wantedBook.description}}
+            </span>
+          </div>
+        </a>
+      </div>
+      <div class="px-3 my-3 text-center">
+        <div class="cart-item-label">From: </div><span
+          class="text-xl font-weight-medium">{{r.bookToGive.owner.fullName}}</span>
+      </div>
+      <div class="px-3 my-3 text-center">
+        <div class="cart-item-label">To: </div><span
+          class="text-xl font-weight-medium">{{r.wantedBook.owner.fullName}}</span>
+      </div>
     </div>
   </div>
 </div>
-</div>
-<div class="container mx-auto w-50 h-50" *ngIf="myRequests.length < 1">
+<div class="container mx-auto w-50 h-50" *ngIf="myRequests.length &lt; 1">
   <div class="bg-light h-50">
-    <p class="h-50">To make a request, choose a book from all the <a routerLink="/books">available books</a>.<p>
+    <p class="h-50">To make a request, choose a book from all the <a routerLink="/books">available books</a>.
+    <p>
   </div>
 </div>

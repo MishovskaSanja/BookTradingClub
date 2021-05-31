@@ -12,34 +12,35 @@ import { UserService } from 'src/app/service/user.service';
 export class MyBooksComponent implements OnInit {
 
   user: User
-  takenBooks : Book[]
+  takenBooks: Book[]
   availableBooks: Book[]
 
   constructor(private userService: UserService,
-                private bookService: BookService) { }
+    private bookService: BookService) { }
 
   ngOnInit(): void {
-    this.user = JSON.parse(sessionStorage.getItem("user")) as User
+    this.getUser()
     this.getAllTakenBooks()
     this.getAllAvailableBooks()
   }
 
-  public getAllTakenBooks(){
+  public getUser() {
+    this.user = JSON.parse(sessionStorage.getItem("user")) as User
+  }
+
+  public getAllTakenBooks() {
     this.userService.getAllTakenUserBooks().subscribe(result => {
       this.takenBooks = result
-      console.log(result)
     })
   }
 
-  public getAllAvailableBooks(){
+  public getAllAvailableBooks() {
     this.userService.getAllAvailableUserBooks().subscribe(result => {
       this.availableBooks = result
-      console.log(result)
     })
   }
 
-
-  public delete(id: bigint){
+  public delete(id: bigint) {
     this.bookService.deleteBook(id).subscribe(result => {
       this.getAllTakenBooks()
       this.getAllAvailableBooks()

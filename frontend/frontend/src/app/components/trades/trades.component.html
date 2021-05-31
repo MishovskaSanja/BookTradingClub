@@ -2,7 +2,6 @@
 
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <div class="container pb-5 mb-2 my-4">
-  <!--Item-->
   <h3 class="ml-3">All trades</h3>
   <div class="cart-item d-md-flex justify-content-between" *ngFor="let r of trades">
     <div class="px-3 my-3">
@@ -25,7 +24,6 @@
         </div>
       </a>
     </div>
-
     <div class="px-3 my-3 text-center">
       <div class="cart-item-label">From: </div><span
         class="text-xl font-weight-medium">{{r.bookToGive.owner.fullName}}</span>
@@ -35,5 +33,4 @@
         class="text-xl font-weight-medium">{{r.wantedBook.owner.fullName}}</span>
     </div>
   </div>
-
 </div>

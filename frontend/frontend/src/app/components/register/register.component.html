@@ -3,19 +3,17 @@
   <div class="row justify-content-center">
     <div class="col-md-8">
       <div class="card">
-        <div class="card-header"><h3>Register</h3></div>
+        <div class="card-header">
+          <h3>Register</h3>
+        </div>
         <div class="card-body">
-          <form class="text-center border py-5" #useregister="ngForm"
-            (ngSubmit)="onSubmit(useregister.value)">
-              <!--Profile Picture-->
-              <div class="form-group row">
-                <label for="imgUrl" class="col-md-4 col-form-label text-md-right">Profile picture</label>
-                <div class="col-md-6">
-                  <input type="text" id="imgUrl" name="imgUrl" class="form-control mb-4" placeholder="imgUrl"
-                    ngModel>
-                </div>
+          <form class="text-center border py-5" #useregister="ngForm" (ngSubmit)="onSubmit(useregister.value)">
+            <div class="form-group row">
+              <label for="imgUrl" class="col-md-4 col-form-label text-md-right">Profile picture</label>
+              <div class="col-md-6">
+                <input type="text" id="imgUrl" name="imgUrl" class="form-control mb-4" placeholder="imgUrl" ngModel>
               </div>
-            <!--Username-->
+            </div>
             <div class="form-group row">
               <label for="username" class="col-md-4 col-form-label text-md-right">Username*</label>
               <div class="col-md-6">
@@ -23,45 +21,42 @@
                   ngModel required>
               </div>
             </div>
-            <!-- Password -->
             <div class="form-group row">
               <label for="password" class="col-md-4 col-form-label text-md-right">Password*</label>
               <div class="col-md-6">
-                <input type="password" id="password" name="password" class="form-control mb-4" placeholder="Password" ngModel>
+                <input type="password" id="password" name="password" class="form-control mb-4" placeholder="Password"
+                  ngModel>
               </div>
             </div>
-            <!--Full Name-->
             <div class="form-group row">
               <label for="fullName" class="col-md-4 col-form-label text-md-right">Full Name*</label>
               <div class="col-md-6">
-                <input type="fullName" id="fullName" name="fullName" class="form-control mb-4" placeholder="Full name" ngModel>
+                <input type="fullName" id="fullName" name="fullName" class="form-control mb-4" placeholder="Full name"
+                  ngModel>
               </div>
             </div>
-            <!--State-->
             <div class="form-group row">
               <label for="state" class="col-md-4 col-form-label text-md-right">State*</label>
               <div class="col-md-6">
                 <input type="state" id="state" name="state" class="form-control mb-4" placeholder="State" ngModel>
               </div>
             </div>
-            <!--City-->
             <div class="form-group row">
               <label for="city" class="col-md-4 col-form-label text-md-right">City*</label>
               <div class="col-md-6">
                 <input type="city" id="city" name="city" class="form-control mb-4" placeholder="City" ngModel>
               </div>
             </div>
-            <!--Address-->
             <div class="form-group row">
               <label for="address" class="col-md-4 col-form-label text-md-right">Address*</label>
               <div class="col-md-6">
-                <input type="address" id="address" name="address" class="form-control mb-4" placeholder="Address" ngModel>
+                <input type="address" id="address" name="address" class="form-control mb-4" placeholder="Address"
+                  ngModel>
               </div>
             </div>
             <div class="col-md-6 offset-md-4" *ngIf="hasError">
               <span class="text-danger">{{error}}.Please try again.</span>
             </div>
-            <!--  button -->
             <div class="col-md-6 offset-md-4">
               <button class="btn btn-primary my-4" block="true" type="submit">Register</button>
               <br>
