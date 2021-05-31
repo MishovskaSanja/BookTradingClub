@@ -3,10 +3,8 @@
 <div class="container pb-5 my-4">
   <div *ngIf="incomingRequests && incomingRequests.length > 0">
     <div class="cart-item d-md-flex justify-content-between" *ngFor="let r of incomingRequests">
-
-      <span class="remove-item" (click)="reject(r.requestId)" *ngIf="r.status == 'PENDING'"><i
-          class="fa fa-times"></i></span>
-      <div class="px-3 my-3" *ngIf="r.status == 'PENDING'">
+      <span class="remove-item" (click)="reject(r.requestId)"><i class="fa fa-times"></i></span>
+      <div class="px-3 my-3">
         <a class="cart-item-product" href="https://www.google.com/search?q={{r.bookToGive.name}}">
           <div class="cart-item-product-thumb"><img src="{{r.bookToGive.imgUrl}}" alt="Product"></div>
           <div class="cart-item-product-info">
@@ -16,7 +14,7 @@
           </div>
         </a>
       </div>
-      <div class="px-3 my-3" *ngIf="r.status == 'PENDING'">
+      <div class="px-3 my-3">
         <a class="cart-item-product" href="https://www.google.com/search?q={{r.wantedBook.name}}">
           <div class="cart-item-product-thumb"><img src="{{r.wantedBook.imgUrl}}" alt="Product"></div>
           <div class="cart-item-product-info">
@@ -26,32 +24,31 @@
           </div>
         </a>
       </div>
-      <div class="px-3 my-3 text-center" *ngIf="r.status == 'PENDING'">
+      <div class="px-3 my-3 text-center">
         <div class="cart-item-label">From: </div><span
           class="text-xl font-weight-medium">{{r.bookToGive.owner.fullName}}</span>
       </div>
-      <div class="px-3 my-3 text-center" *ngIf="r.status == 'PENDING'">
+      <div class="px-3 my-3 text-center">
         <div class="cart-item-label">To: </div><span
           class="text-xl font-weight-medium">{{r.wantedBook.owner.fullName}}</span>
       </div>
       <div class="row">
-        <div class="px-3 my-3 text-center ml-4" *ngIf="r.status == 'PENDING'">
+        <div class="px-3 my-3 text-center ml-4">
           <button class="btn btn-success btn-bg mb-auto" style="margin-top: 120px; margin-left: 20px;"
             (click)="accept(r.requestId)">Accept</button>
         </div>
       </div>
     </div>
-
   </div>
   <div *ngIf="incomingRequests && incomingRequests.length &lt; 1">
     <div id="notfound">
       <div class="notfound">
-      <div class="notfound-2">
-      <h1>Oops!</h1>
-      <h2>It looks like there are no incoming requests.</h2>
+        <div class="notfound-2">
+          <h1>Oops!</h1>
+          <h2>It looks like there are no incoming requests.</h2>
+        </div>
+        <a href="/user/profile">Go back</a>
       </div>
-      <a href="/user/profile">Go back</a>
-      </div>
-      </div>
+    </div>
   </div>
 </div>

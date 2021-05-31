@@ -64,12 +64,16 @@ class RequestService(
             }
             var req = this.requestRepository.findAllByBookToGive_IdOrWantedBook_Id(it.bookToGive.id, it.wantedBook.id)
                     .stream().filter { r -> r.requestId != requestId }.collect(Collectors.toList())
+            var req2 = this.requestRepository.findAllByWantedBook_IdOrBookToGive_Id(it.bookToGive.id, it.wantedBook.id)
+                    .stream().filter { r -> r.requestId != requestId }.collect(Collectors.toList())
+
+            req.addAll(req2)
+
             req.stream().forEach { r ->
                 r.status = RequestStatus.CANCELED
             }
             requestRepository.saveAll(req)
         }
-
     }
 
 }

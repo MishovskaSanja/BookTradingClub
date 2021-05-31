@@ -9,14 +9,12 @@ import org.springframework.stereotype.Repository
 import java.util.*
 
 @Repository
-interface RequestRepository: JpaRepository<Request, Long> {
+interface RequestRepository : JpaRepository<Request, Long> {
     fun getAllByStatus(status: RequestStatus): List<Request>
-
     fun getAllByUserRequesting(user: User): Optional<List<Request>>
-
     fun getAllByUserReceiving(user: User): Optional<List<Request>>
+    fun findByUserReceivingAndUserRequestingAndBookToGiveAndWantedBook(userReceiving: User, userRequesting: User, bookToGive: Book, wantedBook: Book): Optional<Request>
+    fun findAllByBookToGive_IdOrWantedBook_Id(idGive: Long, idTake: Long): List<Request>
+    fun findAllByWantedBook_IdOrBookToGive_Id(idGive: Long, idTake: Long): List<Request>
 
-    fun findByUserReceivingAndUserRequestingAndBookToGiveAndWantedBook(userReceiving: User, userRequesting: User, bookToGive: Book, wantedBook: Book) : Optional<Request>
-
-    fun findAllByBookToGive_IdOrWantedBook_Id(idGive: Long, idTake: Long ): List<Request>
 }

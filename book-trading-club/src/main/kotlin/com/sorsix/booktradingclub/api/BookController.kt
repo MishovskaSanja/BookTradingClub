@@ -3,14 +3,12 @@ package com.sorsix.booktradingclub.api
 import com.sorsix.booktradingclub.api.dto.BookDto
 import com.sorsix.booktradingclub.domain.Book
 import com.sorsix.booktradingclub.service.BookService
-import jdk.jfr.Description
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import javax.servlet.http.HttpServletRequest
 
 @RestController
 @RequestMapping("/api/books")
-@CrossOrigin( "http://localhost:4200")
+@CrossOrigin("http://localhost:4200")
 class BookController(
         val bookService: BookService
 ) {
@@ -18,12 +16,12 @@ class BookController(
     fun getBooks(): List<Book> = bookService.getAllAvailableBooks()
 
     @GetMapping("/book/{id}")
-    fun getBook(@PathVariable id: Long) : ResponseEntity<Book>{
+    fun getBook(@PathVariable id: Long): ResponseEntity<Book> {
         return ResponseEntity.of(bookService.findById(id))
     }
 
     @PostMapping("/addBook")
-    fun addBook(@RequestBody bookDto: BookDto): ResponseEntity<Book>{
+    fun addBook(@RequestBody bookDto: BookDto): ResponseEntity<Book> {
         val book = bookService.createBook(bookDto.name, bookDto.description, bookDto.imgUrl)
         return ResponseEntity.ok(book)
     }
@@ -37,6 +35,5 @@ class BookController(
     fun deleteBook(@PathVariable id: Long) {
         this.bookService.deleteBook(id)
     }
-
 
 }

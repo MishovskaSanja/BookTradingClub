@@ -24,17 +24,23 @@ export class LoginComponent implements OnInit {
   }
 
   public login(data) {
-    this.authService.login(data).subscribe(result => {
-      this.tokenStorage.saveUser(result.username)
-      this.tokenStorage.saveToken(result.accessToken)
-      console.log(data)
-      this.router.navigateByUrl('/books')
-    }, error => {
+    if (data.username != "" && data.password != "") {
+      this.authService.login(data).subscribe(result => {
+        this.tokenStorage.saveUser(result.username)
+        this.tokenStorage.saveToken(result.accessToken)
+        console.log(data)
+        this.router.navigateByUrl('/books')
+      }, error => {
+        this.hasError = true
+        if (error.error) {
+          this.error = error.error.message;
+        }
+      })
+
+    } else {
       this.hasError = true
-      if (error.error) {
-        this.error = error.error.message;
-      }
-    })
+      this.error = "Please fill out all the fields";
+    }
   }
 
 }

@@ -26,7 +26,6 @@ export class UserBooksComponent implements OnInit {
     this.username = this.username.replace('"', '')
     this.username = this.username.replace('"', '')
 
-
     this.getBooksForUsername(this.username)
 
   }

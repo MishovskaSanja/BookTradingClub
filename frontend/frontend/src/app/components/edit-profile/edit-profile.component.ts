@@ -15,22 +15,22 @@ export class EditProfileComponent implements OnInit {
   constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
-    this.userService.getCurrentUser().subscribe(result =>{
+    this.userService.getCurrentUser().subscribe(result => {
       this.user = result
     })
   }
 
-  onSubmit(data){
+  onSubmit(data) {
     console.log(data)
-      this.userService.editInfo({
-        fullName: data.fullName,
-        city: data.city,
-        address: data.address,
-        state: data.state,
-        imgUrl: data.imgUrl
-      }).subscribe(result => {
-        this.router.navigateByUrl("/user/profile")
-      })
+    this.userService.editInfo({
+      fullName: data.fullName,
+      city: data.city,
+      address: data.address,
+      state: data.state,
+      imgUrl: data.imgUrl
+    }).subscribe(result => {
+      this.router.navigateByUrl("/user/profile")
+    })
 
   }
 

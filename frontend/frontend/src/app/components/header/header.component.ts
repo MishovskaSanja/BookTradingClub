@@ -22,15 +22,15 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.tokenStorage.logout()
-   if(this.router.url == '/books'){
-    let currentUrl = this.router.url;
-    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+    if (this.router.url == '/books') {
+      let currentUrl = this.router.url;
+      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
         this.router.navigate([currentUrl]);
-    });
-   }
-   else{
-    this.router.navigateByUrl("/books")
+      });
+    }
+    else {
+      this.router.navigateByUrl("/books")
 
-   }
+    }
   }
 }

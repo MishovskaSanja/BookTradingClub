@@ -1,6 +1,6 @@
 package com.sorsix.booktradingclub.api.dto
 
-data class UserRegisterDto (
+data class UserRegisterDto(
         val username: String,
         val password: String,
         val fullName: String,
